@@ -9,6 +9,15 @@
 
     <display-name>Archetype Created Web Application</display-name>
 
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:springmvc/security-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
     <!--解决POST乱码问题-->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
@@ -19,10 +28,6 @@
         </init-param>
     </filter>
 
-    <filter-mapping>
-        <filter-name>CharacterEncodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -30,19 +35,15 @@
             org.springframework.web.filter.DelegatingFilterProxy
         </filter-class>
     </filter>
+
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:springmvc/security-context.xml</param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
 
     <servlet>
         <servlet-name>DefaultServlet</servlet-name>

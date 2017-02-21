@@ -14,7 +14,7 @@
        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
     <security:http auto-config="true">
         <security:intercept-url pattern="/admin/*" access="ROLE_ADMIN"/>
-        <security:form-login login-page="/admin/login.html"
+        <security:form-login login-page="/login/login.html"
                              default-target-url="/admin/add"
                              authentication-failure-url="/loginfailed"/>
         <security:logout logout-success-url="/logout"/>
