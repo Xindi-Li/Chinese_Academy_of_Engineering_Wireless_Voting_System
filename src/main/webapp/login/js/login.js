@@ -8,10 +8,17 @@ login.controller('login_ctrl', function ($scope, $http) {
             .success(function (response) {
                 if (response) {
                     alert("登陆成功");
-                    window.location.href = "/admin/admin.html"    ;
+                    window.location.href = "/admin/admin.html";
                 } else {
                     alert("登录失败");
                 }
             })
-    }
+    };
+    $scope.logout = function () {
+        $http.get('/logout')
+            .success(function (response) {
+                alert("注销成功");
+                window.location.href = "/login/login.html";
+            })
+    };
 });
