@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>中国工程院无线投票系统</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-    <script src="../admin/js/login.js"></script>
+    <script src="js/login.js"></script>
 </head>
-<body ng-app="login" ng-controller="validate">
+<style>
+    h1 {
+        text-align: center;
+    }
+</style>
+<body ng-app="login" ng-controller="login_ctrl">
 <div class="container">
     <div class="col-md-6 col-md-offset-3">
         <div class="page-header">
-            <h1><span class="glyphicon glyphicon-home"></span>中国工程院无线投票系统</h1>
+            <h1>中国工程院无线投票系统</h1>
         </div>
-        <form ng-submit="log123()">
-            <div id="name-group" class="form-group">
+        <form ng-submit="validate()">
+            <div class="form-group">
                 <label>用户名</label>
-                <input type="text" name="j_username" class="form-control" placeholder="User Name">
+                <input type="text" ng-model="username" class="form-control" placeholder="Username" required=""
+                       autofocus="">
             </div>
 
-            <!-- SUPERHERO NAME -->
-            <div id="superhero-group" class="form-group">
+            <div class="form-group">
                 <label>密码</label>
-                <input type="password" name="j_password" class="form-control" placeholder="Password">
+                <input type="password" ng-model="password" class="form-control" placeholder="Password">
             </div>
 
-            <!-- SUBMIT BUTTON -->
-            <button type="submit" class="btn btn-success btn-lg btn-block">登录</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
         </form>
     </div>
 </div>
