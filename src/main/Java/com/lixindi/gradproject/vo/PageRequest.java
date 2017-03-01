@@ -1,4 +1,4 @@
-package com.lixindi.gradproject.dto;
+package com.lixindi.gradproject.vo;
 
 /**
  * Created by lixindi on 2017/2/27.
