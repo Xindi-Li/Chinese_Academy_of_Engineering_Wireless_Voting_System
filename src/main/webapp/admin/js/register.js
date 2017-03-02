@@ -1,19 +1,19 @@
 /**
- * Created by lixindi on 2017/2/20.
+ * Created by lixindi on 2017/3/2.
  */
-var login = angular.module('login', []);
-login.controller('login_ctrl', function ($scope, $http) {
-    $scope.validate = function () {
-        $http.post('/validate', $scope.account)
+var register = angular.module('register', []);
+register.controller('register_ctrl', function ($scope, $http) {
+    $scope.register = function () {
+        $http.post('/register', $scope.account)
             .success(function (response) {
                 if (response) {
-                    alert("登陆成功");
+                    alert("注册成功");
                     window.location.href = "/admin/admin.html";
                 } else {
-                    alert("登录失败");
+                    alert("账号已存在");
                     var usernameinput = document.querySelector("form > div:nth-child(1) > input");
                     usernameinput.focus();
                 }
             })
-    };
+    }
 });

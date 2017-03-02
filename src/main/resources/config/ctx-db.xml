@@ -21,6 +21,7 @@
 
     <!--sqlsessionFactory bean-->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:config/ctx-mybatis.xml"/>
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描mapping.xml文件 -->
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>

@@ -5,16 +5,16 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/admin.css">
 </head>
-<body>
+<body ng-app="admin">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="logout_ctrl">
     <div class="container-fluid">
         <div class="navbar-header">
             <span class="navbar-brand">中国工程院无线投票系统</span>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">注销</a></li>
+                <li><a href="" ng-click="logout()">注销</a></li>
             </ul>
         </div>
     </div>
@@ -24,10 +24,11 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="http://v3.bootcss.com/examples/dashboard/#">Overview</a></li>
-                <li><a href="http://v3.bootcss.com/examples/dashboard/#">Reports</a></li>
-                <li><a href="http://v3.bootcss.com/examples/dashboard/#">Analytics</a></li>
-                <li><a href="http://v3.bootcss.com/examples/dashboard/#">Export</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Export</a></li>
+                <li><a href="/admin/register.html">注册新管理员</a></li>
+                <li><a href="/admin/reset_password.html">修改密码</a></li>
             </ul>
         </div>
         <div class="col-md-10 col-md-offset-2 main">
@@ -43,6 +44,7 @@
                         <th>Header</th>
                         <th>Header</th>
                         <th>Header</th>
+                        <th>Header</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,6 +53,7 @@
                         <td>Lorem</td>
                         <td>ipsum</td>
                         <td>dolor</td>
+                        <td>sit</td>
                         <td>sit</td>
                     </tr>
                     <tr>

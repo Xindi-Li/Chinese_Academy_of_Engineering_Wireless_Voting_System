@@ -3,7 +3,7 @@ package com.lixindi.gradproject.vo;
 /**
  * Created by lixindi on 2017/2/22.
  */
-public class LoginInfo {
+public class AccountInfo {
     private String username;
     private String password;
 
