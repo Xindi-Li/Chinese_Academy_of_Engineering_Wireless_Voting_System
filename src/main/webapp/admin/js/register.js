@@ -4,7 +4,7 @@
 var register = angular.module('register', []);
 register.controller('register_ctrl', function ($scope, $http) {
     $scope.register = function () {
-        $http.post('/register', $scope.account)
+        $http.post('/admin/register', $scope.account)
             .success(function (response) {
                 if (response) {
                     alert("注册成功");

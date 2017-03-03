@@ -24,90 +24,68 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="#">Reports</a></li>
+                <li><a href="#">新增候选人</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
-                <li><a href="/admin/register.html">注册新管理员</a></li>
-                <li><a href="/admin/reset_password.html">修改密码</a></li>
+                <li><a href="/admin/signup.html">注册新管理员</a></li>
+                <li><a href="/admin/reset-password.html">修改密码</a></li>
             </ul>
         </div>
         <div class="col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
+            <h2 class="sub-header">录入候选人</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <form>
+                        <div class="form-group">
+                            <label for="candidateNum">提名书号</label>
+                            <input type="text" class="form-control" id="candidateNum" placeholder="提名书号" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">姓名</label>
+                            <input type="text" class="form-control" id="name" placeholder="姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="age">年龄</label>
+                            <input type="text" class="form-control" id="age" placeholder="年龄" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="major">学科专业</label>
+                            <input type="text" class="form-control" id="major" placeholder="学科专业" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">工作单位</label>
+                            <input type="text" class="form-control" id="company" placeholder="工作单位" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="department">学部</label>
+                            <input type="text" class="form-control" id="department" placeholder="学部" required>
+                        </div>
 
-            <h2 class="sub-header">Section title</h2>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                        <td>elit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>cursus</td>
-                        <td>ante</td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>Sed</td>
-                        <td>nisi</td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>sem</td>
-                        <td>at</td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>imperdiet</td>
-                        <td>Duis</td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <h2 class="sub-header">导入候选人名单</h2>
+            <div ng-controller="import_csv">
+                <ng-csv-import
+                        class="import"
+                        content="csv.content"
+                        header="csv.header"
+                        header-visible="csv.headerVisible"
+                        separator="csv.separator"
+                        separator-visible="csv.separatorVisible"
+                        result="csv.result"
+                        encoding="csv.encoding"
+                        encoding-visible="csv.encodingVisible"
+                        upload-button-label="csv.uploadButtonLabel"></ng-csv-import>
             </div>
         </div>
     </div>
 </div>
 
 
-
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="js/angular-csv-import.js"></script>
 <script src="js/admin.js"></script>
 </body>
 </html>

@@ -34,25 +34,25 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/admin/logout", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void logout(HttpSession httpSession) {
         httpSession.invalidate();
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/register", method = RequestMethod.POST)
     @ResponseBody
     public Boolean register(@RequestBody AccountInfo accountInfo) {
         return adminService.register(accountInfo);
     }
 
-    @RequestMapping(value = "/get_username", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/get_username", method = RequestMethod.GET)
     @ResponseBody
     public String getUsername(HttpSession httpSession) {
         return ((AccountInfo) httpSession.getAttribute("user")).getUsername();
     }
 
-    @RequestMapping(value = "/reset_password", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/reset_password", method = RequestMethod.POST)
     @ResponseBody
     public Boolean resetPassword(@RequestBody AccountInfo accountInfo) {
         return adminService.resetPassword(accountInfo);

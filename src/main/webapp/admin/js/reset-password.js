@@ -5,13 +5,13 @@ var reset = angular.module('reset', []);
 reset.controller('reset_ctrl', function ($scope, $http) {
     $scope.account = {};
     $scope.get_username = function () {
-        $http.get('/get_username')
+        $http.get('/admin/get_username')
             .success(function (response) {
                 $scope.account.username = response;
             })
     };
     $scope.reset = function () {
-        $http.post('/reset_password', $scope.account)
+        $http.post('/admin/reset_password', $scope.account)
             .success(function (response) {
                 if (response) {
                     alert("修改成功");
