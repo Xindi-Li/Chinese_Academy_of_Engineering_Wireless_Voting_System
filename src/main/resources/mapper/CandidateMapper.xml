@@ -12,20 +12,12 @@
         <result column="group" property="group" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <insert id="insertCandidate" parameterType="com.lixindi.gradproject.vo.CandidateInfo">
-        INSERT INTO candidate
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            candidateNum,name,age,major,company,department,
-            <if test="group != null">
-                group,
-            </if>
-        </trim>
+    <insert id="insertCandidate">
+        INSERT INTO
+        candidate(candidateNum,name,age,major,company,department)
         VALUES
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            #{candidateNum},#{name},#{age},#{major},#{company},#{department},
-            <if test="group != null">
-                #{group},
-            </if>
-        </trim>
+        <foreach collection="list" item="item" separator=",">
+            (#{item.candidateNum}, #{item.name}, #{item.age}, #{item.major}, #{item.company}, #{item.department})
+        </foreach>
     </insert>
 </mapper>

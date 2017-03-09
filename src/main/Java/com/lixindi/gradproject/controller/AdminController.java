@@ -1,7 +1,9 @@
 package com.lixindi.gradproject.controller;
 
 import com.lixindi.gradproject.service.AdminService;
+import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AccountInfo;
+import com.lixindi.gradproject.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,12 @@ public class AdminController {
 
     @RequestMapping(value = "/validate", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean validate(HttpSession httpSession, @RequestBody AccountInfo accountInfo) {
+    public AjaxResponse<Boolean> validate(HttpSession httpSession, @RequestBody AccountInfo accountInfo) {
         if (adminService.validate(accountInfo)) {
             httpSession.setAttribute("user", accountInfo);
-            return true;
+            return new AjaxResponse<Boolean>(Status.OK, true);
         } else {
-            return false;
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
         }
     }
 
@@ -42,19 +44,29 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/register", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean register(@RequestBody AccountInfo accountInfo) {
-        return adminService.register(accountInfo);
+    public AjaxResponse<Boolean> register(@RequestBody AccountInfo accountInfo) {
+        Boolean is_Success = adminService.register(accountInfo);
+        if (is_Success) {
+            return new AjaxResponse<Boolean>(Status.OK, true);
+        } else {
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
+        }
     }
 
     @RequestMapping(value = "/admin/get_username", method = RequestMethod.GET)
     @ResponseBody
-    public String getUsername(HttpSession httpSession) {
-        return ((AccountInfo) httpSession.getAttribute("user")).getUsername();
+    public AjaxResponse<String> getUsername(HttpSession httpSession) {
+        String username = ((AccountInfo) httpSession.getAttribute("user")).getUsername();
+        return new AjaxResponse<String>(Status.OK, username);
     }
 
     @RequestMapping(value = "/admin/reset_password", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean resetPassword(@RequestBody AccountInfo accountInfo) {
-        return adminService.resetPassword(accountInfo);
+    public AjaxResponse<Boolean> resetPassword(@RequestBody AccountInfo accountInfo) {
+        if (adminService.resetPassword(accountInfo)) {
+            return new AjaxResponse<Boolean>(Status.OK, true);
+        } else {
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
+        }
     }
 }

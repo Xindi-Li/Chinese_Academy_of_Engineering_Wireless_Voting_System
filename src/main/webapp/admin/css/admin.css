@@ -1,4 +1,4 @@
-#navbar > ul > li > a{
+#navbar > ul > li > a {
     margin-right: 15px;
 }
 
@@ -10,7 +10,6 @@
 body {
     padding-top: 50px;
 }
-
 
 /*
  * Global add-ons
@@ -37,6 +36,7 @@ body {
 .sidebar {
     display: none;
 }
+
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;
@@ -59,17 +59,18 @@ body {
     margin-bottom: 20px;
     margin-left: -20px;
 }
+
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
 }
+
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
     color: #fff;
     background-color: #428bca;
 }
-
 
 /*
  * Main content
@@ -78,16 +79,17 @@ body {
 .main {
     padding: 20px;
 }
+
 @media (min-width: 768px) {
     .main {
         padding-right: 40px;
         padding-left: 40px;
     }
 }
+
 .main .page-header {
     margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
@@ -97,18 +99,21 @@ body {
     margin-bottom: 30px;
     text-align: center;
 }
+
 .placeholders h4 {
     margin-bottom: 0;
 }
+
 .placeholder {
     margin-bottom: 20px;
 }
+
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
 }
 
-div.import>div>div.label {
+div.import > div > div.label {
     display: inline-block;
     width: 30%;
     text-align: left;
@@ -117,19 +122,19 @@ div.import>div>div.label {
     font-size: 14px;
 }
 
-div.import>div>div>input[type="file"] {
+div.import > div > div > input[type="file"] {
     color: transparent;
     padding: 0;
 }
 
-div.import>div>div>input[type="file"]::-webkit-file-upload-button {
+div.import > div > div > input[type="file"]::-webkit-file-upload-button {
     visibility: hidden;
 }
 
-div.import>div>div>input[type="file"]::before {
+div.import > div > div > input[type="file"]::before {
     content: attr(upload-button-label);
     display: inline-block;
-    background-image: linear-gradient(to top, #f9f9f9 0px, #f9f9f9 50%, #e3e3e3 50%, #e3e3e3 100% );
+    background-image: linear-gradient(to top, #f9f9f9 0px, #f9f9f9 50%, #e3e3e3 50%, #e3e3e3 100%);
     color: #444;
     border: 1px solid #999;
     border-radius: 3px;
@@ -142,13 +147,22 @@ div.import>div>div>input[type="file"]::before {
     font-weight: 700;
     font-size: 14px;
 }
-div.import>div>div>input[type="file"]:hover::before {
+
+div.import > div > div > input[type="file"]:hover::before {
     border-color: black;
 }
-div.import>div>div>input[type="file"]:active::before {
+
+div.import > div > div > input[type="file"]:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
+.uploadConfirm {
+    margin-top: 20px;
+}
+
+label {
+    font-size: large;
+}
 
 
 

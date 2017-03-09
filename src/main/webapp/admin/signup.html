@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>中国工程院无线投票系统</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<style>
-    h1 {
-        text-align: center;
-    }
-</style>
-<body ng-app="register" ng-controller="register_ctrl">
-<div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="page-header">
-            <h1>中国工程院无线投票系统</h1>
-        </div>
+<h2 class="sub-header">注册新管理员</h2>
+<div class="row">
+    <div class="col-md-3" ng-controller="register_ctrl">
         <form ng-submit="register()">
             <div class="form-group">
                 <label>用户名</label>
@@ -27,11 +13,8 @@
                 <input type="password" ng-model="account.password" class="form-control" placeholder="Password" required>
             </div>
 
-            <button type="submit" class="btn btn-lg btn-primary btn-block">注册</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">注册</button>
         </form>
     </div>
 </div>
-<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-<script src="js/register.js"></script>
-</body>
-</html>
+

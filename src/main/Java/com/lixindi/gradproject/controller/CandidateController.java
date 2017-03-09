@@ -1,6 +1,8 @@
 package com.lixindi.gradproject.controller;
 
+import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.vo.CandidateInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +17,12 @@ import java.util.List;
 
 @Controller
 public class CandidateController {
-    @RequestMapping(value = "/w_one_candidate", method = RequestMethod.POST)
+    @Autowired
+    CandidateService candidateService;
+
+    @RequestMapping(value = "/w_candidate", method = RequestMethod.POST)
     @ResponseBody
-    public Boolean insertOne(@RequestBody List<Integer> number) {
-        System.out.println(number.size());
-        return true;
+    public Boolean insertCandidate(@RequestBody List<CandidateInfo> candidateInfos) {
+        return candidateService.insertCandidate(candidateInfos);
     }
-
-
 }

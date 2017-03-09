@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <title>中国工程院无线投票系统</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,67 +24,22 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li><a href="#">新增候选人</a></li>
+                <li><a href="#/add_candidate">新增候选人</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
-                <li><a href="/admin/signup.html">注册新管理员</a></li>
-                <li><a href="/admin/reset-password.html">修改密码</a></li>
+                <li><a href="#/signup">注册新管理员</a></li>
+                <li><a href="#/reset_password">修改密码</a></li>
             </ul>
         </div>
-        <div class="col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">录入候选人</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <form>
-                        <div class="form-group">
-                            <label for="candidateNum">提名书号</label>
-                            <input type="text" class="form-control" id="candidateNum" placeholder="提名书号" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" class="form-control" id="name" placeholder="姓名" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="age">年龄</label>
-                            <input type="text" class="form-control" id="age" placeholder="年龄" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="major">学科专业</label>
-                            <input type="text" class="form-control" id="major" placeholder="学科专业" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">工作单位</label>
-                            <input type="text" class="form-control" id="company" placeholder="工作单位" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="department">学部</label>
-                            <input type="text" class="form-control" id="department" placeholder="学部" required>
-                        </div>
+        <div ng-view class="col-md-10 col-md-offset-2 main">
 
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-            <h2 class="sub-header">导入候选人名单</h2>
-            <div ng-controller="import_csv">
-                <ng-csv-import
-                        class="import"
-                        content="csv.content"
-                        header="csv.header"
-                        header-visible="csv.headerVisible"
-                        separator="csv.separator"
-                        separator-visible="csv.separatorVisible"
-                        result="csv.result"
-                        encoding="csv.encoding"
-                        encoding-visible="csv.encodingVisible"
-                        upload-button-label="csv.uploadButtonLabel"></ng-csv-import>
-            </div>
         </div>
     </div>
 </div>
 
 
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
 <script src="js/angular-csv-import.js"></script>
 <script src="js/admin.js"></script>
 </body>

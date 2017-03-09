@@ -6,7 +6,7 @@ login.controller('login_ctrl', function ($scope, $http) {
     $scope.validate = function () {
         $http.post('/validate', $scope.account)
             .success(function (response) {
-                if (response) {
+                if (response.data) {
                     alert("登陆成功");
                     window.location.href = "/admin/admin.html";
                 } else {

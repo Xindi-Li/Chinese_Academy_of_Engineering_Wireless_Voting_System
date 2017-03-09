@@ -1,0 +1,53 @@
+<h2 class="sub-header">录入候选人</h2>
+<div class="row">
+    <div class="col-md-3">
+        <form>
+            <div class="form-group">
+                <label for="candidateNum">提名书号</label>
+                <input type="text" class="form-control" id="candidateNum" placeholder="提名书号" required>
+            </div>
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" class="form-control" id="name" placeholder="姓名" required>
+            </div>
+            <div class="form-group">
+                <label for="age">年龄</label>
+                <input type="text" class="form-control" id="age" placeholder="年龄" required>
+            </div>
+            <div class="form-group">
+                <label for="major">学科专业</label>
+                <input type="text" class="form-control" id="major" placeholder="学科专业" required>
+            </div>
+            <div class="form-group">
+                <label for="company">工作单位</label>
+                <input type="text" class="form-control" id="company" placeholder="工作单位" required>
+            </div>
+            <div class="form-group">
+                <label for="department">学部</label>
+                <input type="text" class="form-control" id="department" placeholder="学部" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+<h2 class="sub-header">导入候选人名单</h2>
+<div ng-controller="upload_csv">
+    <ng-csv-import
+            class="import"
+            content="csv.content"
+            header="csv.header"
+            header-visible="csv.headerVisible"
+            separator="csv.separator"
+            separator-visible="csv.separatorVisible"
+            result="csv.result"
+            encoding="csv.encoding"
+            encoding-visible="csv.encodingVisible"
+            upload-button-label="csv.uploadButtonLabel"
+            ng-click="clicked()"></ng-csv-import>
+    <div class="uploadConfirm" ng-show="is_clicked">
+        选择的文件：<span ng-bind="csv.result.filename"></span>
+        <button type="button" class="btn btn-primary">上传</button>
+    </div>
+</div>
+<script src="js/upload-csv.js"></script>
