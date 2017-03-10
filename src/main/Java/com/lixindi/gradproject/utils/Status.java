@@ -5,7 +5,8 @@ package com.lixindi.gradproject.utils;
  */
 public enum Status {
     OK(0, "操作成功"),
-    ERROR(1, "出现错误");
+    ERROR(1, "出现错误"),
+    DUPLICATE_KEY(2,"重复的key");
 
     private int status;
     private String message;

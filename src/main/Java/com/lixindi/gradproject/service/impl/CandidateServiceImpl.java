@@ -1,7 +1,10 @@
 package com.lixindi.gradproject.service.impl;
 
 import com.lixindi.gradproject.dao.CandidateMapper;
+import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.service.CandidateService;
+import com.lixindi.gradproject.utils.Status;
+import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -17,13 +20,16 @@ public class CandidateServiceImpl implements CandidateService {
     @Autowired
     private CandidateMapper candidateMapper;
 
-
-    public Boolean insertCandidate(List<CandidateInfo> candidateInfos) {
+    public ServiceResponse<Boolean> insertCandidate(List<CandidateInfo> candidateInfos) {
         try {
             int lines = candidateMapper.insertCandidate(candidateInfos);
-            return lines > 0;
+            if (lines > 0) {
+                return new ServiceResponse<Boolean>(Status.OK, true);
+            } else {
+                return new ServiceResponse<Boolean>(Status.ERROR, false);
+            }
         } catch (DuplicateKeyException exception) {
-            return false;
+            return new ServiceResponse<Boolean>(Status.DUPLICATE_KEY, false);
         }
     }
 }
