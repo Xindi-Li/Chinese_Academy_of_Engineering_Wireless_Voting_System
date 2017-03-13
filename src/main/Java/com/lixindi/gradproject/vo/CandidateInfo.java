@@ -4,7 +4,7 @@ package com.lixindi.gradproject.vo;
  * Created by lixindi on 2017/2/24.
  */
 public class CandidateInfo {
-    private String candidateNum;
+    private String candidate_num;
     private String name;
     private Integer age;
     private String major;
@@ -12,12 +12,12 @@ public class CandidateInfo {
     private String department;
     private String group;
 
-    public String getCandidateNum() {
-        return candidateNum;
+    public String getCandidate_num() {
+        return candidate_num;
     }
 
-    public void setCandidateNum(String candidateNum) {
-        this.candidateNum = candidateNum;
+    public void setCandidate_num(String candidate_num) {
+        this.candidate_num = candidate_num;
     }
 
     public String getName() {

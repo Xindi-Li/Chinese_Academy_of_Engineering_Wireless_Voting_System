@@ -164,12 +164,60 @@ label {
     font-size: large;
 }
 
-.searchbox{
+.searchbox {
     font-size: 103%;
 }
 
-#searchtable{
+#searchtable {
     margin-top: 30px;
+}
+
+.list-group {
+    margin-top: 30px;
+}
+
+.list-group-item {
+    margin-left: 5px;
+    margin-right: -10px;
+    width: 18%;
+    color: #428bca;
+}
+
+.page-list .pagination {
+    float: left;
+}
+
+.page-list .pagination span {
+    cursor: pointer;
+}
+
+.page-list .pagination .separate span {
+    cursor: default;
+    border-top: none;
+    border-bottom: none;
+}
+
+.page-list .pagination .separate span:hover {
+    background: none;
+}
+
+.page-list .page-total {
+    float: left;
+    margin: 25px 20px;
+}
+
+.page-list .page-total input, .page-list .page-total select {
+    height: 26px;
+    border: 1px solid #ddd;
+}
+
+.page-list .page-total input {
+    width: 40px;
+    padding-left: 3px;
+}
+
+.page-list .page-total select {
+    width: 50px;
 }
 
 

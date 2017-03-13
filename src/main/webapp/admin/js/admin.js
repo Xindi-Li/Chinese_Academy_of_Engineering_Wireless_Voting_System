@@ -1,7 +1,7 @@
 /**
  * Created by lixindi on 2017/3/1.
  */
-var admin = angular.module('admin', ['ngCsvImport', 'ngRoute']);
+var admin = angular.module('admin', ['ngCsvImport', 'ngRoute','tm.pagination']);
 admin.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/add_candidate', {
         templateUrl: 'add-candidate.html',
@@ -12,9 +12,12 @@ admin.config(['$routeProvider', function ($routeProvider) {
     }).when('/reset_password', {
         templateUrl: 'reset-password.html',
         controller: 'reset_ctrl'
-    }).when('/view_candidate',{
-        templateUrl:'view-candidate.html',
-        controller:''
+    }).when('/view_candidate', {
+        templateUrl: 'view-candidate.html',
+        controller: ''
+    }).when('/group_candidate', {
+        templateUrl: 'group-candidate.html',
+        controller: 'group_candidate'
     });
 }]);
 

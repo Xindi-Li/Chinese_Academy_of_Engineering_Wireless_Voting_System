@@ -18,7 +18,7 @@ angular.module('admin').controller('add_candidate', function ($scope, $http) {
     };
 
     $scope.submit_one = function () {
-        $http.post('/w_candidate', [$scope.candidate])
+        $http.post('/admin/w_candidate', [$scope.candidate])
             .success(function (response) {
                 if (response.data) {
                     alert("提交成功");
@@ -32,7 +32,7 @@ angular.module('admin').controller('add_candidate', function ($scope, $http) {
 
     };
     $scope.upload_csv = function () {
-        $http.post('/w_candidate', $scope.csv.result)
+        $http.post('/admin/w_candidate', $scope.csv.result)
             .success(function (response) {
                 if (response.data) {
                     alert("上传成功");

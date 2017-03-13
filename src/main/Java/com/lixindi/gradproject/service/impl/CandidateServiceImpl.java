@@ -6,6 +6,7 @@ import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
+import com.lixindi.gradproject.vo.CandidateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,9 @@ public class CandidateServiceImpl implements CandidateService {
         } catch (DuplicateKeyException exception) {
             return new ServiceResponse<Boolean>(Status.DUPLICATE_KEY, false);
         }
+    }
+
+    public List<CandidateInfo> getCandidate(CandidateRequest candidateRequest) {
+        return candidateMapper.getCandidate(candidateRequest);
     }
 }

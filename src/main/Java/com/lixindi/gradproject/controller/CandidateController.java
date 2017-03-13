@@ -5,6 +5,7 @@ import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
+import com.lixindi.gradproject.vo.CandidateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +24,7 @@ public class CandidateController {
     @Autowired
     CandidateService candidateService;
 
-    @RequestMapping(value = "/w_candidate", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/w_candidate", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse<Boolean> insertCandidate(@RequestBody List<CandidateInfo> candidateInfos) {
         ServiceResponse insert = candidateService.insertCandidate(candidateInfos);
@@ -34,5 +35,12 @@ public class CandidateController {
         } else {
             return new AjaxResponse<Boolean>(Status.ERROR, false);
         }
+    }
+
+    @RequestMapping(value = "/admin/r_candidate", method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse<List<CandidateInfo>> getCandidate(@RequestBody CandidateRequest candidateRequest) {
+        List<CandidateInfo> candidateInfos = candidateService.getCandidate(candidateRequest);
+        return new AjaxResponse<List<CandidateInfo>>(Status.OK, candidateInfos);
     }
 }

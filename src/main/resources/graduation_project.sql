@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2017-03-13 10:54:09
+Date: 2017-03-13 19:41:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ INSERT INTO `admin` VALUES ('6', 'abc', '900150983cd24fb0d6963f7d28e17f72');
 DROP TABLE IF EXISTS `candidate`;
 CREATE TABLE `candidate` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
-  `candidateNum` varchar(10) NOT NULL,
+  `candidate_num` varchar(10) NOT NULL,
   `name` varchar(50) NOT NULL,
   `age` int(3) NOT NULL,
   `major` varchar(50) NOT NULL,
@@ -47,8 +47,8 @@ CREATE TABLE `candidate` (
   `department` varchar(50) NOT NULL,
   `group` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `candidateNum` (`candidateNum`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `candidate_num` (`candidate_num`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of candidate
@@ -58,3 +58,10 @@ INSERT INTO `candidate` VALUES ('14', '2', 'abc', '20', 'abc', 'abc', 'abc', nul
 INSERT INTO `candidate` VALUES ('16', '3', 'a', '1', 'a', 'a', 's', null);
 INSERT INTO `candidate` VALUES ('17', '4', '1', '1', '1', '1', '1', null);
 INSERT INTO `candidate` VALUES ('19', '5', '1', '1', '1', '1', '1', null);
+INSERT INTO `candidate` VALUES ('20', '13', '张金麟', '70', '机械', '浙江大学', '机械与运载工程学部', null);
+INSERT INTO `candidate` VALUES ('21', '14', '杨凤田', '66', '机械', '装甲兵工程学院', '机械与运载工程学部', null);
+INSERT INTO `candidate` VALUES ('22', '15', '陈福田', '68', '机械', '中国航天科技集团公司第一研究院', '机械与运载工程学部', null);
+INSERT INTO `candidate` VALUES ('23', '16', '臧克茂', '70', '机械', '中国船舶重工集团第七一九研究所', '机械与运载工程学部', null);
+INSERT INTO `candidate` VALUES ('24', '17', '谭建荣', '70', '机械', '中国航空工业第一集团公司沈阳飞机设计研究所', '机械与运载工程学部', null);
+INSERT INTO `candidate` VALUES ('25', '18', '张尧学', '61', '信息', '教育部', '信息与电子工程学部', null);
+INSERT INTO `candidate` VALUES ('26', '19', '徐扬生', '57', '信息', '香港中文大学', '信息与电子工程学部', null);

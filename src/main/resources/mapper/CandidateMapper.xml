@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lixindi.gradproject.dao.CandidateMapper">
     <resultMap id="BaseResultMap" type="com.lixindi.gradproject.vo.CandidateInfo">
-        <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="candidateNum" property="candidatenum" jdbcType="VARCHAR"/>
+        <result column="candidate_num" property="candidate_num" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="age" property="age" jdbcType="INTEGER"/>
         <result column="major" property="major" jdbcType="VARCHAR"/>
@@ -14,10 +13,25 @@
 
     <insert id="insertCandidate">
         INSERT INTO
-        candidate(candidateNum,name,age,major,company,department)
+        candidate(candidate_num,name,age,major,company,department)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.candidateNum}, #{item.name}, #{item.age}, #{item.major}, #{item.company}, #{item.department})
+            (#{item.candidate_num}, #{item.name}, #{item.age}, #{item.major}, #{item.company}, #{item.department})
         </foreach>
     </insert>
+
+    <select id="getCandidate" resultMap="BaseResultMap">
+        SELECT * FROM candidate
+        <where>
+            <if test="department != null">
+                department = #{department}
+            </if>
+            <if test="group != null">
+                AND group = #{group}
+            </if>
+            <if test="name != null">
+                AND name = #{name}
+            </if>
+        </where>
+    </select>
 </mapper>
