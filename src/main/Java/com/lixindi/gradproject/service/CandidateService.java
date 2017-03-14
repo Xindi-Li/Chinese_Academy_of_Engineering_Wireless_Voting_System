@@ -4,6 +4,7 @@ import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
+import com.lixindi.gradproject.vo.GroupRequest;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface CandidateService {
     CandidateResponse getCandidate(CandidateRequest candidateRequest);
 
     List<String> getDepartment();
+
+    Boolean groupCandidate(GroupRequest groupRequest);
 }

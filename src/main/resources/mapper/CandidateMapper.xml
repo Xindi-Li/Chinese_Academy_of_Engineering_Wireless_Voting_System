@@ -49,6 +49,16 @@
                 department = #{department}
             </if>
         </where>
-
     </select>
+
+    <update id="updateGroup">
+        UPDATE candidate
+        SET group = #{group}
+        <where>
+            <if test="department != null and department != ''">
+                department = #{department}
+            </if>
+            AND name = #{name}
+        </where>
+    </update>
 </mapper>

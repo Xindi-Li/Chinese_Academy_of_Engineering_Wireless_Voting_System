@@ -3,6 +3,7 @@
  */
 angular.module('admin')
     .controller('group_candidate', function ($scope, $http) {
+        $scope.candidates = [];
         $scope.paginationConf = {
             currentPage: 1,
             pagesLength: 15,
@@ -25,7 +26,23 @@ angular.module('admin')
                 .success(function (response) {
                     $scope.paginationConf.totalItems = response.data.total;
                     $scope.candidate = response.data.candidateInfos;
-                })
+                });
+            $scope.candidates = [];
         };
         $scope.$watch('paginationConf.currentPage + department', $scope.get_candidate);
+
+        $scope.group = function (checked, candidate) {
+            if (checked) {
+                $scope.candidates.push(candidate);
+            } else {
+                var index = $scope.candidates.indexOf(candidate);
+                if (index > -1) {
+                    $scope.candidates.splice(index, 1);
+                }
+            }
+        };
+
+        $scope.submit = function () {
+
+        }
     });

@@ -26,7 +26,9 @@
 <div class="row">
     <div class="col-md-8">
         <ul class="list-inline list-group">
-            <li class="list-group-item" ng-repeat="item in candidate"><input type="checkbox">{{item.name}}</li>
+            <li class="list-group-item" ng-repeat="item in candidate">
+                <input type="checkbox" ng-model="item.checked" ng-click="group(item.checked,item.name)">{{item.name}}
+            </li>
         </ul>
     </div>
 </div>

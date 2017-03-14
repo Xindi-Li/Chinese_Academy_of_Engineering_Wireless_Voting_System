@@ -15,4 +15,6 @@ public interface CandidateMapper {
     List<String> getDepartment();
 
     int getTotal(String department);
+
+    int updateGroup(String name, String department, String group);
 }

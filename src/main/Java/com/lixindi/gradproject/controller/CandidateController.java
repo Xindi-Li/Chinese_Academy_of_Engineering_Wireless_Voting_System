@@ -7,6 +7,7 @@ import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
+import com.lixindi.gradproject.vo.GroupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,5 +51,16 @@ public class CandidateController {
     public AjaxResponse<List<String>> getDepartment() {
         List<String> departments = candidateService.getDepartment();
         return new AjaxResponse<List<String>>(Status.OK, departments);
+    }
+
+    @RequestMapping(value = "/admin/w_group", method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse<Boolean> groupCandidate(@RequestBody GroupRequest groupRequest) {
+        Boolean updated = candidateService.groupCandidate(groupRequest);
+        if (updated) {
+            return new AjaxResponse<Boolean>(Status.OK, true);
+        } else {
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
+        }
     }
 }

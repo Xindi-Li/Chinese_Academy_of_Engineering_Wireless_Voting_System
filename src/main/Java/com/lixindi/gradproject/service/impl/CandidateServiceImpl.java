@@ -9,6 +9,7 @@ import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
+import com.lixindi.gradproject.vo.GroupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,16 @@ public class CandidateServiceImpl implements CandidateService {
 
     public List<String> getDepartment() {
         return candidateMapper.getDepartment();
+    }
+
+    public Boolean groupCandidate(GroupRequest groupRequest) {
+        int lines = 0;
+        List<String> names = groupRequest.getNames();
+        String department = groupRequest.getDepartment();
+        String group = groupRequest.getGroup();
+        for (String name : names) {
+            lines += candidateMapper.updateGroup(name, department, group);
+        }
+        return lines > 0;
     }
 }
