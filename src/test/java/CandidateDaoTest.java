@@ -24,4 +24,9 @@ public class CandidateDaoTest {
         List<CandidateInfo> candidateInfos = new ArrayList<CandidateInfo>();
     }
 
+    @Test
+    public void getTotal(){
+        System.out.println(candidateMapper.getTotal(null));
+    }
+
 }

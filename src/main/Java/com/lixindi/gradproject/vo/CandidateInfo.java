@@ -11,6 +11,7 @@ public class CandidateInfo {
     private String company;
     private String department;
     private String group;
+    private Integer total;
 
     public String getCandidate_num() {
         return candidate_num;
@@ -66,5 +67,13 @@ public class CandidateInfo {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

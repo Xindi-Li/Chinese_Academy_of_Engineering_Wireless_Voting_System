@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.dao;
 
+import com.lixindi.gradproject.dto.CandidateDaoRequest;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 
@@ -9,7 +10,9 @@ public interface CandidateMapper {
 
     int insertCandidate(List<CandidateInfo> candidateInfos);
 
-    List<CandidateInfo> getCandidate(CandidateRequest candidateRequest);
+    List<CandidateInfo> getCandidate(CandidateDaoRequest candidateDaoRequest);
 
     List<String> getDepartment();
+
+    int getTotal(String department);
 }

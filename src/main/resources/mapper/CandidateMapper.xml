@@ -23,20 +23,32 @@
     <select id="getCandidate" resultMap="BaseResultMap">
         SELECT * FROM candidate
         <where>
-            <if test="department != null">
+            <if test="department != null and department != ''">
                 department = #{department}
             </if>
-            <if test="group != null">
+            <if test="group != null and group != ''">
                 AND group = #{group}
             </if>
-            <if test="name != null">
+            <if test="name != null and name != ''">
                 AND name = #{name}
             </if>
         </where>
+        limit #{offset},#{itemsPerPage}
     </select>
 
     <select id="getDepartment" resultType="java.lang.String">
         SELECT DISTINCT department
         from candidate
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM candidate
+        <where>
+            <if test="_parameter != null and _parameter!= ''">
+                department = #{department}
+            </if>
+        </where>
+
     </select>
 </mapper>

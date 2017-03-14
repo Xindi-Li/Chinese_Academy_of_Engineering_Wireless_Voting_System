@@ -1,6 +1,8 @@
 package com.lixindi.gradproject.service.impl;
 
 import com.lixindi.gradproject.dao.CandidateMapper;
+import com.lixindi.gradproject.dto.CandidateDaoRequest;
+import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
@@ -34,8 +36,22 @@ public class CandidateServiceImpl implements CandidateService {
         }
     }
 
-    public List<CandidateInfo> getCandidate(CandidateRequest candidateRequest) {
-        return candidateMapper.getCandidate(candidateRequest);
+    public CandidateResponse getCandidate(CandidateRequest candidateRequest) {
+        CandidateDaoRequest candidateDaoRequest = new CandidateDaoRequest();
+        candidateDaoRequest.setDepartment(candidateRequest.getDepartment());
+        candidateDaoRequest.setGroup(candidateRequest.getGroup());
+        candidateDaoRequest.setName(candidateRequest.getName());
+        int itemPerPage = candidateRequest.getItemsPerPage();
+        int offset = (candidateRequest.getCurrentPage() - 1) * itemPerPage;
+        candidateDaoRequest.setItemsPerPage(itemPerPage);
+        candidateDaoRequest.setOffset(offset);
+
+        CandidateResponse candidateResponse = new CandidateResponse();
+        List<CandidateInfo> candidateInfoList = candidateMapper.getCandidate(candidateDaoRequest);
+        int total = candidateMapper.getTotal(candidateRequest.getDepartment());
+        candidateResponse.setCandidateInfos(candidateInfoList);
+        candidateResponse.setTotal(total);
+        return candidateResponse;
     }
 
     public List<String> getDepartment() {

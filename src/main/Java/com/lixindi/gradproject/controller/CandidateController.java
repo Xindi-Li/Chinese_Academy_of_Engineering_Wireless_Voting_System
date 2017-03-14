@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.controller;
 
+import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
@@ -39,9 +40,9 @@ public class CandidateController {
 
     @RequestMapping(value = "/admin/r_candidate", method = RequestMethod.POST)
     @ResponseBody
-    public AjaxResponse<List<CandidateInfo>> getCandidate(@RequestBody CandidateRequest candidateRequest) {
-        List<CandidateInfo> candidateInfos = candidateService.getCandidate(candidateRequest);
-        return new AjaxResponse<List<CandidateInfo>>(Status.OK, candidateInfos);
+    public AjaxResponse<CandidateResponse> getCandidate(@RequestBody CandidateRequest candidateRequest) {
+        CandidateResponse candidateResponse = candidateService.getCandidate(candidateRequest);
+        return new AjaxResponse<CandidateResponse>(Status.OK, candidateResponse);
     }
 
     @RequestMapping(value = "/admin/r_department", method = RequestMethod.GET)

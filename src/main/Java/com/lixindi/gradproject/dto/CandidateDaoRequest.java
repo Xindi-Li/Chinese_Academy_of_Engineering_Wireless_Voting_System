@@ -1,13 +1,13 @@
-package com.lixindi.gradproject.vo;
+package com.lixindi.gradproject.dto;
 
 /**
- * Created by lixindi on 2017/3/10.
+ * Created by lixindi on 2017/3/14.
  */
-public class CandidateRequest {
+public class CandidateDaoRequest {
     private String department;
     private String group;
     private String name;
-    private int currentPage;
+    private int offset;
     private int itemsPerPage;
 
     public String getDepartment() {
@@ -34,12 +34,12 @@ public class CandidateRequest {
         this.name = name;
     }
 
-    public int getCurrentPage() {
-        return currentPage;
+    public int getOffset() {
+        return offset;
     }
 
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     public int getItemsPerPage() {

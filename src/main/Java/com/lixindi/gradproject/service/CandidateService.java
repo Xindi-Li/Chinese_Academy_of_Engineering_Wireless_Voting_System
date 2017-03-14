@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.service;
 
+import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface CandidateService {
     ServiceResponse<Boolean> insertCandidate(List<CandidateInfo> candidateInfos);
 
-    List<CandidateInfo> getCandidate(CandidateRequest candidateRequest);
+    CandidateResponse getCandidate(CandidateRequest candidateRequest);
 
     List<String> getDepartment();
 }

@@ -5,27 +5,27 @@ angular.module('admin')
     .controller('group_candidate', function ($scope, $http) {
         $scope.paginationConf = {
             currentPage: 1,
-            totalItems: 8000,
-            itemsPerPage: 50,
             pagesLength: 15,
-            perPageOptions: [10, 20, 30, 40, 50],
-            onChange: function () {
-            }
+            itemsPerPage: 5,
+            perPageOptions: [5, 10, 15, 20]
         };
         $scope.get_department = function () {
             $http.get('/admin/r_department')
                 .success(function (response) {
-                    $scope.department = response.data;
+                    $scope.departmentList = response.data;
                 })
         };
         $scope.get_candidate = function () {
-            $http.post('/admin/r_candidate', $scope.select)
+            var postData = {
+                currentPage: $scope.paginationConf.currentPage,
+                itemsPerPage: $scope.paginationConf.itemsPerPage,
+                department: $scope.department
+            };
+            $http.post('/admin/r_candidate', postData)
                 .success(function (response) {
-                    $scope.candidate = response.data;
+                    $scope.paginationConf.totalItems = response.data.total;
+                    $scope.candidate = response.data.candidateInfos;
                 })
         };
-
-        $scope.$watch($scope.select, function () {
-            get_candidate();
-        });
+        $scope.$watch('paginationConf.currentPage + department', $scope.get_candidate);
     });
