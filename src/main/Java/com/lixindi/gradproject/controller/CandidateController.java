@@ -43,4 +43,11 @@ public class CandidateController {
         List<CandidateInfo> candidateInfos = candidateService.getCandidate(candidateRequest);
         return new AjaxResponse<List<CandidateInfo>>(Status.OK, candidateInfos);
     }
+
+    @RequestMapping(value = "/admin/r_department", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<List<String>> getDepartment() {
+        List<String> departments = candidateService.getDepartment();
+        return new AjaxResponse<List<String>>(Status.OK, departments);
+    }
 }

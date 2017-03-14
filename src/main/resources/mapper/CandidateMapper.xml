@@ -34,4 +34,9 @@
             </if>
         </where>
     </select>
+
+    <select id="getDepartment" resultType="java.lang.String">
+        SELECT DISTINCT department
+        from candidate
+    </select>
 </mapper>

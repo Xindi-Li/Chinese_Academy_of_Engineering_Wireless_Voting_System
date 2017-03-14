@@ -37,4 +37,8 @@ public class CandidateServiceImpl implements CandidateService {
     public List<CandidateInfo> getCandidate(CandidateRequest candidateRequest) {
         return candidateMapper.getCandidate(candidateRequest);
     }
+
+    public List<String> getDepartment() {
+        return candidateMapper.getDepartment();
+    }
 }

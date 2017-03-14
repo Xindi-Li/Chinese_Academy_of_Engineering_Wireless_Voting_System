@@ -13,4 +13,6 @@ public interface CandidateService {
     ServiceResponse<Boolean> insertCandidate(List<CandidateInfo> candidateInfos);
 
     List<CandidateInfo> getCandidate(CandidateRequest candidateRequest);
+
+    List<String> getDepartment();
 }

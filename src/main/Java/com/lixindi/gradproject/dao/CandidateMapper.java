@@ -10,4 +10,6 @@ public interface CandidateMapper {
     int insertCandidate(List<CandidateInfo> candidateInfos);
 
     List<CandidateInfo> getCandidate(CandidateRequest candidateRequest);
+
+    List<String> getDepartment();
 }
