@@ -31,7 +31,7 @@ angular.module('admin')
         };
         $scope.$watch('paginationConf.currentPage + department', $scope.get_candidate);
 
-        $scope.group = function (checked, candidate) {
+        $scope.changelist = function (checked, candidate) {
             if (checked) {
                 $scope.candidates.push(candidate);
             } else {
@@ -43,6 +43,18 @@ angular.module('admin')
         };
 
         $scope.submit = function () {
-
+            var postData = {
+                names: $scope.candidates,
+                department: $scope.department,
+                group: $scope.group
+            };
+            $http.post('/admin/w_group', postData)
+                .success(function (response) {
+                    if (response.data) {
+                        alert("分组成功");
+                    } else {
+                        alert("分组失败");
+                    }
+                });
         }
     });

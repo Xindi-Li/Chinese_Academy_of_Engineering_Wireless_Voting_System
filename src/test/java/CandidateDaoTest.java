@@ -26,7 +26,7 @@ public class CandidateDaoTest {
 
     @Test
     public void getTotal(){
-        System.out.println(candidateMapper.getTotal(null));
+        System.out.println(candidateMapper.getTotal("abc"));
     }
 
 }

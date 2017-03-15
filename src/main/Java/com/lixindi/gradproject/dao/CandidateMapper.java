@@ -3,6 +3,7 @@ package com.lixindi.gradproject.dao;
 import com.lixindi.gradproject.dto.CandidateDaoRequest;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface CandidateMapper {
 
     List<String> getDepartment();
 
-    int getTotal(String department);
+    int getTotal(@Param("department") String department);
 
-    int updateGroup(String name, String department, String group);
+    int updateGroup(@Param("name") String name,@Param("department") String department,@Param("group") String group);
 }

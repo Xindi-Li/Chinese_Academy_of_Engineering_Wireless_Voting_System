@@ -45,7 +45,7 @@
         SELECT COUNT(1)
         FROM candidate
         <where>
-            <if test="_parameter != null and _parameter!= ''">
+            <if test="department != null and department!= ''">
                 department = #{department}
             </if>
         </where>
@@ -53,7 +53,7 @@
 
     <update id="updateGroup">
         UPDATE candidate
-        SET group = #{group}
+        SET `group` = #{group}
         <where>
             <if test="department != null and department != ''">
                 department = #{department}
