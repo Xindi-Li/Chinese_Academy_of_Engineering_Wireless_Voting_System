@@ -51,6 +51,12 @@
         </where>
     </select>
 
+    <select id="getGroupByDepartment" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT DISTINCT `group`
+        from candidate
+        WHERE department = #{department}
+    </select>
+
     <update id="updateGroup">
         UPDATE candidate
         SET `group` = #{group}

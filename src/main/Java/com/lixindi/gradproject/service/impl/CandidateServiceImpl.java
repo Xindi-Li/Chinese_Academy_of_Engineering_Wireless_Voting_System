@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.service.impl;
 
+import com.google.common.base.Strings;
 import com.lixindi.gradproject.dao.CandidateMapper;
 import com.lixindi.gradproject.dto.CandidateDaoRequest;
 import com.lixindi.gradproject.dto.CandidateResponse;
@@ -10,10 +11,14 @@ import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.tiles.request.collection.CollectionUtil;
+import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -68,5 +73,19 @@ public class CandidateServiceImpl implements CandidateService {
             lines += candidateMapper.updateGroup(name, department, group);
         }
         return lines > 0;
+    }
+
+    public List<String> getGroupByDepartment(String department) {
+        if (Strings.isNullOrEmpty(department)) {
+            return null;
+        } else {
+            List<String> groups = candidateMapper.getGroupByDepartment(department);
+            groups.remove(null);
+            if (CollectionUtils.isEmpty(groups)) {
+                return null;
+            } else {
+                return groups;
+            }
+        }
     }
 }

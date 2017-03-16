@@ -17,5 +17,7 @@ public interface CandidateMapper {
 
     int getTotal(@Param("department") String department);
 
-    int updateGroup(@Param("name") String name,@Param("department") String department,@Param("group") String group);
+    int updateGroup(@Param("name") String name, @Param("department") String department, @Param("group") String group);
+
+    List<String> getGroupByDepartment(@Param("department") String department);
 }

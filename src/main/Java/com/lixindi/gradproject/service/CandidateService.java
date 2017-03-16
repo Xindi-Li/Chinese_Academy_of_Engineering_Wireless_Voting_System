@@ -19,4 +19,6 @@ public interface CandidateService {
     List<String> getDepartment();
 
     Boolean groupCandidate(GroupRequest groupRequest);
+
+    List<String> getGroupByDepartment(String department);
 }

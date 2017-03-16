@@ -1,7 +1,7 @@
 /**
  * Created by lixindi on 2017/3/1.
  */
-var admin = angular.module('admin', ['ngCsvImport', 'ngRoute','tm.pagination']);
+var admin = angular.module('admin', ['ngCsvImport', 'ngRoute', 'tm.pagination']);
 admin.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/add_candidate', {
         templateUrl: 'add-candidate.html',
@@ -14,7 +14,7 @@ admin.config(['$routeProvider', function ($routeProvider) {
         controller: 'reset_ctrl'
     }).when('/view_candidate', {
         templateUrl: 'view-candidate.html',
-        controller: ''
+        controller: 'view_candidate'
     }).when('/group_candidate', {
         templateUrl: 'group-candidate.html',
         controller: 'group_candidate'

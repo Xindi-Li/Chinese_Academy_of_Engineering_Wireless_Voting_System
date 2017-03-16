@@ -10,10 +10,7 @@ import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -62,5 +59,12 @@ public class CandidateController {
         } else {
             return new AjaxResponse<Boolean>(Status.ERROR, false);
         }
+    }
+
+    @RequestMapping(value = "/admin/r_group", method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse<List<String>> getGroupByDepartment(@RequestBody GroupRequest groupRequest) {
+        List<String> groups = candidateService.getGroupByDepartment(groupRequest.getDepartment());
+        return new AjaxResponse<List<String>>(Status.OK, groups);
     }
 }
