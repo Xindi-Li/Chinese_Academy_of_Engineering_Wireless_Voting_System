@@ -54,7 +54,7 @@ public class CandidateServiceImpl implements CandidateService {
 
         CandidateResponse candidateResponse = new CandidateResponse();
         List<CandidateInfo> candidateInfoList = candidateMapper.getCandidate(candidateDaoRequest);
-        int total = candidateMapper.getTotal(candidateRequest.getDepartment());
+        int total = candidateMapper.getTotal(candidateDaoRequest);
         candidateResponse.setCandidateInfos(candidateInfoList);
         candidateResponse.setTotal(total);
         return candidateResponse;

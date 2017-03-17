@@ -6,9 +6,9 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
-                        <select id="department" class="form-control" ng-model="department">
+                        <select id="department" class="form-control" ng-model="department"
+                                ng-options="item for item in departmentList">>
                             <option></option>
-                            <option ng-repeat="item in departmentList">{{item}}</option>
                         </select>
                     </div>
                 </div>

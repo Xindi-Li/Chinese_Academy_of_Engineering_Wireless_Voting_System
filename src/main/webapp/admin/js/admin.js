@@ -34,5 +34,12 @@ admin.controller('logout_ctrl', function ($scope, $http) {
     }
 });
 
-
+admin.service('candidate_service', function ($http) {
+    this.paginationConf = {
+        currentPage: 1,
+        pagesLength: 15,
+        itemsPerPage: 5,
+        perPageOptions: [5, 10, 15, 20]
+    };
+});
 

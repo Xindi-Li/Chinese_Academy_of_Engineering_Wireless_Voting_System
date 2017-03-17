@@ -6,18 +6,18 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
-                        <select id="department" class="form-control" ng-model="department">
+                        <select id="department" class="form-control" ng-model="department"
+                                ng-options="item for item in departmentList">
                             <option></option>
-                            <option ng-repeat="item in departmentList">{{item}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="group">组:</label>
-                        <select id="group" class="form-control" ng-model="group">
+                        <select id="group" class="form-control" ng-model="group"
+                                ng-options="item for item in groupList">
                             <option></option>
-                            <option ng-repeat="item in groupList">{{item}}</option>
                         </select>
                     </div>
                 </div>
@@ -25,15 +25,15 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="name">姓名:</label>
-                        <input type="text" class="form-control" id="name" placeholder="姓名">
+                        <input type="text" class="form-control" ng-model="name" id="name" placeholder="姓名">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-click="get_group()">查询</button>
+                <button type="submit" class="btn btn-primary" ng-click="get_candidate()">查询</button>
             </div>
         </form>
     </div>
 </div>
-<div class="table-responsive">
+<div class="table-responsive" ng-init="get_candidate()">
     <table class="table table-striped table-bordered" id="searchtable">
         <thead>
         <tr>
@@ -42,49 +42,18 @@
             <th>年龄</th>
             <th>学科专业</th>
             <th>工作单位</th>
+            <th>所在学部</th>
             <th style="width: 50px;"></th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
-            <td>
-                <a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-                <a href=""><i class="glyphicon glyphicon-remove"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>1,002</td>
-            <td>amet</td>
-            <td>consectetur</td>
-            <td>adipiscing</td>
-            <td>elit</td>
-            <td>
-                <a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-                <a href=""><i class="glyphicon glyphicon-remove"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>1,003</td>
-            <td>Integer</td>
-            <td>nec</td>
-            <td>odio</td>
-            <td>Praesent</td>
-            <td>
-                <a href=""><i class="glyphicon glyphicon-pencil"></i></a>
-                <a href=""><i class="glyphicon glyphicon-remove"></i></a>
-            </td>
-        </tr>
-        <tr>
-            <td>1,003</td>
-            <td>libero</td>
-            <td>Sed</td>
-            <td>cursus</td>
-            <td>ante</td>
+        <tr ng-repeat="item in candidate">
+            <td class="col-md-1">{{item.candidate_num}}</td>
+            <td class="col-md-1">{{item.name}}</td>
+            <td class="col-md-1">{{item.age}}</td>
+            <td class="col-md-3">{{item.major}}</td>
+            <td class="col-md-3">{{item.company}}</td>
+            <td>{{item.department}}</td>
             <td>
                 <a href=""><i class="glyphicon glyphicon-pencil"></i></a>
                 <a href=""><i class="glyphicon glyphicon-remove"></i></a>
@@ -93,3 +62,4 @@
         </tbody>
     </table>
 </div>
+<tm-pagination conf="paginationConf"></tm-pagination>

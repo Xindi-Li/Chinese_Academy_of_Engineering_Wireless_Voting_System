@@ -27,12 +27,13 @@
                 department = #{department}
             </if>
             <if test="group != null and group != ''">
-                AND group = #{group}
+                AND `group` = #{group}
             </if>
             <if test="name != null and name != ''">
-                AND name = #{name}
+                AND `name` = #{name}
             </if>
         </where>
+        ORDER BY candidate_num
         limit #{offset},#{itemsPerPage}
     </select>
 
@@ -47,6 +48,12 @@
         <where>
             <if test="department != null and department!= ''">
                 department = #{department}
+            </if>
+            <if test="group != null and group != ''">
+                AND `group` = #{group}
+            </if>
+            <if test="name != null and name != ''">
+                AND `name` = #{name}
             </if>
         </where>
     </select>
@@ -64,7 +71,7 @@
             <if test="department != null and department != ''">
                 department = #{department}
             </if>
-            AND name = #{name}
+            AND `name` = #{name}
         </where>
     </update>
 </mapper>

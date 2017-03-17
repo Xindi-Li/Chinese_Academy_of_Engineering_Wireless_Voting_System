@@ -15,7 +15,7 @@ public interface CandidateMapper {
 
     List<String> getDepartment();
 
-    int getTotal(@Param("department") String department);
+    int getTotal(CandidateDaoRequest candidateDaoRequest);
 
     int updateGroup(@Param("name") String name, @Param("department") String department, @Param("group") String group);
 
