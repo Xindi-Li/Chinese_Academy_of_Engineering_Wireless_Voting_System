@@ -2,7 +2,7 @@
  * Created by lixindi on 2017/3/10.
  */
 angular.module('admin')
-    .controller('view_candidate', function ($scope, $http, candidate_service) {
+    .controller('view_candidate', function ($scope, $http, $location, candidate_service, candidateInfo) {
 
         $scope.paginationConf = candidate_service.paginationConf;
 
@@ -40,4 +40,9 @@ angular.module('admin')
         };
 
         $scope.$watch('paginationConf.currentPage', $scope.get_candidate);
+
+        $scope.edit_candidate = function (candidate) {
+            candidateInfo.setValue(candidate);
+            $location.url('/edit_candidate');
+        }
     });

@@ -21,4 +21,6 @@ public interface CandidateService {
     Boolean groupCandidate(GroupRequest groupRequest);
 
     List<String> getGroupByDepartment(String department);
+
+    Boolean updateCandidate(CandidateInfo candidateInfo);
 }

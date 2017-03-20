@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,6 +42,16 @@ public class CandidateController {
     public AjaxResponse<CandidateResponse> getCandidate(@RequestBody CandidateRequest candidateRequest) {
         CandidateResponse candidateResponse = candidateService.getCandidate(candidateRequest);
         return new AjaxResponse<CandidateResponse>(Status.OK, candidateResponse);
+    }
+
+    @RequestMapping(value = "/admin/u_candidate", method = RequestMethod.POST)
+    @ResponseBody
+    public AjaxResponse<Boolean> updateCandidate(@RequestBody CandidateInfo candidateInfo) {
+        if (candidateService.updateCandidate(candidateInfo)) {
+            return new AjaxResponse<Boolean>(Status.OK, true);
+        } else {
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
+        }
     }
 
     @RequestMapping(value = "/admin/r_department", method = RequestMethod.GET)

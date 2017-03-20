@@ -20,4 +20,6 @@ public interface CandidateMapper {
     int updateGroup(@Param("name") String name, @Param("department") String department, @Param("group") String group);
 
     List<String> getGroupByDepartment(@Param("department") String department);
+
+    int updateCandidate(CandidateInfo candidateInfo);
 }

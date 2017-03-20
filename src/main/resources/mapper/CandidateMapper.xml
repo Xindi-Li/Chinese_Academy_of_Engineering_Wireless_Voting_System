@@ -74,4 +74,26 @@
             AND `name` = #{name}
         </where>
     </update>
+
+    <update id="updateCandidate">
+        UPDATE candidate
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="major != null and major!= ''">
+                major = #{major},
+            </if>
+            <if test="company != null and company!= ''">
+                company = #{company},
+            </if>
+            <if test="department != null and department != ''">
+                department = #{department}
+            </if>
+        </set>
+        WHERE candidate_num = #{candidate_num}
+    </update>
 </mapper>

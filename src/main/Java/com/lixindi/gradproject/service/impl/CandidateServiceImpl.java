@@ -88,4 +88,9 @@ public class CandidateServiceImpl implements CandidateService {
             }
         }
     }
+
+    public Boolean updateCandidate(CandidateInfo candidateInfo) {
+        int lines = candidateMapper.updateCandidate(candidateInfo);
+        return lines > 0;
+    }
 }
