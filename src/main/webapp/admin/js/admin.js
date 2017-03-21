@@ -21,6 +21,9 @@ admin.config(function ($routeProvider) {
     }).when('/edit_candidate', {
         templateUrl: 'edit-candidate.html',
         controller: 'edit_candidate'
+    }).when('/vote_setting', {
+        templateUrl: 'vote-setting.html',
+        controller: 'vote_setting'
     });
 });
 
@@ -55,5 +58,14 @@ admin.service('candidateInfo', function () {
         this.company = candidate.company;
         this.department = candidate.department;
     };
+});
+
+admin.service('voteParam', function () {
+    this.setValue = function (voteParam) {
+        this.department = voteParam.department;
+        this.group = voteParam.group;
+        this.type = voteParam.type;
+        this.round = voteParam.round;
+    }
 });
 

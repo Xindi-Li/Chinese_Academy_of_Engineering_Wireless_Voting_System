@@ -161,7 +161,7 @@ div.import > div > div > input[type="file"]:active::before {
 }
 
 label {
-    font-size: large;
+    font-size: medium;
 }
 
 .searchbox {
@@ -220,4 +220,11 @@ label {
     width: 50px;
 }
 
+#vote {
+    font-size: medium;
+}
+
+#vote > div:nth-child(5) {
+    margin-top: 15px;
+}
 

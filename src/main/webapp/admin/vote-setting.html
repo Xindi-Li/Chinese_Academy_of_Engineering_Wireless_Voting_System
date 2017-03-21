@@ -1,0 +1,62 @@
+<h2 class="sub-header">投票设置</h2>
+<div class="row" id="vote">
+    <div class="col-md-2">
+        <form>
+            <div class="form-group">
+                <label for="department">学部:</label>
+                <select id="department" class="form-control" ng-model="group"
+                        ng-options="item for item in groupList">
+                    <option></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="group">组:</label>
+                <select id="group" class="form-control" ng-model="group"
+                        ng-options="item for item in groupList">
+                    <option></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" ng-model="election_type" value="offcial" required>
+                    正式选举
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="inlineRadioOptions" ng-model="election_type" value="preelection"> 预选
+                </label>
+            </div>
+
+            <div class="form-group">
+                <span>第
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                轮</span>
+                <span>第
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                次</span>
+            </div>
+
+            <div class="form-group">
+                <label for="number">晋级人数：</label>
+                <input id="number" type="number" min="1" max="100">
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg">开启投票</button>
+        </form>
+    </div>
+    <div class="col-md-2">
+        <label>候选人数: </label><span ng-bind="count"></span>
+    </div>
+</div>
