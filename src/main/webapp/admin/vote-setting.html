@@ -1,35 +1,36 @@
 <h2 class="sub-header">投票设置</h2>
 <div class="row" id="vote">
-    <div class="col-md-2">
-        <form>
-            <div class="form-group">
-                <label for="department">学部:</label>
-                <select id="department" class="form-control" ng-model="group"
-                        ng-options="item for item in groupList">
-                    <option></option>
-                </select>
-            </div>
+    <div class="col-md-2" ng-init="get_department()">
+        <form ng-submit="begin_vote()">
+            <div>
+                <div class="form-group">
+                    <label for="department">学部:</label>
+                    <select id="department" class="form-control" ng-model="voteParam.department" ng-disabled="elec_begin"
+                            ng-options="item for item in departmentList" required>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="group">组:</label>
-                <select id="group" class="form-control" ng-model="group"
-                        ng-options="item for item in groupList">
-                    <option></option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" ng-model="election_type" value="offcial" required>
-                    正式选举
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="inlineRadioOptions" ng-model="election_type" value="preelection"> 预选
-                </label>
-            </div>
+                <div class="form-group">
+                    <label for="group">组:</label>
+                    <select id="group" class="form-control" ng-model="voteParam.group" ng-disabled="elec_begin"
+                            ng-options="item for item in groupList">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" ng-model="voteParam.type" value="正式" required
+                               ng-disabled="this_begin">
+                        正式选举
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="inlineRadioOptions" ng-model="voteParam.type" value="预选"
+                               ng-disabled="this_begin"> 预选
+                    </label>
+                </div>
 
-            <div class="form-group">
+                <div class="form-group">
                 <span>第
-                <select>
+                <select ng-model="voteParam.round" ng-disabled="this_begin">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -37,8 +38,8 @@
                     <option>5</option>
                 </select>
                 轮</span>
-                <span>第
-                <select>
+                    <span>第
+                <select ng-model="voteParam.times" ng-disabled="this_begin">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -46,17 +47,24 @@
                     <option>5</option>
                 </select>
                 次</span>
-            </div>
+                </div>
 
-            <div class="form-group">
-                <label for="number">晋级人数：</label>
-                <input id="number" type="number" min="1" max="100">
-            </div>
+                <div class="form-group">
+                    <label for="number">晋级人数：</label>
+                    <input id="number" type="number" min="1" max="100" ng-model="voteParam.advance_num"
+                           ng-disabled="this_begin">
+                </div>
 
-            <button type="submit" class="btn btn-success btn-lg">开启投票</button>
+                <button type="submit" class="btn btn-primary btn-lg" ng-disabled="this_begin">开启投票</button>
+            </div>
         </form>
     </div>
-    <div class="col-md-2">
-        <label>候选人数: </label><span ng-bind="count"></span>
+    <div class="col-md-5">
+        <div id="container" class="pull-right" ng-show="this_begin">
+            <h3 class="text-center">投票已进行</h3>
+            <div id="timer"></div>
+            <button id="endthis" class="btn btn-success" ng-click="end_this()">结束本次投票</button>
+            <button id="endall" class="btn btn-danger pull-right" ng-click="end_election()">结束选举</button>
+        </div>
     </div>
 </div>

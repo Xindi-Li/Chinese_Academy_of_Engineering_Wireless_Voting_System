@@ -27,6 +27,16 @@ admin.config(function ($routeProvider) {
     });
 });
 
+admin.run(function ($rootScope, voteParam) {
+    $rootScope.$on('$routeChangeStart', function (evt, next, current) {
+        if (current.templateUrl == "vote-setting.html" && voteParam.elec_begin == true) {
+            alert("选举尚未结束");
+            evt.preventDefault();
+        }
+    });
+
+});
+
 admin.controller('logout_ctrl', function ($scope, $http) {
     $scope.logout = function () {
         var confirm = window.confirm("确定注销吗？");
@@ -40,13 +50,13 @@ admin.controller('logout_ctrl', function ($scope, $http) {
     }
 });
 
-admin.service('candidate_service', function ($http) {
-    this.paginationConf = {
+admin.constant('paginationConf', {
+    paginationConf: {
         currentPage: 1,
         pagesLength: 15,
         itemsPerPage: 5,
         perPageOptions: [5, 10, 15, 20]
-    };
+    }
 });
 
 admin.service('candidateInfo', function () {
@@ -61,11 +71,16 @@ admin.service('candidateInfo', function () {
 });
 
 admin.service('voteParam', function () {
+    this.candidates = [];
+    this.this_begin = false;
+    this.elec_begin = false;
     this.setValue = function (voteParam) {
         this.department = voteParam.department;
         this.group = voteParam.group;
         this.type = voteParam.type;
         this.round = voteParam.round;
+        this.times = voteParam.times;
+        this.advance_num = voteParam.advance_num;
     }
 });
 

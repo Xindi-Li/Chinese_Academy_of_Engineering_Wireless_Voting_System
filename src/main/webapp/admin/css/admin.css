@@ -228,3 +228,17 @@ label {
     margin-top: 15px;
 }
 
+#container {
+    margin: 0 auto;
+    width: 200px;
+}
+
+#timer {
+    width: 180px;
+    height: 76px;
+    line-height: 76px;
+    font-size: 40pt;
+    font-weight: bold;
+    color: black;
+}
+

@@ -34,7 +34,9 @@
             </if>
         </where>
         ORDER BY candidate_num
-        limit #{offset},#{itemsPerPage}
+        <if test="offset != null and itemsPerPage != null">
+            limit #{offset},#{itemsPerPage}
+        </if>
     </select>
 
     <select id="getDepartment" resultType="java.lang.String">

@@ -2,9 +2,9 @@
  * Created by lixindi on 2017/3/13.
  */
 angular.module('admin')
-    .controller('group_candidate', function ($scope, $http, candidate_service) {
+    .controller('group_candidate', function ($scope, $http, paginationConf) {
         $scope.candidates = [];
-        $scope.paginationConf = candidate_service.paginationConf;
+        $scope.paginationConf = paginationConf.paginationConf;
 
         $scope.get_department = function () {
             $http.get('/admin/r_department')

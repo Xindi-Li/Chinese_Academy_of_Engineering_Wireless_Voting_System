@@ -7,8 +7,8 @@ public class CandidateDaoRequest {
     private String department;
     private String group;
     private String name;
-    private int offset;
-    private int itemsPerPage;
+    private Integer offset;
+    private Integer itemsPerPage;
 
     public String getDepartment() {
         return department;
@@ -34,19 +34,19 @@ public class CandidateDaoRequest {
         this.name = name;
     }
 
-    public int getOffset() {
+    public Integer getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset) {
+    public void setOffset(Integer offset) {
         this.offset = offset;
     }
 
-    public int getItemsPerPage() {
+    public Integer getItemsPerPage() {
         return itemsPerPage;
     }
 
-    public void setItemsPerPage(int itemsPerPage) {
+    public void setItemsPerPage(Integer itemsPerPage) {
         this.itemsPerPage = itemsPerPage;
     }
 }

@@ -7,8 +7,8 @@ public class CandidateRequest {
     private String department;
     private String group;
     private String name;
-    private int currentPage;
-    private int itemsPerPage;
+    private Integer currentPage;
+    private Integer itemsPerPage;
 
     public String getDepartment() {
         return department;
@@ -34,19 +34,19 @@ public class CandidateRequest {
         this.name = name;
     }
 
-    public int getCurrentPage() {
+    public Integer getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
     }
 
-    public int getItemsPerPage() {
+    public Integer getItemsPerPage() {
         return itemsPerPage;
     }
 
-    public void setItemsPerPage(int itemsPerPage) {
+    public void setItemsPerPage(Integer itemsPerPage) {
         this.itemsPerPage = itemsPerPage;
     }
 }

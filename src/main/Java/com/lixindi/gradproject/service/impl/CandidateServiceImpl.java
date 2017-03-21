@@ -47,11 +47,12 @@ public class CandidateServiceImpl implements CandidateService {
         candidateDaoRequest.setDepartment(candidateRequest.getDepartment());
         candidateDaoRequest.setGroup(candidateRequest.getGroup());
         candidateDaoRequest.setName(candidateRequest.getName());
-        int itemPerPage = candidateRequest.getItemsPerPage();
-        int offset = (candidateRequest.getCurrentPage() - 1) * itemPerPage;
-        candidateDaoRequest.setItemsPerPage(itemPerPage);
-        candidateDaoRequest.setOffset(offset);
-
+        if (candidateRequest.getItemsPerPage() != null && candidateRequest.getCurrentPage() != null) {
+            int itemPerPage = candidateRequest.getItemsPerPage();
+            int offset = (candidateRequest.getCurrentPage() - 1) * itemPerPage;
+            candidateDaoRequest.setItemsPerPage(itemPerPage);
+            candidateDaoRequest.setOffset(offset);
+        }
         CandidateResponse candidateResponse = new CandidateResponse();
         List<CandidateInfo> candidateInfoList = candidateMapper.getCandidate(candidateDaoRequest);
         int total = candidateMapper.getTotal(candidateDaoRequest);
