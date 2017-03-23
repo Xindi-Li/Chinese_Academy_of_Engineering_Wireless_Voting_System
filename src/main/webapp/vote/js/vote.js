@@ -1,7 +1,14 @@
 /**
  * Created by lixindi on 2017/3/20.
  */
-angular.module('vote', ['admin'])
-    .controller('vote_ctrl', function ($scope, voteParam) {
-        $scope.voteParam = voteParam;
-    });
+var vote = angular.module('vote', []);
+
+vote.controller('vote_ctrl', function ($scope) {
+    $scope.init = function () {
+
+    };
+    window.onload = function () {
+    }
+});
+
+

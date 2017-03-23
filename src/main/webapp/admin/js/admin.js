@@ -27,11 +27,13 @@ admin.config(function ($routeProvider) {
     });
 });
 
-admin.run(function ($rootScope, voteParam) {
+admin.run(function ($rootScope) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
-        if (current.templateUrl == "vote-setting.html" && voteParam.elec_begin == true) {
-            alert("选举尚未结束");
-            evt.preventDefault();
+        if (current != undefined && current.templateUrl == "vote-setting.html") {
+            if ($rootScope.vote_begin) {
+                alert("投票尚未结束");
+                evt.preventDefault();
+            }
         }
     });
 
@@ -70,17 +72,6 @@ admin.service('candidateInfo', function () {
     };
 });
 
-admin.service('voteParam', function () {
-    this.candidates = [];
-    this.this_begin = false;
-    this.elec_begin = false;
-    this.setValue = function (voteParam) {
-        this.department = voteParam.department;
-        this.group = voteParam.group;
-        this.type = voteParam.type;
-        this.round = voteParam.round;
-        this.times = voteParam.times;
-        this.advance_num = voteParam.advance_num;
-    }
-});
+
+
 
