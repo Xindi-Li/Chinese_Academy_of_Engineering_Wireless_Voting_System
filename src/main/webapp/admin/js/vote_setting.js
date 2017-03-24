@@ -40,7 +40,7 @@ angular.module('admin')
         $scope.begin_vote = function () {
             init();
             startit();
-            $rootScope.vote_begin = true;
+            $rootScope.elec_begin = true;
             $scope.voteData.vote_begin = true;
             $scope.elec_begin = true;
             if ($scope.voteData.candidates.length == 0) {
@@ -51,7 +51,6 @@ angular.module('admin')
         $scope.end_vote = function () {
             var confirm = window.confirm("确定结束投票吗？");
             if (confirm) {
-                $rootScope.vote_begin = false;
                 $scope.voteData.vote_begin = false;
             }
         };
@@ -59,15 +58,10 @@ angular.module('admin')
         $scope.end_election = function () {
             var confirm = window.confirm("确定结束选举吗？");
             if (confirm) {
-                $rootScope.vote_begin = false;
+                $rootScope.elec_begin = false;
                 $scope.elec_begin = false;
                 $scope.voteData.vote_begin = false;
             }
         };
 
-        window.onbeforeunload = function (event) {
-            if ($rootScope.vote_begin) {
-                return "Leave";
-            }
-        };
     });

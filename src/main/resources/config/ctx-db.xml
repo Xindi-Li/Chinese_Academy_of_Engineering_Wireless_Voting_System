@@ -6,7 +6,7 @@
 
 
     <!--获取数据库配置文件-->
-    <context:property-placeholder location="classpath:properties/db.properties"/>
+    <context:property-placeholder location="classpath:properties/db.properties" ignore-unresolvable="true"/>
 
     <!--设置数据源c3p0-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -14,8 +14,8 @@
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="user" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
-        <property name="maxPoolSize" value="50"/>
-        <property name="minPoolSize" value="2"/>
+        <property name="maxPoolSize" value="10"/>
+        <property name="minPoolSize" value="1"/>
         <property name="maxIdleTime" value="60"/>
     </bean>
 
