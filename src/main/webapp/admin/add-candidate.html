@@ -1,6 +1,6 @@
-<h2 class="sub-header">录入候选人</h2>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
+        <h2 class="sub-header">录入候选人</h2>
         <form ng-submit="submit_one()">
             <div class="form-group">
                 <label for="candidate_num">提名书号</label>
@@ -31,26 +31,37 @@
                        required>
             </div>
 
-            <button type="submit" class="btn btn-primary">提交</button>
+            <button type="submit" class="btn btn-primary">录入</button>
         </form>
     </div>
-</div>
-<h2 class="sub-header">导入候选人名单</h2>
-<div>
-    <ng-csv-import
-            class="import"
-            content="csv.content"
-            header="csv.header"
-            header-visible="csv.headerVisible"
-            separator="csv.separator"
-            separator-visible="csv.separatorVisible"
-            result="csv.result"
-            encoding="csv.encoding"
-            encoding-visible="csv.encodingVisible"
-            upload-button-label="csv.uploadButtonLabel"
-            ng-click="clicked()"></ng-csv-import>
-    <div class="uploadConfirm" ng-show="is_clicked">
-        选择的文件：<span ng-bind="csv.result.filename"></span>
-        <button type="button" class="btn btn-primary" ng-click="upload_csv()">上传</button>
+    <div class="col-md-5 col-md-offset-2">
+        <h2 class="sub-header">导入候选人</h2>
+        <div>
+            <ng-csv-import
+                    class="import"
+                    content="csv.content"
+                    header="csv.header"
+                    header-visible="csv.headerVisible"
+                    separator="csv.separator"
+                    separator-visible="csv.separatorVisible"
+                    result="csv.result"
+                    encoding="csv.encoding"
+                    encoding-visible="csv.encodingVisible"
+                    upload-button-label="csv.uploadButtonLabel"
+                    ng-click="clicked()"></ng-csv-import>
+        </div>
+        <div class="panel panel-default uploadConfirm">
+            <div class="panel-heading">文件信息</div>
+            <div class="panel-body">
+                <div ng-show="csv.result.filename != null">
+                    <div>选择的文件：<span ng-bind="csv.result.filename"></span></div>
+                    <button type="button" id="uploadbtn" class="btn btn-primary" ng-click="upload_csv()">上传</button>
+                </div>
+                <div class="text-center" ng-show="csv.result.filename == null">
+                    尚未选择文件
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

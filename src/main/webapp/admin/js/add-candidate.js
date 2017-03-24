@@ -12,10 +12,6 @@ angular.module('admin').controller('add_candidate', function ($scope, $http) {
         result: null,
         uploadButtonLabel: "上传一个CSV文件"
     };
-    $scope.is_clicked = false;
-    $scope.clicked = function () {
-        $scope.is_clicked = true;
-    };
 
     $scope.submit_one = function () {
         $http.post('/admin/w_candidate', [$scope.candidate])

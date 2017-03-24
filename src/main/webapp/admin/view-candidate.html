@@ -3,7 +3,7 @@
     <div class="col-md-10">
         <form class="form-inline" ng-init="get_department()">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-xs-3">
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
                         <select id="department" class="form-control" ng-model="department"
@@ -12,7 +12,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-xs-3">
                     <div class="form-group">
                         <label class="searchbox" for="group">组:</label>
                         <select id="group" class="form-control" ng-model="group"
@@ -21,13 +21,15 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-xs-3">
                     <div class="form-group">
                         <label class="searchbox" for="name">姓名:</label>
-                        <input type="text" class="form-control" ng-model="name" id="name" placeholder="姓名">
+                        <input class="form-control" type="text" ng-model="name" id="name" placeholder="姓名">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" ng-click="get_candidate()">查询</button>
+                <div class="col-xs-1">
+                    <button type="submit" class="btn btn-primary" ng-click="get_candidate()">查询</button>
+                </div>
             </div>
         </form>
     </div>
@@ -42,7 +44,7 @@
             <th>学科专业</th>
             <th>工作单位</th>
             <th>所在学部</th>
-            <th style="width: 50px;"></th>
+            <th style="width: 60px;">操作</th>
         </tr>
         </thead>
         <tbody>
