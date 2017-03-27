@@ -30,8 +30,8 @@ admin.config(function ($routeProvider) {
 admin.run(function ($rootScope) {
     $rootScope.$on('$routeChangeStart', function (evt, next, current) {
         if (current != undefined && current.templateUrl == "vote-setting.html") {
-            if ($rootScope.vote_begin) {
-                alert("投票尚未结束");
+            if ($rootScope.elec_begin) {
+                alert("选举尚未结束");
                 evt.preventDefault();
             }
         }

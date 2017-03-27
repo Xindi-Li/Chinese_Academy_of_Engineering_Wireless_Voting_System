@@ -1,6 +1,6 @@
 <h2 class="sub-header">投票设置</h2>
 <div class="row" id="vote">
-    <div class="col-md-2" ng-init="get_department()">
+    <div class="col-md-3" ng-init="get_department()">
         <form ng-submit="begin_vote()">
             <div>
                 <div class="form-group">
@@ -15,23 +15,13 @@
                     <label for="group">组:</label>
                     <select id="group" class="form-control" ng-model="voteData.group" ng-disabled="elec_begin"
                             ng-options="item for item in groupList">
+                        <option></option>
                     </select>
-                </div>
-                <div class="form-group">
-                    <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" ng-model="voteData.type" value="正式" required
-                               ng-disabled="voteData.vote_begin">
-                        正式选举
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="inlineRadioOptions" ng-model="voteData.type" value="预选"
-                               ng-disabled="voteData.vote_begin"> 预选
-                    </label>
                 </div>
 
                 <div class="form-group">
                 <span>第
-                <select ng-model="voteData.round" ng-disabled="voteData.vote_begin">
+                <select ng-model="voteData.round" ng-disabled="elec_begin">
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -51,6 +41,31 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="vote_type" ng-model="voteData.vote_type" value="正式" required
+                               ng-disabled="voteData.vote_begin">
+                        正式
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="vote_type" ng-model="voteData.vote_type" value="预选"
+                               ng-disabled="voteData.vote_begin"> 预选
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>选票类型：</label>
+                    <label class="radio-inline">
+                        <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="记分"
+                               required ng-disabled="voteData.vote_begin">
+                        记分(A、B、C)
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="表决"
+                               ng-disabled="voteData.vote_begin"> 表决(√，×)
+                    </label>
+                </div>
+
+                <div class="form-group">
                     <label for="number">晋级人数：</label>
                     <input id="number" type="number" min="1" max="100" ng-model="advance_num"
                            ng-disabled="voteData.vote_begin">
@@ -61,13 +76,18 @@
                 </button>
             </div>
         </form>
+        <div id="end">
+            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="elec_begin && !voteData.vote_begin">
+                结束选举
+            </button>
+            <button class="btn btn-warning btn-lg pull-right" ng-if="elec_begin && !voteData.vote_begin">结束本轮投票</button>
+        </div>
     </div>
     <div class="col-md-5">
         <div id="container" class="pull-right" ng-show="voteData.vote_begin">
             <h3 class="text-center">投票已进行</h3>
             <div id="timer"></div>
-            <button id="endthis" class="btn btn-success" ng-click="end_vote()">结束本次投票</button>
-            <button id="endall" class="btn btn-danger pull-right" ng-click="end_election()">结束选举</button>
+            <button class="btn btn-success center-block" ng-click="end_vote()">结束本次投票</button>
         </div>
     </div>
 </div>

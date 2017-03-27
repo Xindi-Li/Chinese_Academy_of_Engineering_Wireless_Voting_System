@@ -252,7 +252,7 @@ body > nav > div {
 }
 
 #navbar > ul > li > a:hover {
-   background: #0e90d2;
+    background: #0e90d2;
 }
 
 #navbar > ul > li > a:visited {
@@ -263,13 +263,16 @@ i {
     margin-right: 5px;
 }
 
-th{
+th {
     font-size: medium;
 }
 
-#uploadbtn{
+#uploadbtn {
     margin-top: 15px;
 }
 
+#end {
+    margin-top: 30px;
+}
 
 

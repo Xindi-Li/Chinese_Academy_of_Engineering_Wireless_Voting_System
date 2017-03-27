@@ -13,6 +13,7 @@ angular.module('admin')
             $http.get('/admin/r_department')
                 .success(function (response) {
                     $scope.departmentList = response.data;
+                    $scope.voteData.department = $scope.departmentList[0];
                 })
         };
         $scope.get_group = function () {
@@ -43,9 +44,8 @@ angular.module('admin')
             $rootScope.elec_begin = true;
             $scope.voteData.vote_begin = true;
             $scope.elec_begin = true;
-            if ($scope.voteData.candidates.length == 0) {
-                $scope.get_candidate();
-            }
+            $scope.get_candidate();
+            $http.post('/admin/w_vote_setting', $scope.voteData);
         };
 
         $scope.end_vote = function () {

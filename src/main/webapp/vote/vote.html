@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/vote.css">
 </head>
-<body ng-app="vote" ng-controller="vote_ctrl" ng-init="init()" ng-show="">
+<body ng-app="vote" ng-controller="vote_ctrl" ng-init="init()" ng-show="is_start">
 <h2 class="sub-header">
     <span ng-bind="voteData.department"></span>第<span ng-bind="voteData.round"></span>轮
-    <span ng-bind="voteData.group"></span><span ng-bind="voteData.type"></span>第
+    <span ng-bind="voteData.group"></span><span ng-bind="voteData.vote_type"></span>第
     <span ng-bind="voteData.times"></span>次
 </h2>
+<h3 class="text-center" id="timer"></h3>
 <div class="table-responsive">
     <table class="table table-striped table-bordered">
         <thead>
@@ -30,12 +31,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1,001</td>
-            <td>Lorem</td>
-            <td>ipsum</td>
-            <td>dolor</td>
-            <td>sit</td>
+        <tr ng-repeat="item in voteData.candidates">
+            <td>{{item.candidate_num}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.major}}</td>
+            <td>{{item.company}}</td>
             <td><label><input type="radio" name="1"></label></td>
             <td><label><input type="radio" name="1"></label></td>
             <td><label><input type="radio" name="1"></label></td>
@@ -45,5 +46,6 @@
 </div>
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script src="js/vote.js"></script>
+<script src="js/timer.js"></script>
 </body>
 </html>

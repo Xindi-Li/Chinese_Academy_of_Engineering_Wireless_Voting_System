@@ -1,11 +1,10 @@
-import com.lixindi.gradproject.redis.UserDao;
-import com.lixindi.gradproject.vo.AccountInfo;
+import com.lixindi.gradproject.vo.VoteSetting;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.lixindi.gradproject.redis.VoteDao;
 
 /**
  * Created by lixindi on 2017/3/23.
@@ -15,16 +14,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = "classpath:config/applicationContext.xml")
 public class RedisTest {
     @Autowired
-    private UserDao userDao;
+    private VoteDao voteDao;
 
     @Test
     public void set() {
-        userDao.add();
+        voteDao.updateStatus(true);
     }
 
     @Test
     public void get() {
-        AccountInfo accountInfo = userDao.get("abc");
-
+        System.out.println(voteDao.getStatus());
     }
 }
