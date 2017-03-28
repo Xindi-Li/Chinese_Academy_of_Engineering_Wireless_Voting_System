@@ -1,9 +1,12 @@
 package com.lixindi.gradproject.vo;
 
+import java.io.Serializable;
+
 /**
  * Created by lixindi on 2017/2/24.
  */
-public class CandidateInfo {
+public class CandidateInfo implements Serializable {
+    private static final long serialVersionUID = -5590067601672181854L;
     private String candidate_num;
     private String name;
     private Integer age;

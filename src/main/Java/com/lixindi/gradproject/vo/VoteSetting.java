@@ -19,6 +19,7 @@ public class VoteSetting implements Serializable {
     private String round;
     private String times;
     private Integer advance_num;
+    private Integer voter_num;
 
     public List<CandidateInfo> getCandidates() {
         return candidates;
@@ -82,6 +83,14 @@ public class VoteSetting implements Serializable {
 
     public void setAdvance_num(Integer advance_num) {
         this.advance_num = advance_num;
+    }
+
+    public Integer getVoter_num() {
+        return voter_num;
+    }
+
+    public void setVoter_num(Integer voter_num) {
+        this.voter_num = voter_num;
     }
 
     public String toString() {

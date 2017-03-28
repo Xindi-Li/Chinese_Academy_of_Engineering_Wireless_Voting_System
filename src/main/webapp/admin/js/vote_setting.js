@@ -2,7 +2,7 @@
  * Created by lixindi on 2017/3/20.
  */
 angular.module('admin')
-    .controller('vote_setting', function ($scope, $http, $rootScope) {
+    .controller('vote_setting', function ($scope, $http, $rootScope, $q) {
         $scope.voteData = {
             candidates: [],
             vote_begin: false
@@ -28,14 +28,16 @@ angular.module('admin')
         $scope.$watch('voteData.department', $scope.get_group);
 
         $scope.get_candidate = function () {
+            var deferred = $q.defer();
             var postData = {
                 department: $scope.voteData.department,
                 group: $scope.voteData.group
             };
             $http.post('/admin/r_candidate', postData)
                 .success(function (response) {
-                    $scope.voteData.candidates = response.data.candidateInfos;
+                    deferred.resolve(response.data.candidateInfos);
                 });
+            return deferred.promise;
         };
 
         $scope.begin_vote = function () {
@@ -44,8 +46,11 @@ angular.module('admin')
             $rootScope.elec_begin = true;
             $scope.voteData.vote_begin = true;
             $scope.elec_begin = true;
-            $scope.get_candidate();
-            $http.post('/admin/w_vote_setting', $scope.voteData);
+            $scope.get_candidate().then(function (data) {
+                $scope.voteData.candidates = data;
+                $http.post('/admin/w_vote_setting', $scope.voteData);
+            });
+
         };
 
         $scope.end_vote = function () {

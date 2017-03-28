@@ -21,11 +21,12 @@ public class VoteDaoImpl implements VoteDao {
     private RedisTemplate redisTemplate;
 
     public void setVoteParam(VoteSetting voteSetting) {
-        ListOperations<String, VoteSetting> listOperations = redisTemplate.opsForList();
+        ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
 
-        listOperations.leftPush("voteParam", voteSetting);
+        valueOperations.set("voteParam", voteSetting);
+
     }
 
     public void updateStatus(boolean status) {
@@ -49,11 +50,11 @@ public class VoteDaoImpl implements VoteDao {
     }
 
     public VoteSetting getVoteParam() {
-        ListOperations<String, VoteSetting> listOperations = redisTemplate.opsForList();
+        ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
 
-        return listOperations.index("voteParam", 0);
+        return valueOperations.get("voteParam");
     }
 
 
