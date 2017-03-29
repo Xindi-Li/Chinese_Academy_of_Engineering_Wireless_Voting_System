@@ -26,4 +26,12 @@ public class VoteServiceImpl implements VoteService {
     public Boolean getStatus() {
         return voteDao.getStatus();
     }
+
+    public Boolean validateId(int id) {
+        return voteDao.addIdToSet(id);
+    }
+
+    public Boolean validateToken(String token) {
+        return null;
+    }
 }

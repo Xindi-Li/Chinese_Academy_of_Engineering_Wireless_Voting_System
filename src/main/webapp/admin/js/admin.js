@@ -1,7 +1,7 @@
 /**
  * Created by lixindi on 2017/3/1.
  */
-var admin = angular.module('admin', ['ngCsvImport', 'ngRoute', 'tm.pagination']);
+var admin = angular.module('admin', ['ngCsvImport', 'ngRoute', 'tm.pagination','angularModalService']);
 admin.config(function ($routeProvider) {
     $routeProvider.when('/add_candidate', {
         templateUrl: 'add-candidate.html',

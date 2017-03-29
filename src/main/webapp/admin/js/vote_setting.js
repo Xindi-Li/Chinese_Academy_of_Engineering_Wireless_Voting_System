@@ -2,7 +2,7 @@
  * Created by lixindi on 2017/3/20.
  */
 angular.module('admin')
-    .controller('vote_setting', function ($scope, $http, $rootScope, $q) {
+    .controller('vote_setting', function ($scope, $http, $rootScope, $q, ModalService) {
         $scope.voteData = {
             candidates: [],
             vote_begin: false
@@ -50,6 +50,16 @@ angular.module('admin')
                 $scope.voteData.candidates = data;
                 $http.post('/admin/w_vote_setting', $scope.voteData);
             });
+            $http.get('/admin/generate_qrcode?num=' + $scope.voteData.voter_num);
+        };
+
+        $scope.show_modal = function () {
+            ModalService.showModal({
+                templateUrl: "yesno.html",
+                controller: "YesNoController"
+            }).then(function (modal) {
+                modal.element.modal();
+            });
 
         };
 
@@ -57,6 +67,7 @@ angular.module('admin')
             var confirm = window.confirm("确定结束投票吗？");
             if (confirm) {
                 $scope.voteData.vote_begin = false;
+
             }
         };
 
@@ -70,3 +81,11 @@ angular.module('admin')
         };
 
     });
+
+admin.controller('YesNoController', ['$scope', 'close', function ($scope, close) {
+
+    $scope.close = function (result) {
+        close(result, 500); // close, but give 500ms for bootstrap to animate
+    };
+
+}]);

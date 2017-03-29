@@ -20,7 +20,7 @@ public class QRCodeGenerator {
                 sf.mkdirs();
             }
             for (int i = 1; i <= num; i++) {
-                String url = address + "/?id=" + i;
+                String url = address + "?id=" + i;
                 BitMatrix byteMatrix = new MultiFormatWriter().encode(new String(url.getBytes("UTF-8"), "iso-8859-1"),
                         BarcodeFormat.QR_CODE, 300, 300);
                 String filename = i + ".png";

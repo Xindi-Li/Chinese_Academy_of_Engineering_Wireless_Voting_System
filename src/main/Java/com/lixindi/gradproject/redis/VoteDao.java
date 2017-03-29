@@ -13,4 +13,8 @@ public interface VoteDao {
     boolean getStatus();
 
     VoteSetting getVoteParam();
+
+    boolean isKeyExists(String key);
+
+    boolean addIdToSet(int id);
 }

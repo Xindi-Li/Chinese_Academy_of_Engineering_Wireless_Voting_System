@@ -7,13 +7,22 @@ import java.util.List;
  * Created by lixindi on 2017/3/29.
  */
 public class VoteResult implements Serializable {
-    private static final long serialVersionUID = 1301859431868093469L;
+    private static final long serialVersionUID = 6665489290296477753L;
+    private Integer voterID;
     private List<CandidateInfo> candidates;
     private String department;
     private String group;
     private String round;
     private String times;
     private Integer advance_num;
+
+    public Integer getVoterID() {
+        return voterID;
+    }
+
+    public void setVoterID(Integer voterID) {
+        this.voterID = voterID;
+    }
 
     public List<CandidateInfo> getCandidates() {
         return candidates;

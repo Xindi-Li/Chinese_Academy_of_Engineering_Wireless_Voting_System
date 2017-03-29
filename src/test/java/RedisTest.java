@@ -23,6 +23,13 @@ public class RedisTest {
 
     @Test
     public void get() {
-        System.out.println(voteDao.getStatus());
+        System.out.println(voteDao.getVoteParam());
     }
+
+    @Test
+    public void addId() {
+        voteDao.addIdToSet(1);
+    }
+
+
 }

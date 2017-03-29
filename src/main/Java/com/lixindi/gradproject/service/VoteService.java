@@ -11,4 +11,7 @@ public interface VoteService {
     VoteSetting getVoteParam();
 
     Boolean getStatus();
+
+    Boolean validateId(int id);
+
 }

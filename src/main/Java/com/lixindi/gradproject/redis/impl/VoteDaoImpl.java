@@ -4,6 +4,7 @@ import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -57,5 +58,15 @@ public class VoteDaoImpl implements VoteDao {
         return valueOperations.get("voteParam");
     }
 
+    public boolean isKeyExists(String key) {
+        return redisTemplate.hasKey(key);
+    }
 
+    public boolean addIdToSet(int id) {
+        SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
+
+        return setOperations.add("ids", id);
+    }
 }

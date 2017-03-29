@@ -70,10 +70,4 @@ public class AdminController {
             return new AjaxResponse<Boolean>(Status.ERROR, false);
         }
     }
-
-    @RequestMapping(value = "qrcode", method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void ReceivingMoneyQRCode(@RequestParam String url) {
-        QRCodeGenerator.GenerateQRCode(3,"www.baidu.com");
-    }
 }
