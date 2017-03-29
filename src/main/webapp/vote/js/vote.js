@@ -16,6 +16,13 @@ vote.controller('vote_ctrl', function ($scope, $http) {
                 }
             });
     };
+
+    $scope.submit = function () {
+        var confirm = window.confirm("确定提交吗？");
+        if (confirm) {
+            
+        }
+    };
     window.onload = function () {
         init();
         startit();

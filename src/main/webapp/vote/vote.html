@@ -30,7 +30,7 @@
             <th ng-if="voteData.ballot_type =='记分'">B</th>
             <th ng-if="voteData.ballot_type =='记分'">C</th>
 
-            <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-ok"></i> </th>
+            <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-ok"></i></th>
             <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-remove"></i></th>
         </tr>
         </thead>
@@ -57,6 +57,7 @@
         </tbody>
     </table>
 </div>
+<button type="button" class="btn btn-success btn-lg center-block" ng-click="submit()">提交</button>
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script src="js/vote.js"></script>
 <script src="js/timer.js"></script>
