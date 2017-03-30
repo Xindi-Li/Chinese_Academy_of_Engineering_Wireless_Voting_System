@@ -5,13 +5,14 @@ import com.lixindi.gradproject.utils.GetMD5;
 import com.lixindi.gradproject.utils.QRCodeGenerator;
 import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
+import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -57,23 +58,31 @@ public class VoteController {
         }
     }
 
-    @RequestMapping(value = "/vote/validate_id", method = RequestMethod.GET)
+    @RequestMapping(value = "/vote/validate_querystring", method = RequestMethod.GET)
     @ResponseBody
-    public AjaxResponse<Boolean> validateId(@RequestParam int id) {
-        if (voteService.validateId(id)) {
-            return new AjaxResponse<Boolean>(Status.OK, true);
+    public AjaxResponse<Boolean> validateQueryString(@RequestParam int id, @RequestParam String token) {
+        if (!GetMD5.getMD5("123").equals(token)) {
+            return new AjaxResponse<Boolean>(Status.WRONG_TOKEN, false);
         } else {
-            return new AjaxResponse<Boolean>(Status.ERROR, false);
+            if (voteService.validateId(id)) {
+                return new AjaxResponse<Boolean>(Status.ID_EXSITS, false);
+            } else {
+                return new AjaxResponse<Boolean>(Status.OK, true);
+            }
         }
     }
 
-    @RequestMapping(value = "/vote/validate_token", method = RequestMethod.GET)
+    @RequestMapping(value = "/vote/submit_vote", method = RequestMethod.POST)
     @ResponseBody
-    public AjaxResponse<Boolean> validateToken(@RequestParam String token) {
-        if (GetMD5.getMD5("123").equals(token)) {
-            return new AjaxResponse<Boolean>(Status.OK, true);
+    public AjaxResponse<Boolean> submitVote(HttpServletRequest request, @RequestBody VoteResult voteResult) {
+        if (!GetMD5.getMD5("123").equals(request.getParameter("token"))) {
+            throw new RuntimeException("您没有操作此接口的权限");
         } else {
-            return new AjaxResponse<Boolean>(Status.ERROR, false);
+            if (voteService.saveVoteResult(voteResult)) {
+                return new AjaxResponse<Boolean>(Status.OK, true);
+            } else {
+                return new AjaxResponse<Boolean>(Status.ERROR, false);
+            }
         }
     }
 }

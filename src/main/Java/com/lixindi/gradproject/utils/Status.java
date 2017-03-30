@@ -6,7 +6,10 @@ package com.lixindi.gradproject.utils;
 public enum Status {
     OK(0, "操作成功"),
     ERROR(1, "出现错误"),
-    DUPLICATE_KEY(2,"重复的key");
+    DUPLICATE_KEY(2,"重复的key"),
+    WRONG_TOKEN(3,"token错误"),
+    ID_EXSITS(4,"id已存在")
+    ;
 
     private int status;
     private String message;

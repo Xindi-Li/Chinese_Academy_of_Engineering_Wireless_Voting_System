@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.redis;
 
+import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 
 /**
@@ -17,4 +18,9 @@ public interface VoteDao {
     boolean isKeyExists(String key);
 
     boolean addIdToSet(int id);
+
+    boolean isIdExists(int id);
+
+    void saveVoteResult(VoteResult voteResult);
+
 }

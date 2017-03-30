@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.redis.impl;
 
+import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.ListOperations;
@@ -11,6 +12,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Repository;
 import com.lixindi.gradproject.redis.VoteDao;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -23,26 +25,16 @@ public class VoteDaoImpl implements VoteDao {
 
     public void setVoteParam(VoteSetting voteSetting) {
         ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-
         valueOperations.set("voteParam", voteSetting);
-
     }
 
     public void updateStatus(boolean status) {
         ValueOperations<String, Boolean> valueOperations = redisTemplate.opsForValue();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-
         valueOperations.set("is_start", status);
     }
 
     public boolean getStatus() {
         ValueOperations<String, Boolean> valueOperations = redisTemplate.opsForValue();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-
         if (redisTemplate.hasKey("is_start")) {
             return valueOperations.get("is_start");
         } else {
@@ -52,9 +44,6 @@ public class VoteDaoImpl implements VoteDao {
 
     public VoteSetting getVoteParam() {
         ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-
         return valueOperations.get("voteParam");
     }
 
@@ -64,9 +53,15 @@ public class VoteDaoImpl implements VoteDao {
 
     public boolean addIdToSet(int id) {
         SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-
         return setOperations.add("ids", id);
+    }
+
+    public boolean isIdExists(int id) {
+        SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
+        return setOperations.isMember("ids", id);
+    }
+
+    public void saveVoteResult(VoteResult voteResult) {
+        ValueOperations<String,VoteResult> valueOperations = redisTemplate.opsForValue();
     }
 }

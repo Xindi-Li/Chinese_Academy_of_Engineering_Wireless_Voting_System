@@ -2,6 +2,7 @@ package com.lixindi.gradproject.service.impl;
 
 import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.service.VoteService;
+import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +29,21 @@ public class VoteServiceImpl implements VoteService {
     }
 
     public Boolean validateId(int id) {
-        return voteDao.addIdToSet(id);
+        return voteDao.isIdExists(id);
     }
 
-    public Boolean validateToken(String token) {
-        return null;
+    public Boolean saveVoteResult(VoteResult voteResult) {
+        if (voteDao.getStatus()) {
+            voteDao.addIdToSet(voteResult.getVoterID());
+            if(voteDao.isKeyExists(voteResult.getDepartment()+"score")){
+
+            }else {
+
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
+
 }

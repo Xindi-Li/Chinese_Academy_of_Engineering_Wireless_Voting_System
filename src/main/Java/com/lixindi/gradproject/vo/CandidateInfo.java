@@ -1,5 +1,8 @@
 package com.lixindi.gradproject.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -87,5 +90,9 @@ public class CandidateInfo implements Serializable {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

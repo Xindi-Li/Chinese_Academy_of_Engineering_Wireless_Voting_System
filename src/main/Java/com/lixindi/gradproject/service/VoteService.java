@@ -1,5 +1,6 @@
 package com.lixindi.gradproject.service;
 
+import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 
 /**
@@ -14,4 +15,5 @@ public interface VoteService {
 
     Boolean validateId(int id);
 
+    Boolean saveVoteResult(VoteResult voteResult);
 }

@@ -7,13 +7,10 @@ import java.util.List;
  * Created by lixindi on 2017/3/29.
  */
 public class VoteResult implements Serializable {
-    private static final long serialVersionUID = 6665489290296477753L;
+    private static final long serialVersionUID = -2359442457509883970L;
     private Integer voterID;
     private List<CandidateInfo> candidates;
     private String department;
-    private String group;
-    private String round;
-    private String times;
     private Integer advance_num;
 
     public Integer getVoterID() {
@@ -38,30 +35,6 @@ public class VoteResult implements Serializable {
 
     public void setDepartment(String department) {
         this.department = department;
-    }
-
-    public String getGroup() {
-        return group;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-    public String getRound() {
-        return round;
-    }
-
-    public void setRound(String round) {
-        this.round = round;
-    }
-
-    public String getTimes() {
-        return times;
-    }
-
-    public void setTimes(String times) {
-        this.times = times;
     }
 
     public Integer getAdvance_num() {

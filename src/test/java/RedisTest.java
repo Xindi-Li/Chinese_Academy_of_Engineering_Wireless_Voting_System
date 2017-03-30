@@ -1,3 +1,4 @@
+import com.lixindi.gradproject.utils.GetMD5;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,11 @@ public class RedisTest {
     @Test
     public void addId() {
         voteDao.addIdToSet(1);
+    }
+
+    @Test
+    public void getMD5(){
+        System.out.println(GetMD5.getMD5("123"));
     }
 
 
