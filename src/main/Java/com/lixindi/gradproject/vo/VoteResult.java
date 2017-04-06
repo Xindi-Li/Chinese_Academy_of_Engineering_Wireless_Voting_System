@@ -1,5 +1,8 @@
 package com.lixindi.gradproject.vo;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -43,5 +46,9 @@ public class VoteResult implements Serializable {
 
     public void setAdvance_num(Integer advance_num) {
         this.advance_num = advance_num;
+    }
+
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

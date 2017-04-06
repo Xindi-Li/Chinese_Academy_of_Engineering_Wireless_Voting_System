@@ -35,15 +35,20 @@ public class VoteServiceImpl implements VoteService {
     public Boolean saveVoteResult(VoteResult voteResult) {
         if (voteDao.getStatus()) {
             voteDao.addIdToSet(voteResult.getVoterID());
-            if(voteDao.isKeyExists(voteResult.getDepartment()+"score")){
-
-            }else {
-
+            if (voteDao.isKeyExists(voteResult.getDepartment() + "score")) {
+                VoteResult scoreResult = voteDao.getVoteResult(voteResult.getDepartment());
+                for (int i = 0; i < voteResult.getCandidates().size(); i++) {
+                    int saved = scoreResult.getCandidates().get(i).getScore();
+                    int toAdd = voteResult.getCandidates().get(i).getScore();
+                    scoreResult.getCandidates().get(i).setScore(saved + toAdd);
+                }
+                voteDao.setVoteResult(scoreResult);
+            } else {
+                voteDao.setVoteResult(voteResult);
             }
             return true;
         } else {
             return false;
         }
     }
-
 }

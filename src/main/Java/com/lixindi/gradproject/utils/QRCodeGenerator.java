@@ -15,7 +15,7 @@ import java.io.OutputStream;
 public class QRCodeGenerator {
     public static void GenerateQRCode(int num, String address) {
         try {
-            File sf = new File("C:\\Users\\lixindi\\Desktop\\qrcode");
+            File sf = new File("C:\\Users\\Administrator\\Desktop\\qrcode");
             if (!sf.exists()) {
                 sf.mkdirs();
             }

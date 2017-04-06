@@ -3,6 +3,8 @@ import com.lixindi.gradproject.vo.VoteSetting;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.lixindi.gradproject.redis.VoteDao;
@@ -17,6 +19,9 @@ public class RedisTest {
     @Autowired
     private VoteDao voteDao;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Test
     public void set() {
         voteDao.updateStatus(true);
@@ -24,12 +29,12 @@ public class RedisTest {
 
     @Test
     public void get() {
-        System.out.println(voteDao.getVoteParam());
+        System.out.println(voteDao.getVoteResult("机械与运载工程学部"));
     }
 
     @Test
-    public void addId() {
-        voteDao.addIdToSet(1);
+    public void delKey(){
+        redisTemplate.delete("机械与运载工程学部score");
     }
 
     @Test

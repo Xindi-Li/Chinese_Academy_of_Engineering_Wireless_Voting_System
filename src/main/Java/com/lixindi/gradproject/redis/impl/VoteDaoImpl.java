@@ -1,19 +1,13 @@
 package com.lixindi.gradproject.redis.impl;
 
+import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Repository;
-import com.lixindi.gradproject.redis.VoteDao;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * Created by lixindi on 2017/3/27.
@@ -47,6 +41,11 @@ public class VoteDaoImpl implements VoteDao {
         return valueOperations.get("voteParam");
     }
 
+    public VoteResult getVoteResult(String department) {
+        ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
+        return valueOperations.get(department + "score");
+    }
+
     public boolean isKeyExists(String key) {
         return redisTemplate.hasKey(key);
     }
@@ -61,7 +60,8 @@ public class VoteDaoImpl implements VoteDao {
         return setOperations.isMember("ids", id);
     }
 
-    public void saveVoteResult(VoteResult voteResult) {
-        ValueOperations<String,VoteResult> valueOperations = redisTemplate.opsForValue();
+    public void setVoteResult(VoteResult voteResult) {
+        ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(voteResult.getDepartment() + "score", voteResult);
     }
 }

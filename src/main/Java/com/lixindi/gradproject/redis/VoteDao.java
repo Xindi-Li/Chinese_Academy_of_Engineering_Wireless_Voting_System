@@ -15,12 +15,14 @@ public interface VoteDao {
 
     VoteSetting getVoteParam();
 
+    VoteResult getVoteResult(String department);
+
     boolean isKeyExists(String key);
 
     boolean addIdToSet(int id);
 
     boolean isIdExists(int id);
 
-    void saveVoteResult(VoteResult voteResult);
+    void setVoteResult(VoteResult voteResult);
 
 }
