@@ -4,6 +4,7 @@ import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.service.VoteService;
 import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
+import com.lixindi.gradproject.vo.VotedNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,14 +36,14 @@ public class VoteServiceImpl implements VoteService {
     public Boolean saveVoteResult(VoteResult voteResult) {
         if (voteDao.getStatus()) {
             voteDao.addIdToSet(voteResult.getVoterID());
-            if (voteDao.isKeyExists(voteResult.getDepartment() + "score")) {
-                VoteResult scoreResult = voteDao.getVoteResult(voteResult.getDepartment());
+            if (voteDao.isKeyExists("voteResult")) {
+                VoteResult lastResult = voteDao.getVoteResult();
                 for (int i = 0; i < voteResult.getCandidates().size(); i++) {
-                    int saved = scoreResult.getCandidates().get(i).getScore();
+                    int saved = lastResult.getCandidates().get(i).getScore();
                     int toAdd = voteResult.getCandidates().get(i).getScore();
-                    scoreResult.getCandidates().get(i).setScore(saved + toAdd);
+                    lastResult.getCandidates().get(i).setScore(saved + toAdd);
                 }
-                voteDao.setVoteResult(scoreResult);
+                voteDao.setVoteResult(lastResult);
             } else {
                 voteDao.setVoteResult(voteResult);
             }
@@ -50,5 +51,12 @@ public class VoteServiceImpl implements VoteService {
         } else {
             return false;
         }
+    }
+
+    public VotedNum getVotedNum() {
+        VotedNum votedNum = new VotedNum();
+        votedNum.setTotal(voteDao.getVoterNum());
+        votedNum.setVoted(voteDao.getVotedNum());
+        return votedNum;
     }
 }

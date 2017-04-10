@@ -29,7 +29,12 @@ public class RedisTest {
 
     @Test
     public void get() {
-        System.out.println(voteDao.getVoteResult("机械与运载工程学部"));
+        System.out.println(voteDao.getVoteResult());
+    }
+
+    @Test
+    public void getVoteParam(){
+        System.out.println(voteDao.getVoteParam());
     }
 
     @Test

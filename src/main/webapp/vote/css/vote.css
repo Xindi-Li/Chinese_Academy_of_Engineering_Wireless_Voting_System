@@ -5,13 +5,3 @@
 th {
     text-align: center;
 }
-
-@media only screen and (max-width: 520px) {
-    .table-responsive {
-        margin-right: 5rem;
-    }
-}
-
-.table-responsive{
-    margin-right: 5rem;
-}

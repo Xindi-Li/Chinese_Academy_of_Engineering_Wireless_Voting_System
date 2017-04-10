@@ -41,9 +41,9 @@ public class VoteDaoImpl implements VoteDao {
         return valueOperations.get("voteParam");
     }
 
-    public VoteResult getVoteResult(String department) {
+    public VoteResult getVoteResult() {
         ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
-        return valueOperations.get(department + "score");
+        return valueOperations.get("voteResult");
     }
 
     public boolean isKeyExists(String key) {
@@ -62,6 +62,16 @@ public class VoteDaoImpl implements VoteDao {
 
     public void setVoteResult(VoteResult voteResult) {
         ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set(voteResult.getDepartment() + "score", voteResult);
+        valueOperations.set("voteResult", voteResult);
+    }
+
+    public long getVotedNum() {
+        SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
+        return setOperations.size("ids");
+    }
+
+    public long getVoterNum() {
+        ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
+        return valueOperations.get("voteParam").getVoter_num();
     }
 }

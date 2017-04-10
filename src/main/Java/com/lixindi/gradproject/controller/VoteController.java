@@ -7,6 +7,7 @@ import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
+import com.lixindi.gradproject.vo.VotedNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -84,5 +85,17 @@ public class VoteController {
                 return new AjaxResponse<Boolean>(Status.ERROR, false);
             }
         }
+    }
+
+    @RequestMapping(value = "/vote/r_votednum", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<VotedNum> getVotedNum() {
+        return new AjaxResponse<VotedNum>(Status.OK, voteService.getVotedNum());
+    }
+
+    @RequestMapping(value = "/vote/endvote",method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void endVote(){
+
     }
 }

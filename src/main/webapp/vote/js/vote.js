@@ -45,14 +45,12 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
             if (confirm) {
                 var postData = {
                     voterID: $scope.urlParam.id,
-                    candidates: $scope.voteData.candidates,
-                    department: $scope.voteData.department,
-                    advance_num: $scope.voteData.advance_num
+                    candidates: $scope.voteData.candidates
                 };
                 $http.post('/vote/submit_vote?token=' + $scope.urlParam.token, postData)
                     .success(function (response) {
                         if (response.data) {
-                            alert("投票成功");
+                            alert("投票成功，请退出");
                         } else {
                             alert("投票已关闭");
                         }

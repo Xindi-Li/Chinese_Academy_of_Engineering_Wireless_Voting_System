@@ -3,11 +3,15 @@
  */
 angular.module('admin')
     .controller('vote_setting', function ($scope, $http, $rootScope, $q, ModalService) {
+
+        $scope.timesList = [];
+
         $scope.voteData = {
+            round: 1,
+            times: 1,
             candidates: [],
             vote_begin: false
         };
-
 
         $scope.get_department = function () {
             $http.get('/admin/r_department')
@@ -46,6 +50,7 @@ angular.module('admin')
             $rootScope.elec_begin = true;
             $scope.voteData.vote_begin = true;
             $scope.elec_begin = true;
+            $scope.round_end = false;
             $scope.get_candidate().then(function (data) {
                 $scope.voteData.candidates = data;
                 $http.post('/admin/w_vote_setting', $scope.voteData);
@@ -56,18 +61,32 @@ angular.module('admin')
         $scope.show_modal = function () {
             ModalService.showModal({
                 templateUrl: "yesno.html",
-                controller: "YesNoController"
+                controller: "YesNoController",
+                inputs: {
+                    name: "james"
+                }
             }).then(function (modal) {
                 modal.element.modal();
             });
-
         };
 
         $scope.end_vote = function () {
-            var confirm = window.confirm("确定结束投票吗？");
-            if (confirm) {
-                $scope.voteData.vote_begin = false;
+            $http.get('/vote/r_votednum')
+                .success(function (response) {
+                    var confirm = window.confirm("已有" + response.data.voted + "/" + response.data.total + "人完成投票，" +
+                        "确定结束本次投票吗？");
+                    if (confirm) {
+                        $scope.voteData.vote_begin = false;
+                        $scope.timesList.push($scope.voteData.times);
+                        $scope.voteData.times++;
+                    }
+                });
+        };
 
+        $scope.end_round = function () {
+            var confirm = window.confirm("确定结束本轮投票吗");
+            if (confirm) {
+                $scope.round_end = true;
             }
         };
 
@@ -80,12 +99,15 @@ angular.module('admin')
             }
         };
 
+
     });
 
-admin.controller('YesNoController', ['$scope', 'close', function ($scope, close) {
+admin.controller('YesNoController', function ($scope, close, name) {
+
+    $scope.name = name;
 
     $scope.close = function (result) {
         close(result, 500); // close, but give 500ms for bootstrap to animate
     };
 
-}]);
+});

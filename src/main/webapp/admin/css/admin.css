@@ -162,24 +162,21 @@ label {
     font-size: medium;
 }
 
+.list-inline,#searchtable,#end {
+    margin-top: 30px;
+}
+
+.list-inline .list-group-item {
+    margin-left: 5px;
+    margin-right: -10px;
+    width: 20%;
+    color: #428bca;
+}
+
 .searchbox {
     font-size: 110%;
 }
 
-#searchtable {
-    margin-top: 30px;
-}
-
-.list-group {
-    margin-top: 30px;
-}
-
-.list-group-item {
-    margin-left: 5px;
-    margin-right: -10px;
-    width: 18%;
-    color: #428bca;
-}
 
 .page-list .pagination {
     float: left;
@@ -271,8 +268,8 @@ th {
     margin-top: 15px;
 }
 
-#end {
-    margin-top: 30px;
+u{
+    font-weight: bold;
 }
 
 

@@ -20,24 +20,7 @@
                 </div>
 
                 <div class="form-group">
-                <span>第
-                <select ng-model="voteData.round" ng-disabled="elec_begin">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-                轮</span>
-                    <span>第
-                <select ng-model="voteData.times" ng-disabled="voteData.vote_begin">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-                次</span>
+                    第 <u>{{voteData.round}}</u> 轮第 <u>{{voteData.times}}</u> 次投票
                 </div>
 
                 <div class="form-group">
@@ -74,7 +57,7 @@
                 <div class="form-group">
                     <label for="voter_num">投票人数：</label>
                     <input id="voter_num" type="number" min="1" max="100" ng-model="voteData.voter_num"
-                           ng-disabled="voteData.elec_begin" required>
+                           ng-disabled="voteData.vote_begin" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-lg" ng-disabled="voteData.vote_begin">
@@ -83,17 +66,35 @@
             </div>
         </form>
         <div id="end">
-            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="elec_begin && !voteData.vote_begin">
+            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="round_end">
                 结束选举
             </button>
-            <button class="btn btn-warning btn-lg pull-right" ng-if="elec_begin && !voteData.vote_begin">结束本轮投票</button>
+            <button class="btn btn-warning btn-lg" ng-click="end_round()"
+                    ng-if="elec_begin && !voteData.vote_begin && !round_end">
+                结束本轮投票
+            </button>
         </div>
     </div>
     <div class="col-md-5">
-        <div id="container" class="pull-right" ng-show="voteData.vote_begin">
+        <div id="container" class="center-block" ng-show="voteData.vote_begin">
             <h3 class="text-center">投票已进行</h3>
             <div id="timer"></div>
             <button class="btn btn-success center-block" ng-click="end_vote()">结束本次投票</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading">本轮投票结果</div>
+            <div class="panel-body">
+                <div class="text-center" ng-show="timesList.length==0">
+                    暂无结果
+                </div>
+                <div class="list-group">
+                    <a class="list-group-item" ng-repeat="item in timesList" href="" ng-click="show_modal()">
+                        第{{item}}次投票结果
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

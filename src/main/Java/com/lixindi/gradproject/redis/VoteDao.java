@@ -15,7 +15,7 @@ public interface VoteDao {
 
     VoteSetting getVoteParam();
 
-    VoteResult getVoteResult(String department);
+    VoteResult getVoteResult();
 
     boolean isKeyExists(String key);
 
@@ -25,4 +25,7 @@ public interface VoteDao {
 
     void setVoteResult(VoteResult voteResult);
 
+    long getVotedNum();
+
+    long getVoterNum();
 }
