@@ -17,8 +17,8 @@ public class CandidateInfo implements Serializable {
     private String company;
     private String department;
     private String group;
-    private Integer total;
     private Integer score;
+    private Boolean is_advance;
 
     public String getCandidate_num() {
         return candidate_num;
@@ -76,20 +76,20 @@ public class CandidateInfo implements Serializable {
         this.group = group;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
     public Integer getScore() {
         return score;
     }
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Boolean getIs_advance() {
+        return is_advance;
+    }
+
+    public void setIs_advance(Boolean is_advance) {
+        this.is_advance = is_advance;
     }
 
     public String toString() {

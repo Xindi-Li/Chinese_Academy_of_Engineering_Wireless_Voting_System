@@ -4,10 +4,7 @@ import com.lixindi.gradproject.service.VoteService;
 import com.lixindi.gradproject.utils.GetMD5;
 import com.lixindi.gradproject.utils.QRCodeGenerator;
 import com.lixindi.gradproject.utils.Status;
-import com.lixindi.gradproject.vo.AjaxResponse;
-import com.lixindi.gradproject.vo.VoteResult;
-import com.lixindi.gradproject.vo.VoteSetting;
-import com.lixindi.gradproject.vo.VotedNum;
+import com.lixindi.gradproject.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,6 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by lixindi on 2017/3/22.
@@ -34,9 +35,6 @@ public class VoteController {
     @RequestMapping(value = "/vote/r_vote_setting", method = RequestMethod.GET)
     @ResponseBody
     public AjaxResponse<VoteSetting> getVoteParam() {
-        if (!voteService.getStatus()) {
-            return new AjaxResponse<VoteSetting>(Status.ERROR, null);
-        }
         VoteSetting voteSetting = voteService.getVoteParam();
         if (voteSetting != null) {
             return new AjaxResponse<VoteSetting>(Status.OK, voteSetting);
@@ -78,12 +76,12 @@ public class VoteController {
     public AjaxResponse<Boolean> submitVote(HttpServletRequest request, @RequestBody VoteResult voteResult) {
         if (!GetMD5.getMD5("123").equals(request.getParameter("token"))) {
             throw new RuntimeException("您没有操作此接口的权限");
+        } else if (voteService.validateId(voteResult.getVoterID())) {
+            return new AjaxResponse<Boolean>(Status.ID_EXSITS, false);
+        } else if (voteService.saveVoteResult(voteResult)) {
+            return new AjaxResponse<Boolean>(Status.OK, true);
         } else {
-            if (voteService.saveVoteResult(voteResult)) {
-                return new AjaxResponse<Boolean>(Status.OK, true);
-            } else {
-                return new AjaxResponse<Boolean>(Status.ERROR, false);
-            }
+            return new AjaxResponse<Boolean>(Status.ERROR, false);
         }
     }
 
@@ -93,9 +91,35 @@ public class VoteController {
         return new AjaxResponse<VotedNum>(Status.OK, voteService.getVotedNum());
     }
 
-    @RequestMapping(value = "/vote/endvote",method = RequestMethod.GET)
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void endVote(){
-
+    @RequestMapping(value = "/vote/r_vote_result", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<VoteResult> getVoteResult() {
+        VoteResult voteResult = voteService.getVoteResult();
+        if (voteResult == null) {
+            voteService.delKeys();
+            return new AjaxResponse<VoteResult>(Status.ERROR, null);
+        }
+        List<CandidateInfo> candidates = voteResult.getCandidates();
+        int advance_num = voteService.getVoteParam().getAdvance_num();
+        voteService.delKeys();
+        Collections.sort(candidates, new Comparator<CandidateInfo>() {
+            public int compare(CandidateInfo a, CandidateInfo b) {
+                return b.getScore() - a.getScore();
+            }
+        });
+        ListIterator<CandidateInfo> listIterator = candidates.listIterator();
+        int score = candidates.get(advance_num - 1).getScore();
+        while (listIterator.hasNext()) {
+            CandidateInfo candidate = listIterator.next();
+            if (candidate.getScore() >= score) {
+                candidate.setIs_advance(true);
+            } else {
+                candidate.setIs_advance(false);
+            }
+        }
+        VoteResult result = new VoteResult();
+        result.setAdvance_score(score);
+        result.setCandidates(candidates);
+        return new AjaxResponse<VoteResult>(Status.OK, result);
     }
 }

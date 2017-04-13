@@ -8,6 +8,9 @@ import com.lixindi.gradproject.vo.VotedNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lixindi on 2017/3/27.
  */
@@ -17,16 +20,23 @@ public class VoteServiceImpl implements VoteService {
     VoteDao voteDao;
 
     public void setVoteParam(VoteSetting voteSetting) {
-        voteDao.setVoteParam(voteSetting);
-        voteDao.updateStatus(true);
+        voteDao.setKeyValue("voteParam", voteSetting);
+    }
+
+    public void delKeys() {
+        List<String> keys = new ArrayList<String>();
+        keys.add("ids");
+        keys.add("voteParam");
+        keys.add("voteResult");
+        voteDao.delKeys(keys);
     }
 
     public VoteSetting getVoteParam() {
-        return voteDao.getVoteParam();
+        return voteDao.getValueByKey("voteParam");
     }
 
-    public Boolean getStatus() {
-        return voteDao.getStatus();
+    public VoteResult getVoteResult() {
+        return voteDao.getValueByKey("voteResult");
     }
 
     public Boolean validateId(int id) {
@@ -34,18 +44,18 @@ public class VoteServiceImpl implements VoteService {
     }
 
     public Boolean saveVoteResult(VoteResult voteResult) {
-        if (voteDao.getStatus()) {
+        if (getVoteParam() != null) {
             voteDao.addIdToSet(voteResult.getVoterID());
-            if (voteDao.isKeyExists("voteResult")) {
-                VoteResult lastResult = voteDao.getVoteResult();
+            if (voteDao.getValueByKey("voteResult") != null) {
+                VoteResult lastResult = voteDao.getValueByKey("voteResult");
                 for (int i = 0; i < voteResult.getCandidates().size(); i++) {
                     int saved = lastResult.getCandidates().get(i).getScore();
                     int toAdd = voteResult.getCandidates().get(i).getScore();
                     lastResult.getCandidates().get(i).setScore(saved + toAdd);
                 }
-                voteDao.setVoteResult(lastResult);
+                voteDao.setKeyValue("voteResult", lastResult);
             } else {
-                voteDao.setVoteResult(voteResult);
+                voteDao.setKeyValue("voteResult", voteResult);
             }
             return true;
         } else {

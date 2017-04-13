@@ -1,8 +1,8 @@
 <h2 class="sub-header">候选人分组</h2>
 <div class="row">
-    <div class="col-md-10">
-        <form class="form-inline" ng-init="get_department()">
-            <div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            <form class="form-inline" ng-init="get_department()">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
@@ -11,24 +11,43 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="searchbox" for="name">组名称:</label>
                         <input type="text" class="form-control" ng-model="group" id="name" placeholder="组名称">
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary" ng-click="submit()">确定分组</button>
+            </form>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="list-inline list-group">
+                    <li class="list-group-item" ng-repeat="item in candidate">
+                        <input type="checkbox" ng-model="item.checked"
+                               ng-change="add_candidate(item.checked,item.name)">
+                        {{item.name}}
+                    </li>
+                </ul>
             </div>
-        </form>
+        </div>
+        <tm-pagination conf="paginationConf"></tm-pagination>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">待分组候选人</div>
+            <div class="panel-body">
+                <div class="text-center" ng-if="candidates.length==0">
+                    暂无结果
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="item in candidates">
+                        {{item}}<a href="" ng-click="remove_candidate(item)">
+                        <i class="glyphicon glyphicon-remove pull-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-8">
-        <ul class="list-inline list-group">
-            <li class="list-group-item" ng-repeat="item in candidate">
-                <input type="checkbox" ng-model="item.checked" ng-click="changelist(item.checked,item.name)">{{item.name}}
-            </li>
-        </ul>
-    </div>
-</div>
-<tm-pagination conf="paginationConf"></tm-pagination>
+

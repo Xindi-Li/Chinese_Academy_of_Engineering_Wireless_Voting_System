@@ -3,7 +3,7 @@
  */
 angular.module('admin')
     .controller('vote_setting', function ($scope, $http, $rootScope, $q, ModalService) {
-
+        var voteResultList = [];
         $scope.timesList = [];
 
         $scope.voteData = {
@@ -58,12 +58,17 @@ angular.module('admin')
             $http.get('/admin/generate_qrcode?num=' + $scope.voteData.voter_num);
         };
 
-        $scope.show_modal = function () {
+        $scope.show_modal = function (times) {
             ModalService.showModal({
-                templateUrl: "yesno.html",
-                controller: "YesNoController",
+                templateUrl: "vote-result.html",
+                controller: "vote_result",
                 inputs: {
-                    name: "james"
+                    result: {
+                        voteResult: voteResultList[times - 1],
+                        round: $scope.voteData.round,
+                        times: times,
+                        department: $scope.voteData.department
+                    }
                 }
             }).then(function (modal) {
                 modal.element.modal();
@@ -76,9 +81,13 @@ angular.module('admin')
                     var confirm = window.confirm("已有" + response.data.voted + "/" + response.data.total + "人完成投票，" +
                         "确定结束本次投票吗？");
                     if (confirm) {
-                        $scope.voteData.vote_begin = false;
-                        $scope.timesList.push($scope.voteData.times);
-                        $scope.voteData.times++;
+                        $http.get('/vote/r_vote_result')
+                            .success(function (response) {
+                                voteResultList.push(response.data);
+                                $scope.voteData.vote_begin = false;
+                                $scope.timesList.push($scope.voteData.times);
+                                $scope.voteData.times++;
+                            });
                     }
                 });
         };
@@ -87,6 +96,20 @@ angular.module('admin')
             var confirm = window.confirm("确定结束本轮投票吗");
             if (confirm) {
                 $scope.round_end = true;
+                ModalService.showModal({
+                    templateUrl: "round-result.html",
+                    controller: "round_result",
+                    inputs: {
+                        result: {
+                            voteResult: voteResultList,
+                            round: $scope.voteData.round,
+                            timesList: Array.from(new Array(voteResultList.length), (val, index)=>index + 1),
+                            department: $scope.voteData.department
+                        }
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                });
             }
         };
 
@@ -102,12 +125,12 @@ angular.module('admin')
 
     });
 
-admin.controller('YesNoController', function ($scope, close, name) {
+admin.controller('vote_result', function ($scope, result) {
+    $scope.result = result;
+});
 
-    $scope.name = name;
-
-    $scope.close = function (result) {
-        close(result, 500); // close, but give 500ms for bootstrap to animate
-    };
-
+admin.controller('round_result', function ($scope, result) {
+    $scope.result = result;
+    $scope.times = result.timesList[0];
+    
 });

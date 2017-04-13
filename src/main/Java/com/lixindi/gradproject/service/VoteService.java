@@ -10,9 +10,11 @@ import com.lixindi.gradproject.vo.VotedNum;
 public interface VoteService {
     void setVoteParam(VoteSetting voteSetting);
 
+    void delKeys();
+
     VoteSetting getVoteParam();
 
-    Boolean getStatus();
+    VoteResult getVoteResult();
 
     Boolean validateId(int id);
 

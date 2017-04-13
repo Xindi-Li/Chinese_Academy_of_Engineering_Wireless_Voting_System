@@ -3,27 +3,21 @@ package com.lixindi.gradproject.redis;
 import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 
+import java.util.List;
+
 /**
  * Created by lixindi on 2017/3/27.
  */
 public interface VoteDao {
-    void setVoteParam(VoteSetting voteSetting);
+    <T> void setKeyValue(String key ,T value);
 
-    void updateStatus(boolean status);
+    <T> T getValueByKey(String key);
 
-    boolean getStatus();
-
-    VoteSetting getVoteParam();
-
-    VoteResult getVoteResult();
-
-    boolean isKeyExists(String key);
+    void delKeys(List<String> keys);
 
     boolean addIdToSet(int id);
 
     boolean isIdExists(int id);
-
-    void setVoteResult(VoteResult voteResult);
 
     long getVotedNum();
 

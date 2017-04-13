@@ -1,13 +1,14 @@
 package com.lixindi.gradproject.redis.impl;
 
 import com.lixindi.gradproject.redis.VoteDao;
-import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SetOperations;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by lixindi on 2017/3/27.
@@ -17,37 +18,18 @@ public class VoteDaoImpl implements VoteDao {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    public void setVoteParam(VoteSetting voteSetting) {
-        ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("voteParam", voteSetting);
+    public <T> void setKeyValue(String key, T value) {
+        ValueOperations<String, T> valueOperations = redisTemplate.opsForValue();
+        valueOperations.set(key, value);
     }
 
-    public void updateStatus(boolean status) {
-        ValueOperations<String, Boolean> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("is_start", status);
+    public <T> T getValueByKey(String key) {
+        ValueOperations<String, T> valueOperations = redisTemplate.opsForValue();
+        return valueOperations.get(key);
     }
 
-    public boolean getStatus() {
-        ValueOperations<String, Boolean> valueOperations = redisTemplate.opsForValue();
-        if (redisTemplate.hasKey("is_start")) {
-            return valueOperations.get("is_start");
-        } else {
-            return false;
-        }
-    }
-
-    public VoteSetting getVoteParam() {
-        ValueOperations<String, VoteSetting> valueOperations = redisTemplate.opsForValue();
-        return valueOperations.get("voteParam");
-    }
-
-    public VoteResult getVoteResult() {
-        ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
-        return valueOperations.get("voteResult");
-    }
-
-    public boolean isKeyExists(String key) {
-        return redisTemplate.hasKey(key);
+    public void delKeys(List<String> keys) {
+        redisTemplate.delete(keys);
     }
 
     public boolean addIdToSet(int id) {
@@ -58,11 +40,6 @@ public class VoteDaoImpl implements VoteDao {
     public boolean isIdExists(int id) {
         SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
         return setOperations.isMember("ids", id);
-    }
-
-    public void setVoteResult(VoteResult voteResult) {
-        ValueOperations<String, VoteResult> valueOperations = redisTemplate.opsForValue();
-        valueOperations.set("voteResult", voteResult);
     }
 
     public long getVotedNum() {

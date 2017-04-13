@@ -10,6 +10,15 @@ vote.config(function ($locationProvider) {
     });
 });
 
+vote.config(function ($httpProvider) {
+    if (!$httpProvider.defaults.headers.get) {
+        $httpProvider.defaults.headers.get = {};
+    }
+    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
+    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
+    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
+});
+
 vote.controller('vote_ctrl', function ($scope, $http, $location) {
         $scope.init = function () {
             $scope.urlParam = $location.search();
@@ -49,12 +58,14 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
                 };
                 $http.post('/vote/submit_vote?token=' + $scope.urlParam.token, postData)
                     .success(function (response) {
-                        if (response.data) {
+                        if (response.status == 0) {
                             alert("投票成功，请退出");
+                        } else if (response.status == 4) {
+                            alert("请勿重复投票");
                         } else {
                             alert("投票已关闭");
                         }
-                        window.location.href = "about:blank";
+                        $scope.is_start = false;
                     })
             }
         };

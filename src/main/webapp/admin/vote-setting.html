@@ -66,7 +66,7 @@
             </div>
         </form>
         <div id="end">
-            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="round_end">
+            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="round_end&&elec_begin">
                 结束选举
             </button>
             <button class="btn btn-warning btn-lg" ng-click="end_round()"
@@ -84,13 +84,13 @@
     </div>
     <div class="col-md-2 col-md-offset-1">
         <div class="panel panel-primary">
-            <div class="panel-heading">本轮投票结果</div>
+            <div class="panel-heading text-center">本轮投票结果</div>
             <div class="panel-body">
                 <div class="text-center" ng-show="timesList.length==0">
                     暂无结果
                 </div>
                 <div class="list-group">
-                    <a class="list-group-item" ng-repeat="item in timesList" href="" ng-click="show_modal()">
+                    <a class="list-group-item" ng-repeat="item in timesList" href="" ng-click="show_modal(item)">
                         第{{item}}次投票结果
                     </a>
                 </div>

@@ -1,7 +1,9 @@
 import com.lixindi.gradproject.utils.GetMD5;
 import com.lixindi.gradproject.vo.VoteSetting;
+import com.lixindi.gradproject.vo.VotedNum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.access.BootstrapException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -24,17 +26,12 @@ public class RedisTest {
 
     @Test
     public void set() {
-        voteDao.updateStatus(true);
+        voteDao.setKeyValue("is_start",true);
     }
 
     @Test
     public void get() {
-        System.out.println(voteDao.getVoteResult());
-    }
-
-    @Test
-    public void getVoteParam(){
-        System.out.println(voteDao.getVoteParam());
+        System.out.println(voteDao.getValueByKey("voteResult"));
     }
 
     @Test
