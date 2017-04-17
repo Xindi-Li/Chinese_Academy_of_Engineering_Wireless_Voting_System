@@ -61,6 +61,14 @@
                            ng-disabled="voteData.vote_begin" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="hour">投票时限：</label>
+                    <input id="hour" type="number" min="0" max="5" ng-model="hour" ng-disabled="voteData.vote_begin"
+                            required>小时
+                    <input type="number" min="0" max="59" ng-model="minute" ng-disabled="voteData.vote_begin"
+                            required>分钟
+                </div>
+
                 <button type="submit" class="btn btn-primary btn-lg" ng-disabled="voteData.vote_begin">
                     开启投票
                 </button>
@@ -78,7 +86,7 @@
     </div>
     <div class="col-md-5">
         <div id="container" class="center-block" ng-show="voteData.vote_begin">
-            <h3 class="text-center">投票已进行</h3>
+            <h3 class="text-center">投票时间剩余</h3>
             <div id="timer"></div>
             <button class="btn btn-success center-block" ng-click="end_vote()">结束本次投票</button>
         </div>

@@ -123,4 +123,16 @@ public class VoteController {
         result.setCandidates(candidates);
         return new AjaxResponse<VoteResult>(Status.OK, result);
     }
+
+    @RequestMapping(value = "/admin/w_round_result", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void setRoundResult(@RequestBody List<CandidateInfo> candidates) {
+        voteService.setRoundResult(candidates);
+    }
+
+    @RequestMapping(value = "/vote/r_round_result", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<List<CandidateInfo>> getRoundResult() {
+        return new AjaxResponse<List<CandidateInfo>>(Status.OK, voteService.getRoundResult());
+    }
 }

@@ -2,6 +2,7 @@ package com.lixindi.gradproject.service.impl;
 
 import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.service.VoteService;
+import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.VoteResult;
 import com.lixindi.gradproject.vo.VoteSetting;
 import com.lixindi.gradproject.vo.VotedNum;
@@ -23,12 +24,20 @@ public class VoteServiceImpl implements VoteService {
         voteDao.setKeyValue("voteParam", voteSetting);
     }
 
+    public void setRoundResult(List<CandidateInfo> candidates) {
+        voteDao.setKeyValue("roundResult", candidates);
+    }
+
     public void delKeys() {
         List<String> keys = new ArrayList<String>();
         keys.add("ids");
         keys.add("voteParam");
         keys.add("voteResult");
         voteDao.delKeys(keys);
+    }
+
+    public List<CandidateInfo> getRoundResult() {
+        return voteDao.getValueByKey("roundResult");
     }
 
     public VoteSetting getVoteParam() {

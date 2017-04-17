@@ -22,7 +22,7 @@ function startit() {
         if (hour < 0) {
             clearTimeout(t);
             alert("您未在规定的时间内完成投票，选票作废");
-            window.location.href = "about:blank";
+            $scope.begin_vote();
             return;
         } else {
             minute = 59;
