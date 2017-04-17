@@ -19,8 +19,8 @@ public class QRCodeGenerator {
             if (!sf.exists()) {
                 sf.mkdirs();
             }
-            String token = GetMD5.getMD5("123");
             for (int i = 1; i <= num; i++) {
+                String token = GetMD5.getMD5("token" + i);
                 String url = address + "?id=" + i + "&token=" + token;
                 BitMatrix byteMatrix = new MultiFormatWriter().encode(new String(url.getBytes("UTF-8"), "iso-8859-1"),
                         BarcodeFormat.QR_CODE, 300, 300);
@@ -28,6 +28,7 @@ public class QRCodeGenerator {
                 OutputStream os = new FileOutputStream(sf.getPath() + "\\" + filename);
                 MatrixToImageWriter.writeToStream(byteMatrix, "png", os);
                 os.close();
+                System.out.println(url);
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,15 +10,6 @@ vote.config(function ($locationProvider) {
     });
 });
 
-vote.config(function ($httpProvider) {
-    if (!$httpProvider.defaults.headers.get) {
-        $httpProvider.defaults.headers.get = {};
-    }
-    $httpProvider.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT';
-    $httpProvider.defaults.headers.get['Cache-Control'] = 'no-cache';
-    $httpProvider.defaults.headers.get['Pragma'] = 'no-cache';
-});
-
 vote.controller('vote_ctrl', function ($scope, $http, $location) {
         $scope.init = function () {
             $scope.urlParam = $location.search();
@@ -26,7 +17,9 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
                 $scope.is_start = false;
                 alert("您没有权限投票");
             } else {
-                $http.get('/vote/validate_querystring?token=' + $scope.urlParam.token + "&id=" + $scope.urlParam.id)
+                var timestamp = Date.parse(new Date());
+                $http.get('/vote/validate_querystring?token=' + $scope.urlParam.token + "&id=" + $scope.urlParam.id +
+                    "&t=" + timestamp)
                     .success(function (response) {
                         if (response.status == 3) {
                             $scope.is_start = false;
@@ -56,7 +49,7 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
                     voterID: $scope.urlParam.id,
                     candidates: $scope.voteData.candidates
                 };
-                $http.post('/vote/submit_vote?token=' + $scope.urlParam.token, postData)
+                $http.post('/vote/submit_vote?token=' + $scope.urlParam.token + "&id=" + $scope.urlParam.id, postData)
                     .success(function (response) {
                         if (response.status == 0) {
                             alert("投票成功，请退出");

@@ -60,7 +60,7 @@ public class VoteController {
     @RequestMapping(value = "/vote/validate_querystring", method = RequestMethod.GET)
     @ResponseBody
     public AjaxResponse<Boolean> validateQueryString(@RequestParam int id, @RequestParam String token) {
-        if (!GetMD5.getMD5("123").equals(token)) {
+        if (!GetMD5.getMD5("token" + id).equals(token)) {
             return new AjaxResponse<Boolean>(Status.WRONG_TOKEN, false);
         } else {
             if (voteService.validateId(id)) {
@@ -74,7 +74,8 @@ public class VoteController {
     @RequestMapping(value = "/vote/submit_vote", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse<Boolean> submitVote(HttpServletRequest request, @RequestBody VoteResult voteResult) {
-        if (!GetMD5.getMD5("123").equals(request.getParameter("token"))) {
+        String id = request.getParameter("id");
+        if (!GetMD5.getMD5("token" + id).equals(request.getParameter("token"))) {
             throw new RuntimeException("您没有操作此接口的权限");
         } else if (voteService.validateId(voteResult.getVoterID())) {
             return new AjaxResponse<Boolean>(Status.ID_EXSITS, false);

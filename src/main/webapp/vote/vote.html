@@ -11,59 +11,61 @@
 <h2 class="sub-header">
     {{voteData.department}}学部第{{voteData.round}}轮{{voteData.vote_type}}第{{voteData.times}}次
 </h2>
-<form ng-submit="submit()">
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th rowspan="2">提名书号</th>
-                <th rowspan="2">姓名</th>
-                <th rowspan="2">年龄</th>
-                <th rowspan="2">学科专业</th>
-                <th rowspan="2">工作单位</th>
-                <th colspan="3" ng-if="voteData.ballot_type =='记分'">圈选栏</th>
-                <th colspan="2" ng-if="voteData.ballot_type =='表决'">圈选栏</th>
-            </tr>
-            <tr>
-                <th ng-if="voteData.ballot_type =='记分'">A</th>
-                <th ng-if="voteData.ballot_type =='记分'">B</th>
-                <th ng-if="voteData.ballot_type =='记分'">C</th>
+<div class="col-md-11">
+    <form ng-submit="submit()">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th rowspan="2">提名书号</th>
+                    <th rowspan="2">姓名</th>
+                    <th rowspan="2">年龄</th>
+                    <th rowspan="2">学科专业</th>
+                    <th rowspan="2">工作单位</th>
+                    <th colspan="3" ng-if="voteData.ballot_type =='记分'">圈选栏</th>
+                    <th colspan="2" ng-if="voteData.ballot_type =='表决'">圈选栏</th>
+                </tr>
+                <tr>
+                    <th ng-if="voteData.ballot_type =='记分'">A</th>
+                    <th ng-if="voteData.ballot_type =='记分'">B</th>
+                    <th ng-if="voteData.ballot_type =='记分'">C</th>
 
-                <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-ok"></i></th>
-                <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-remove"></i></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="item in voteData.candidates">
-                <td>{{item.candidate_num}}</td>
-                <td>{{item.name}}</td>
-                <td>{{item.age}}</td>
-                <td>{{item.major}}</td>
-                <td>{{item.company}}</td>
+                    <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-ok"></i></th>
+                    <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-remove"></i></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in voteData.candidates">
+                    <td>{{item.candidate_num}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.age}}</td>
+                    <td>{{item.major}}</td>
+                    <td>{{item.company}}</td>
 
-                <td ng-if="voteData.ballot_type =='记分'">
-                    <input type="radio" name="{{item}}" ng-model="item.score" value="3" required>
-                </td>
-                <td ng-if="voteData.ballot_type =='记分'">
-                    <input type="radio" name="{{item}}" ng-model="item.score" value="2" required>
-                </td>
-                <td ng-if="voteData.ballot_type =='记分'">
-                    <input type="radio" name="{{item}}" ng-model="item.score" value="1" required>
-                </td>
+                    <td ng-if="voteData.ballot_type =='记分'">
+                        <input type="radio" name="{{item}}" ng-model="item.score" value="3" required>
+                    </td>
+                    <td ng-if="voteData.ballot_type =='记分'">
+                        <input type="radio" name="{{item}}" ng-model="item.score" value="2" required>
+                    </td>
+                    <td ng-if="voteData.ballot_type =='记分'">
+                        <input type="radio" name="{{item}}" ng-model="item.score" value="1" required>
+                    </td>
 
-                <td ng-if="voteData.ballot_type =='表决'">
-                    <input type="radio" name="{{item}}" ng-model="item.score" value="1" required>
-                </td>
-                <td ng-if="voteData.ballot_type =='表决'">
-                    <input type="radio" name="{{item}}" ng-model="item.score" value="0" required>
-                </td>
+                    <td ng-if="voteData.ballot_type =='表决'">
+                        <input type="radio" name="{{item}}" ng-model="item.score" value="1" required>
+                    </td>
+                    <td ng-if="voteData.ballot_type =='表决'">
+                        <input type="radio" name="{{item}}" ng-model="item.score" value="0" required>
+                    </td>
 
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <button type="submit" class="btn btn-success btn-lg center-block">提交</button>
-</form>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg center-block">提交</button>
+    </form>
+</div>
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 <script src="js/vote.js"></script>
 </body>

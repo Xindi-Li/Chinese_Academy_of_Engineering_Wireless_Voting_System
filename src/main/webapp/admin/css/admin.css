@@ -154,7 +154,7 @@ div.import > div > div > input[type="file"]:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
 
-.uploadConfirm {
+.uploadConfirm, #resultTable {
     margin-top: 20px;
 }
 
@@ -175,7 +175,6 @@ label {
 .list-group-item {
     color: #428bca;
 }
-
 
 .searchbox {
     font-size: 110%;
@@ -222,7 +221,7 @@ label {
     font-size: medium;
 }
 
-#vote > div:nth-child(5) {
+#vote > div:nth-child(5), #uploadbtn {
     margin-top: 15px;
 }
 
@@ -267,12 +266,12 @@ th {
     font-size: medium;
 }
 
-#uploadbtn {
-    margin-top: 15px;
-}
-
 u {
     font-weight: bold;
 }
 
+.modal-body .form-inline{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
 

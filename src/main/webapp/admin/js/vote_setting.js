@@ -132,5 +132,14 @@ admin.controller('vote_result', function ($scope, result) {
 admin.controller('round_result', function ($scope, result) {
     $scope.result = result;
     $scope.times = result.timesList[0];
-    
+    $scope.$watch('times', function () {
+        $scope.candidates = result.voteResult[$scope.times - 1].candidates;
+        $scope.advance_score = result.voteResult[$scope.times - 1].advance_score;
+    });
+    $scope.submit= function () {
+        var confirm = window.confirm("确定选择第"+$scope.times+"次结果作为本轮投票的结果吗？");
+        if(confirm){
+            $('.modal').modal('hide');
+        }
+    }
 });

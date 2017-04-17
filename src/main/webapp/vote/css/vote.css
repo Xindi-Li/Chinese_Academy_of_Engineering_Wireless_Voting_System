@@ -1,7 +1,5 @@
-.sub-header {
+.sub-header, th {
     text-align: center;
 }
 
-th {
-    text-align: center;
-}
+

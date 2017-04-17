@@ -7,14 +7,16 @@
                 </h3>
             </div>
             <div class="modal-body">
-                <form>
-                    <span>选取第</span>
-                    <select class="form-control" ng-model="times"
-                            ng-options="item for item in result.timesList">
-                        <option></option>
-                    </select>
+                <form class="form-inline" ng-submit="submit()">
+                    <div class="form-group">
+                        <label for="round">选取第</label>
+                        <select id="round" class="form-control" ng-model="times" ng-options="item for item in result.timesList">
+                        </select>
+                        <label for="round">次作为本轮结果</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary col-md-offset-1">确定</button>
                 </form>
-                <table class="table table-bordered">
+                <table id="resultTable" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>提名书号</th>
@@ -26,7 +28,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in result.voteResult.candidates" ng-class="{'success':item.is_advance}">
+                    <tr ng-repeat="item in candidates" ng-class="{'success':item.is_advance}">
                         <td class="col-md-2">{{item.candidate_num}}</td>
                         <td class="col-md-1">{{item.name}}</td>
                         <td class="col-md-1">{{item.age}}</td>
@@ -36,10 +38,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <h4 class="text-center">本次选举分数线为：{{result.voteResult.advance_score}}</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">关闭</button>
+                <h4 class="text-center">本次选举分数线为：{{advance_score}}</h4>
             </div>
         </div>
     </div>
