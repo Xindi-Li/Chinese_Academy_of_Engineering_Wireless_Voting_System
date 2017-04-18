@@ -8,6 +8,7 @@ angular.module('admin')
                 .success(function (response) {
                     if (response.data) {
                         alert("注册成功");
+                        $scope.account = {};
                     } else {
                         alert("账号已存在");
                         var usernameinput = document.querySelector("form > div:nth-child(1) > input");

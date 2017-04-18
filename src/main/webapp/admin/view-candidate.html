@@ -44,17 +44,23 @@
             <th>学科专业</th>
             <th>工作单位</th>
             <th>所在学部</th>
+            <th>籍贯</th>
+            <th>民族</th>
+            <th>最高学历</th>
             <th>操作</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="item in candidate">
-            <td class="col-md-1">{{item.candidate_num}}</td>
-            <td class="col-md-1">{{item.name}}</td>
-            <td class="col-md-1">{{item.age}}</td>
-            <td class="col-md-3">{{item.major}}</td>
-            <td class="col-md-3">{{item.company}}</td>
+            <td>{{item.candidate_num}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.major}}</td>
+            <td>{{item.company}}</td>
             <td>{{item.department}}</td>
+            <td>{{item.native_place}}</td>
+            <td>{{item.ethnicity}}</td>
+            <td>{{item.highest_education}}</td>
             <td>
                 <a href="" ng-click="edit_candidate(item)"><i class="glyphicon glyphicon-pencil"></i></a>
                 <a href=""><i class="glyphicon glyphicon-remove"></i></a>

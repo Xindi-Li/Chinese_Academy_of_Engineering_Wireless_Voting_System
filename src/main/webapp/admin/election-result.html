@@ -1,0 +1,38 @@
+<div class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">
+                    当选院士名单
+                </h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>提名书号</th>
+                        <th>姓名</th>
+                        <th>年龄</th>
+                        <th>学科专业</th>
+                        <th>工作单位</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in result.voteResult.candidates" ng-class="{'success':item.is_advance}">
+                        <td class="col-md-2">{{item.candidate_num}}</td>
+                        <td class="col-md-1">{{item.name}}</td>
+                        <td class="col-md-1">{{item.age}}</td>
+                        <td class="col-md-3">{{item.major}}</td>
+                        <td class="col-md-3">{{item.company}}</td>
+                        <td class="col-md-1">{{item.score}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4 class="text-center">本次选举分数线为：{{result.voteResult.advance_score}}</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -17,8 +17,35 @@ public class CandidateInfo implements Serializable {
     private String company;
     private String department;
     private String group;
+    private String native_place;
+    private String ethnicity;
+    private String highest_education;
     private Integer score;
     private Boolean is_advance;
+
+    public String getNative_place() {
+        return native_place;
+    }
+
+    public void setNative_place(String native_place) {
+        this.native_place = native_place;
+    }
+
+    public String getEthnicity() {
+        return ethnicity;
+    }
+
+    public void setEthnicity(String ethnicity) {
+        this.ethnicity = ethnicity;
+    }
+
+    public String getHighest_education() {
+        return highest_education;
+    }
+
+    public void setHighest_education(String highest_education) {
+        this.highest_education = highest_education;
+    }
 
     public String getCandidate_num() {
         return candidate_num;

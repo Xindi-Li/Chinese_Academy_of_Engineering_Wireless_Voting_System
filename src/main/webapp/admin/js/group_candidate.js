@@ -2,7 +2,7 @@
  * Created by lixindi on 2017/3/13.
  */
 angular.module('admin')
-    .controller('group_candidate', function ($scope, $http, paginationConf) {
+    .controller('group_candidate', function ($scope, $http, paginationConf,$route) {
         $scope.candidates = [];
         $scope.paginationConf = paginationConf.paginationConf;
 
@@ -61,10 +61,10 @@ angular.module('admin')
                     .success(function (response) {
                         if (response.data) {
                             alert("分组成功");
+                            $route.reload();
                         } else {
                             alert("分组失败");
                         }
-                        $scope.candidates = [];
                     });
             }
         }

@@ -15,6 +15,7 @@ angular.module('admin')
                 .success(function (response) {
                     if (response.data) {
                         alert("修改成功");
+                        $scope.account.password = null;
                     } else {
                         alert("修改失败");
                         var usernameinput = document.querySelector("form > div:nth-child(1) > input");

@@ -30,6 +30,21 @@
                 <input type="text" class="form-control" id="department" ng-model="candidate.department" placeholder="学部"
                        required>
             </div>
+            <div class="form-group">
+                <label for="native_place">籍贯</label>
+                <input type="text" class="form-control" id="native_place" ng-model="candidate.native_place"
+                       placeholder="籍贯" required>
+            </div>
+            <div class="form-group">
+                <label for="ethnicity">民族</label>
+                <input type="text" class="form-control" id="ethnicity" ng-model="candidate.ethnicity" placeholder="民族"
+                       required>
+            </div>
+            <div class="form-group">
+                <label for="highest_education">最高学历</label>
+                <input type="text" class="form-control" id="highest_education" ng-model="candidate.highest_education"
+                       placeholder="最高学历" required>
+            </div>
 
             <button type="submit" class="btn btn-primary">录入</button>
         </form>
@@ -66,7 +81,7 @@
         <p>1.支持CSV文件上传</p>
         <p>2.CSV上传前确保编码为UTF-8</p>
         <p>3.CSV文件第一行为字段名称，分别为：candidate_num(提名书号)，name(姓名)，age(年龄)，major(学科专业)，
-            company(工作单位)，department(学部)
+            company(工作单位)，department(学部)，native_place(籍贯)，ethnicity(民族)，highest_education(最高学历)
         </p>
     </div>
 </div>

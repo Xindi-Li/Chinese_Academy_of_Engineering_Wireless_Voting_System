@@ -140,6 +140,24 @@ angular.module('admin')
         $scope.end_election = function () {
             var confirm = window.confirm("确定结束选举吗？");
             if (confirm) {
+                ModalService.showModal({
+                    templateUrl: "vote-result.html",
+                    controller: "vote_result",
+                    inputs: {
+                        result: {
+                            voteResult: voteResultList[times - 1],
+                            round: $scope.voteData.round,
+                            times: times,
+                            department: $scope.voteData.department
+                        }
+                    }
+                }).then(function (modal) {
+                    modal.element.modal();
+                });
+
+
+
+
                 $rootScope.elec_begin = false;
                 $scope.elec_begin = false;
                 $scope.voteData.vote_begin = false;

@@ -13,10 +13,11 @@
 
     <insert id="insertCandidate">
         INSERT INTO
-        candidate(candidate_num,name,age,major,company,department)
+        candidate(candidate_num,name,age,major,company,department,native_place,ethnicity,highest_education)
         VALUES
         <foreach collection="list" item="item" separator=",">
-            (#{item.candidate_num}, #{item.name}, #{item.age}, #{item.major}, #{item.company}, #{item.department})
+            (#{item.candidate_num}, #{item.name}, #{item.age}, #{item.major}, #{item.company}, #{item.department},
+            #{item.native_place}, #{item.ethnicity}, #{item.highest_education})
         </foreach>
     </insert>
 
@@ -94,6 +95,15 @@
             </if>
             <if test="department != null and department != ''">
                 department = #{department}
+            </if>
+            <if test="native_place != null and native_place != ''">
+                native_place = #{native_place}
+            </if>
+            <if test="ethnicity != null and ethnicity != ''">
+                ethnicity = #{ethnicity}
+            </if>
+            <if test="highest_education != null and highest_education != ''">
+                highest_education = #{highest_education}
             </if>
         </set>
         WHERE candidate_num = #{candidate_num}
