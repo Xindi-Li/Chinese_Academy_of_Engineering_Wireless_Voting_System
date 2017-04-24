@@ -1,97 +1,105 @@
 <h2 class="sub-header">投票设置</h2>
 <div class="row" id="vote">
-    <div class="col-md-4" ng-init="get_department()">
+    <div class="col-md-4">
         <form ng-submit="begin_vote()">
-            <div>
-                <div class="form-group">
-                    <label for="department">学部:</label>
-                    <select id="department" class="form-control" ng-model="voteData.department"
-                            ng-disabled="elec_begin"
-                            ng-options="item for item in departmentList" required>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="group">组:</label>
-                    <select id="group" class="form-control" ng-model="voteData.group" ng-disabled="elec_begin"
-                            ng-options="item for item in groupList">
-                        <option></option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    第 <u>{{voteData.round}}</u> 轮第 <u>{{voteData.times}}</u> 次投票
-                </div>
-
-                <div class="form-group">
-                    <label>选举类型：</label>
-                    <label class="radio-inline">
-                        <input type="radio" name="vote_type" ng-model="voteData.vote_type" value="正式" required
-                               ng-disabled="voteData.vote_begin">
-                        正式
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="vote_type" ng-model="voteData.vote_type" value="预选"
-                               ng-disabled="voteData.vote_begin"> 预选
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label>选票类型：</label>
-                    <label class="radio-inline">
-                        <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="记分"
-                               required ng-disabled="voteData.vote_begin">
-                        记分(A、B、C)
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="表决"
-                               ng-disabled="voteData.vote_begin"> 表决(√，×)
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <label for="advance_num">晋级人数：</label>
-                    <input id="advance_num" type="number" min="1" max="100" ng-model="voteData.advance_num"
-                           ng-disabled="voteData.vote_begin" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="voter_num">投票人数：</label>
-                    <input id="voter_num" type="number" min="1" max="100" ng-model="voteData.voter_num"
-                           ng-disabled="voteData.vote_begin" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="hour">投票时限：</label>
-                    <input id="hour" type="number" min="0" max="5" ng-model="hour" ng-disabled="voteData.vote_begin"
-                            required>小时
-                    <input type="number" min="0" max="59" ng-model="minute" ng-disabled="voteData.vote_begin"
-                            required>分钟
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-lg" ng-disabled="voteData.vote_begin">
-                    开启投票
-                </button>
+            <div class="form-group">
+                第 <u>{{round}}</u> 轮第 <u>{{times}}</u> 次投票
             </div>
+
+            <div class="form-group">
+                <label>候选人名单：</label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_group" ng-model="is_group" ng-value="true"
+                           ng-change="get_conditions()" ng-disabled="elec_begin" required>分组
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="is_group" ng-model="is_group" ng-value="false"
+                           ng-change="get_conditions()" ng-disabled="elec_begin" required>不分组
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>选举类型：</label>
+                <label class="radio-inline">
+                    <input type="radio" name="vote_type" ng-model="vote_type" value="正式" required
+                           ng-disabled="vote_begin">正式
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="vote_type" ng-model="vote_type" value="预选" required
+                           ng-disabled="vote_begin"> 预选
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>选票类型：</label>
+                <label class="radio-inline">
+                    <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="记分"
+                           required ng-disabled="vote_begin">
+                    记分(A、B、C)
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="ballot_type" ng-model="voteData.ballot_type" value="表决"
+                           ng-disabled="vote_begin"> 表决(√，×)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="advance_num">晋级人数：</label>
+                <input id="advance_num" type="number" min="1" max="100" ng-model="voteData.advance_num"
+                       ng-disabled="vote_begin" required>
+            </div>
+
+            <div class="form-group">
+                <label for="voter_num">投票人数：</label>
+                <input id="voter_num" type="number" min="1" max="100" ng-model="voteData.voter_num"
+                       ng-disabled="vote_begin" required>
+            </div>
+
+            <div class="form-group">
+                <label for="hour">投票时限：</label>
+                <input id="hour" type="number" min="0" max="5" ng-model="hour" ng-disabled="vote_begin"
+                       required>小时
+                <input type="number" min="0" max="59" ng-model="minute" ng-disabled="vote_begin"
+                       required>分钟
+            </div>
+            <div class="form-group">
+                <label for="title">选票标题：</label>
+                <input id="title" type="text" class="form-control" ng-model="voteData.title" ng-disabled="vote_begin"
+                       required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" ng-disabled="vote_begin">
+                开启投票
+            </button>
         </form>
         <div id="end">
             <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="round_end&&elec_begin">
                 结束选举
             </button>
             <button class="btn btn-warning btn-lg" ng-click="end_round()"
-                    ng-if="elec_begin && !voteData.vote_begin && !round_end">
+                    ng-if="elec_begin && !vote_begin && !round_end">
                 结束本轮投票
             </button>
         </div>
     </div>
-    <div class="col-md-5">
-        <div id="container" class="center-block" ng-show="voteData.vote_begin">
+    <div class="col-md-3" ng-if="!elec_begin">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in conditions">
+                <input type="checkbox" ng-click="select_condition(item)">
+                {{item}}<span ng-if="!is_group">学部</span>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="col-md-5" ng-show="vote_begin">
+        <div id="container" class="center-block">
             <h3 class="text-center">投票时间剩余</h3>
             <div id="timer"></div>
             <button class="btn btn-success center-block" ng-click="end_vote()">结束本次投票</button>
         </div>
     </div>
-    <div class="col-md-2 col-md-offset-1">
+    <div class="col-md-2 pull-right">
         <div class="panel panel-primary">
             <div class="panel-heading text-center">本轮投票结果</div>
             <div class="panel-body">

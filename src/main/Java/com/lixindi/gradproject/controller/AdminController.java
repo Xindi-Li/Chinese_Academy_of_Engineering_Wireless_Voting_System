@@ -31,9 +31,9 @@ public class AdminController {
     public AjaxResponse<Boolean> validate(HttpSession httpSession, @RequestBody AccountInfo accountInfo) {
         if (adminService.validate(accountInfo)) {
             httpSession.setAttribute("user", accountInfo);
-            return new AjaxResponse<Boolean>(Status.OK, true);
+            return new AjaxResponse<>(Status.OK, true);
         } else {
-            return new AjaxResponse<Boolean>(Status.ERROR, false);
+            return new AjaxResponse<>(Status.ERROR, false);
         }
     }
 
@@ -48,9 +48,9 @@ public class AdminController {
     public AjaxResponse<Boolean> register(@RequestBody AccountInfo accountInfo) {
         Boolean is_Success = adminService.register(accountInfo);
         if (is_Success) {
-            return new AjaxResponse<Boolean>(Status.OK, true);
+            return new AjaxResponse<>(Status.OK, true);
         } else {
-            return new AjaxResponse<Boolean>(Status.ERROR, false);
+            return new AjaxResponse<>(Status.ERROR, false);
         }
     }
 
@@ -58,16 +58,16 @@ public class AdminController {
     @ResponseBody
     public AjaxResponse<String> getUsername(HttpSession httpSession) {
         String username = ((AccountInfo) httpSession.getAttribute("user")).getUsername();
-        return new AjaxResponse<String>(Status.OK, username);
+        return new AjaxResponse<>(Status.OK, username);
     }
 
     @RequestMapping(value = "/admin/reset_password", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse<Boolean> resetPassword(@RequestBody AccountInfo accountInfo) {
         if (adminService.resetPassword(accountInfo)) {
-            return new AjaxResponse<Boolean>(Status.OK, true);
+            return new AjaxResponse<>(Status.OK, true);
         } else {
-            return new AjaxResponse<Boolean>(Status.ERROR, false);
+            return new AjaxResponse<>(Status.ERROR, false);
         }
     }
 }

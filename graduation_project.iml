@@ -19,7 +19,7 @@
       <configuration />
     </facet>
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -34,6 +34,8 @@
     <orderEntry type="library" name="angular" level="application" />
     <orderEntry type="library" name="angular-route" level="application" />
     <orderEntry type="library" name="angular-animate" level="application" />
+    <orderEntry type="library" name="jquery-2.2.4" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="jquery-2.2.4" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.2.6.RELEASE" level="project" />
@@ -138,7 +140,5 @@
     <orderEntry type="library" name="Maven: com.google.zxing:core:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.google.zxing:javase:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: com.beust:jcommander:1.48" level="project" />
-    <orderEntry type="library" name="jquery-2.2.4" level="application" />
-    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

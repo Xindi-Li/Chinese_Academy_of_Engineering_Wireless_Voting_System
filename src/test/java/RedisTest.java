@@ -31,7 +31,7 @@ public class RedisTest {
 
     @Test
     public void get() {
-        System.out.println(voteDao.getValueByKey("voteResult"));
+        System.out.println("");
     }
 
     @Test

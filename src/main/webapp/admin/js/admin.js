@@ -1,7 +1,7 @@
 /**
  * Created by lixindi on 2017/3/1.
  */
-var admin = angular.module('admin', ['ngCsvImport', 'ngRoute', 'tm.pagination','angularModalService']);
+var admin = angular.module('admin', ['ngCsvImport', 'ngRoute', 'tm.pagination', 'angularModalService']);
 admin.config(function ($routeProvider) {
     $routeProvider.when('/add_candidate', {
         templateUrl: 'add-candidate.html',
@@ -69,6 +69,9 @@ admin.service('candidateInfo', function () {
         this.major = candidate.major;
         this.company = candidate.company;
         this.department = candidate.department;
+        this.native_place = candidate.native_place;
+        this.ethnicity = candidate.ethnicity;
+        this.highest_education = candidate.highest_education;
     };
 });
 

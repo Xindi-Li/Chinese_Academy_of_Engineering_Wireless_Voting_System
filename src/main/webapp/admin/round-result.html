@@ -3,14 +3,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center">
-                    {{result.department}}学部第{{result.round}}轮结果
+                    第{{result.round}}轮结果
                 </h3>
             </div>
             <div class="modal-body">
                 <form class="form-inline" ng-submit="submit()">
                     <div class="form-group">
                         <label for="round">选取第</label>
-                        <select id="round" class="form-control" ng-model="times" ng-options="item for item in result.timesList">
+                        <select id="round" class="form-control" ng-model="times"
+                                ng-options="item for item in result.timesList">
                         </select>
                         <label for="round">次作为本轮结果</label>
                     </div>

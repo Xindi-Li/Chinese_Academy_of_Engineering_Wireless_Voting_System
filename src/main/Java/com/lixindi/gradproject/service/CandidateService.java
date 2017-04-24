@@ -5,6 +5,8 @@ import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
+import com.lixindi.gradproject.vo.NomineeRequest;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ public interface CandidateService {
 
     CandidateResponse getCandidate(CandidateRequest candidateRequest);
 
+    List<CandidateInfo> getNominee(NomineeRequest request);
+
     List<String> getDepartment();
 
     Boolean groupCandidate(GroupRequest groupRequest);
@@ -23,4 +27,6 @@ public interface CandidateService {
     List<String> getGroupByDepartment(String department);
 
     Boolean updateCandidate(CandidateInfo candidateInfo);
+
+    Boolean deleteCandidate(CandidateInfo candidateInfo);
 }

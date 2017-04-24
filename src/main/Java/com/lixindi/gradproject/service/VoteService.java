@@ -13,11 +13,11 @@ import java.util.List;
 public interface VoteService {
     void setVoteParam(VoteSetting voteSetting);
 
-    void setRoundResult(List<CandidateInfo> candidates);
+    void setNominees(List<CandidateInfo> candidates);
 
     void delKeys();
 
-    List<CandidateInfo> getRoundResult();
+    List<CandidateInfo> getNominees();
 
     VoteSetting getVoteParam();
 

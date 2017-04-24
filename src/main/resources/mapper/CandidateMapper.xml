@@ -8,6 +8,9 @@
         <result column="major" property="major" jdbcType="VARCHAR"/>
         <result column="company" property="company" jdbcType="VARCHAR"/>
         <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="native_place" property="native_place" jdbcType="VARCHAR"/>
+        <result column="ethnicity" property="ethnicity" jdbcType="VARCHAR"/>
+        <result column="highest_education" property="highest_education" jdbcType="VARCHAR"/>
         <result column="group" property="group" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -38,6 +41,19 @@
         <if test="offset != null and itemsPerPage != null">
             limit #{offset},#{itemsPerPage}
         </if>
+    </select>
+
+    <select id="getNominee" resultMap="BaseResultMap">
+        SELECT * FROM candidate
+        <where>
+            department = #{department}
+            <if test="groups != null">
+                AND `group` IN
+                <foreach collection="groups" item="item" open="(" close=")" separator=",">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
     </select>
 
     <select id="getDepartment" resultType="java.lang.String">
@@ -108,4 +124,14 @@
         </set>
         WHERE candidate_num = #{candidate_num}
     </update>
+
+    <delete id="deleteCandidate">
+        DELETE FROM candidate
+        <where>
+            `name` = #{name}
+            AND age = #{age}
+            AND department = #{department}
+        </where>
+    </delete>
+
 </mapper>

@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
                         <select id="department" class="form-control" ng-model="department"
-                                ng-options="item for item in departmentList">
+                                ng-options="item for item in departmentList" ng-change="get_group()">
                             <option></option>
                         </select>
                     </div>
@@ -63,7 +63,7 @@
             <td>{{item.highest_education}}</td>
             <td>
                 <a href="" ng-click="edit_candidate(item)"><i class="glyphicon glyphicon-pencil"></i></a>
-                <a href=""><i class="glyphicon glyphicon-remove"></i></a>
+                <a href="" ng-click="del_candidate(item)"><i class="glyphicon glyphicon-remove"></i></a>
             </td>
         </tr>
         </tbody>

@@ -36,6 +36,10 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
                                     } else {
                                         $scope.is_start = true;
                                         $scope.voteData = response.data;
+                                        $http.get('/vote/r_nominees')
+                                            .success(function (response) {
+                                                $scope.candidates = response.data;
+                                            })
                                     }
                                 });
                         }
@@ -47,7 +51,7 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
             if (confirm) {
                 var postData = {
                     voterID: $scope.urlParam.id,
-                    candidates: $scope.voteData.candidates
+                    candidates: $scope.candidates
                 };
                 $http.post('/vote/submit_vote?token=' + $scope.urlParam.token + "&id=" + $scope.urlParam.id, postData)
                     .success(function (response) {

@@ -24,8 +24,8 @@ public class VoteServiceImpl implements VoteService {
         voteDao.setKeyValue("voteParam", voteSetting);
     }
 
-    public void setRoundResult(List<CandidateInfo> candidates) {
-        voteDao.setKeyValue("roundResult", candidates);
+    public void setNominees(List<CandidateInfo> candidates) {
+        voteDao.setKeyValue("nominees", candidates);
     }
 
     public void delKeys() {
@@ -36,8 +36,8 @@ public class VoteServiceImpl implements VoteService {
         voteDao.delKeys(keys);
     }
 
-    public List<CandidateInfo> getRoundResult() {
-        return voteDao.getValueByKey("roundResult");
+    public List<CandidateInfo> getNominees() {
+        return voteDao.getValueByKey("nominees");
     }
 
     public VoteSetting getVoteParam() {

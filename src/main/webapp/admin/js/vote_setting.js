@@ -2,67 +2,90 @@
  * Created by lixindi on 2017/3/20.
  */
 angular.module('admin')
-    .controller('vote_setting', function ($scope, $http, $rootScope, $q, ModalService, $timeout, $route) {
+    .controller('vote_setting', function ($scope, $http, $rootScope, ModalService, $timeout, $route) {
         var voteResultList = [];
         $scope.timesList = [];
+        var conditionList = [];
 
-        $scope.voteData = {
-            round: 1,
-            times: 1,
-            candidates: [],
-            vote_begin: false
-        };
+        $scope.round = 1;
+        $scope.times = 1;
+        $scope.vote_begin = false;
 
-        $scope.get_department = function () {
-            $http.get('/admin/r_department')
-                .success(function (response) {
-                    $scope.departmentList = response.data;
-                    $scope.voteData.department = $scope.departmentList[0];
-                })
-        };
-        $scope.get_group = function () {
-            var department = {
-                department: $scope.voteData.department
-            };
-            $http.post('/admin/r_group', department)
-                .success(function (response) {
-                    $scope.groupList = response.data;
-                });
-        };
-        $scope.$watch('voteData.department', $scope.get_group);
-
-        $scope.get_candidate = function () {
-            var deferred = $q.defer();
-            if ($scope.voteData.round == 1) {
-                var postData = {
-                    department: $scope.voteData.department,
-                    group: $scope.voteData.group
-                };
-                $http.post('/admin/r_candidate', postData)
+        $scope.get_conditions = function () {
+            if ($scope.is_group) {
+                $http.get('/admin/r_conditions')
                     .success(function (response) {
-                        deferred.resolve(response.data.candidateInfos);
-                    });
+                        $scope.conditions = response.data;
+                    })
             } else {
-                $http.get('/vote/r_round_result')
+                $http.get('/admin/r_department')
                     .success(function (response) {
-                        deferred.resolve(response.data);
+                        $scope.conditions = response.data;
                     })
             }
-            return deferred.promise;
+            conditionList = [];
+        };
+
+        $scope.select_condition = function (condition) {
+            var index = conditionList.indexOf(condition);
+            if (index == -1) {
+                conditionList.push(condition);
+            } else {
+                conditionList.splice(index, 1);
+            }
+        };
+
+        $scope.set_candidate = function () {
+            if ($scope.round == 1 && $scope.times == 1) {
+                var postData = [];
+                if ($scope.is_group) {
+                    var dict = [];
+                    conditionList.forEach(function (element) {
+                        var splited = element.split(/学部|组/);
+                        if (dict.hasOwnProperty(splited[0])) {
+                            dict[splited[0]].push(splited[1]);
+                        } else {
+                            if (splited[1] == "") {
+                                dict[splited[0]] = null;
+                            } else {
+                                dict[splited[0]] = [splited[1]];
+                            }
+                        }
+                    });
+                    for (item in dict) {
+                        postData.push({
+                            department: item,
+                            groups: dict[item]
+                        });
+                    }
+                } else {
+                    conditionList.forEach(function (element) {
+                        postData.push({
+                            department: element
+                        })
+                    });
+                }
+
+                $http.post('/admin/r_nominees_db', postData)
+                    .success(function (response) {
+                        $http.post('/admin/w_nominees', response.data);
+                    });
+            }
         };
 
         $scope.begin_vote = function () {
-            init();
-            startit();
-            $rootScope.elec_begin = true;
-            $scope.voteData.vote_begin = true;
-            $scope.elec_begin = true;
-            $scope.round_end = false;
-            $scope.get_candidate().then(function (data) {
-                $scope.voteData.candidates = data;
-                $http.post('/admin/w_vote_setting', $scope.voteData);
-            });
-            $http.get('/admin/generate_qrcode?num=' + $scope.voteData.voter_num);
+            if (conditionList.length == 0) {
+                alert("至少选择一个候选人范围");
+            } else {
+                init();
+                startit();
+                $rootScope.elec_begin = true;
+                $scope.vote_begin = true;
+                $scope.elec_begin = true;
+                $scope.round_end = false;
+                $scope.set_candidate();
+                $http.post('/admin/w_vote_setting?num=' + $scope.voteData.voter_num, $scope.voteData);
+            }
         };
 
         $scope.show_modal = function (times) {
@@ -72,9 +95,8 @@ angular.module('admin')
                 inputs: {
                     result: {
                         voteResult: voteResultList[times - 1],
-                        round: $scope.voteData.round,
-                        times: times,
-                        department: $scope.voteData.department
+                        round: $scope.round,
+                        times: times
                     }
                 }
             }).then(function (modal) {
@@ -91,9 +113,9 @@ angular.module('admin')
                         $http.get('/vote/r_vote_result')
                             .success(function (response) {
                                 voteResultList.push(response.data);
-                                $scope.voteData.vote_begin = false;
-                                $scope.timesList.push($scope.voteData.times);
-                                $scope.voteData.times++;
+                                $scope.vote_begin = false;
+                                $scope.timesList.push($scope.times);
+                                $scope.times++;
                             });
                     }
                 });
@@ -104,9 +126,9 @@ angular.module('admin')
             $http.get('/vote/r_vote_result')
                 .success(function (response) {
                     voteResultList.push(response.data);
-                    $scope.voteData.vote_begin = false;
-                    $scope.timesList.push($scope.voteData.times);
-                    $scope.voteData.times++;
+                    $scope.vote_begin = false;
+                    $scope.timesList.push($scope.times);
+                    $scope.times++;
                 });
         };
 
@@ -119,17 +141,16 @@ angular.module('admin')
                     inputs: {
                         result: {
                             voteResult: voteResultList,
-                            round: $scope.voteData.round,
-                            timesList: Array.from(new Array(voteResultList.length), (val, index)=>index + 1),
-                            department: $scope.voteData.department
+                            round: $scope.round,
+                            timesList: Array.from(new Array(voteResultList.length), (val, index)=>index + 1)
                         }
                     }
                 }).then(function (modal) {
                     modal.element.modal();
                     modal.closed.then(function () {
                         $scope.round_end = true;
-                        $scope.voteData.round++;
-                        $scope.voteData.times = 1;
+                        $scope.round++;
+                        $scope.times = 1;
                         voteResultList = [];
                         $scope.timesList = [];
                     });
@@ -154,13 +175,9 @@ angular.module('admin')
                 }).then(function (modal) {
                     modal.element.modal();
                 });
-
-
-
-
                 $rootScope.elec_begin = false;
                 $scope.elec_begin = false;
-                $scope.voteData.vote_begin = false;
+                $scope.vote_begin = false;
                 $route.reload();
             }
         };
@@ -211,10 +228,11 @@ admin.controller('vote_result', function ($scope, result) {
 admin.controller('round_result', function ($scope, $http, result, $element, close) {
     $scope.result = result;
     $scope.times = result.timesList[0];
-    $scope.$watch('times', function () {
+    $scope.get_result = function () {
         $scope.candidates = result.voteResult[$scope.times - 1].candidates;
         $scope.advance_score = result.voteResult[$scope.times - 1].advance_score;
-    });
+    };
+    $scope.$watch('times',$scope.get_result);
     $scope.submit = function () {
         var confirm = window.confirm("确定选择第" + $scope.times + "次结果作为本轮投票的结果吗？");
         if (confirm) {
@@ -222,7 +240,7 @@ admin.controller('round_result', function ($scope, $http, result, $element, clos
                 element.score = null;
                 return element.is_advance;
             });
-            $http.post('/admin/w_round_result', advance_candidates)
+            $http.post('/admin/w_nominees', advance_candidates)
                 .success(function () {
                     $element.modal('hide');
                     close(null, 200);

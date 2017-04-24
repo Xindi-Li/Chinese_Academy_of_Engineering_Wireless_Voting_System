@@ -7,18 +7,16 @@ import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
 import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
-import com.lixindi.gradproject.vo.AjaxResponse;
 import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
+import com.lixindi.gradproject.vo.NomineeRequest;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.tiles.request.collection.CollectionUtil;
-import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,6 +59,10 @@ public class CandidateServiceImpl implements CandidateService {
         return candidateResponse;
     }
 
+    public List<CandidateInfo> getNominee(NomineeRequest request) {
+        return candidateMapper.getNominee(request);
+    }
+
     public List<String> getDepartment() {
         return candidateMapper.getDepartment();
     }
@@ -92,6 +94,11 @@ public class CandidateServiceImpl implements CandidateService {
 
     public Boolean updateCandidate(CandidateInfo candidateInfo) {
         int lines = candidateMapper.updateCandidate(candidateInfo);
+        return lines > 0;
+    }
+
+    public Boolean deleteCandidate(CandidateInfo candidateInfo) {
+        int lines = candidateMapper.deleteCandidate(candidateInfo);
         return lines > 0;
     }
 }

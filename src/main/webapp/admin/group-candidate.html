@@ -7,7 +7,7 @@
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
                         <select id="department" class="form-control" ng-model="department"
-                                ng-options="item for item in departmentList">>
+                                ng-options="item for item in departmentList" ng-change="get_candidate()">
                         </select>
                     </div>
                 </div>
@@ -25,7 +25,8 @@
                 <ul class="list-inline list-group">
                     <li class="list-group-item" ng-repeat="item in candidate">
                         <input type="checkbox" ng-model="item.checked"
-                               ng-change="add_candidate(item.checked,item.name)">
+                               ng-change="add_candidate(item.checked,item.name)"
+                               ng-checked="candidates.indexOf(item.name)>-1">
                         {{item.name}}
                     </li>
                 </ul>
@@ -33,7 +34,7 @@
         </div>
         <tm-pagination conf="paginationConf"></tm-pagination>
     </div>
-    <div class="col-md-2 col-md-offset-1">
+    <div class="col-md-2 pull-right">
         <div class="panel panel-primary">
             <div class="panel-heading text-center">待分组候选人</div>
             <div class="panel-body">

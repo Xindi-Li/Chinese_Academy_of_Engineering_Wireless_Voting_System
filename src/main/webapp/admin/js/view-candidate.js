@@ -22,7 +22,6 @@ angular.module('admin')
                     $scope.groupList = response.data;
                 });
         };
-        $scope.$watch('department', $scope.get_group);
 
         $scope.get_candidate = function () {
             var postData = {
@@ -44,5 +43,15 @@ angular.module('admin')
         $scope.edit_candidate = function (candidate) {
             candidateInfo.setValue(candidate);
             $location.url('/edit_candidate');
+        };
+
+        $scope.del_candidate = function (candidate) {
+            var confirm = window.confirm("确实删除此候选人吗?");
+            if (confirm) {
+                $http.post('/admin/d_candidate', candidate)
+                    .success(function () {
+                        $scope.get_candidate();
+                    })
+            }
         }
     });

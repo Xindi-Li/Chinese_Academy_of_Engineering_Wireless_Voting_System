@@ -2,7 +2,7 @@
  * Created by lixindi on 2017/3/13.
  */
 angular.module('admin')
-    .controller('group_candidate', function ($scope, $http, paginationConf,$route) {
+    .controller('group_candidate', function ($scope, $http, paginationConf, $route) {
         $scope.candidates = [];
         $scope.paginationConf = paginationConf.paginationConf;
 
@@ -25,7 +25,7 @@ angular.module('admin')
                     $scope.candidate = response.data.candidateInfos;
                 });
         };
-        $scope.$watch('paginationConf.currentPage + department', $scope.get_candidate);
+        $scope.$watch('paginationConf.currentPage', $scope.get_candidate);
         $scope.$watch('department', function () {
             $scope.candidates = [];
         });
@@ -40,6 +40,7 @@ angular.module('admin')
                 }
             }
         };
+        
 
         $scope.remove_candidate = function (candidate) {
             var index = $scope.candidates.indexOf(candidate);
