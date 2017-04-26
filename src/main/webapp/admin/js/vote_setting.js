@@ -161,24 +161,25 @@ angular.module('admin')
         $scope.end_election = function () {
             var confirm = window.confirm("确定结束选举吗？");
             if (confirm) {
-                ModalService.showModal({
-                    templateUrl: "vote-result.html",
-                    controller: "vote_result",
-                    inputs: {
-                        result: {
-                            voteResult: voteResultList[times - 1],
-                            round: $scope.voteData.round,
-                            times: times,
-                            department: $scope.voteData.department
-                        }
-                    }
-                }).then(function (modal) {
-                    modal.element.modal();
-                });
-                $rootScope.elec_begin = false;
-                $scope.elec_begin = false;
-                $scope.vote_begin = false;
-                $route.reload();
+                $http.get('/vote/r_nominees')
+                    .success(function (response) {
+                        ModalService.showModal({
+                            templateUrl: "election-result.html",
+                            controller: "elec_result",
+                            inputs: {
+                                academician: response.data
+                            }
+                        }).then(function (modal) {
+                            modal.element.modal();
+                            modal.closed.then(function () {
+                                $http.post('/admin/w_academician', response.data);
+                                $rootScope.elec_begin = false;
+                                $scope.elec_begin = false;
+                                $scope.vote_begin = false;
+                                $route.reload();
+                            });
+                        });
+                    });
             }
         };
 
@@ -225,6 +226,13 @@ admin.controller('vote_result', function ($scope, result) {
     $scope.result = result;
 });
 
+admin.controller('elec_result', function ($scope, academician, close) {
+    $scope.academician = academician;
+    $scope.dismissModal = function () {
+        close(null, 200);
+    }
+});
+
 admin.controller('round_result', function ($scope, $http, result, $element, close) {
     $scope.result = result;
     $scope.times = result.timesList[0];
@@ -232,7 +240,7 @@ admin.controller('round_result', function ($scope, $http, result, $element, clos
         $scope.candidates = result.voteResult[$scope.times - 1].candidates;
         $scope.advance_score = result.voteResult[$scope.times - 1].advance_score;
     };
-    $scope.$watch('times',$scope.get_result);
+    $scope.$watch('times', $scope.get_result);
     $scope.submit = function () {
         var confirm = window.confirm("确定选择第" + $scope.times + "次结果作为本轮投票的结果吗？");
         if (confirm) {
@@ -240,11 +248,9 @@ admin.controller('round_result', function ($scope, $http, result, $element, clos
                 element.score = null;
                 return element.is_advance;
             });
-            $http.post('/admin/w_nominees', advance_candidates)
-                .success(function () {
-                    $element.modal('hide');
-                    close(null, 200);
-                });
+            $http.post('/admin/w_nominees', advance_candidates);
+            $element.modal('hide');
+            close(null, 200);
         }
     }
 });

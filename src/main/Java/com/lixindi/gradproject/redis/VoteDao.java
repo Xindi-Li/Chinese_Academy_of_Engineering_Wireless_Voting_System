@@ -1,8 +1,5 @@
 package com.lixindi.gradproject.redis;
 
-import com.lixindi.gradproject.vo.VoteResult;
-import com.lixindi.gradproject.vo.VoteSetting;
-
 import java.util.List;
 
 /**

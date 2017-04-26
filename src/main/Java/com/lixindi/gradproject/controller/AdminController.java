@@ -1,7 +1,6 @@
 package com.lixindi.gradproject.controller;
 
 import com.lixindi.gradproject.service.AdminService;
-import com.lixindi.gradproject.utils.QRCodeGenerator;
 import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.AccountInfo;
 import com.lixindi.gradproject.vo.AjaxResponse;

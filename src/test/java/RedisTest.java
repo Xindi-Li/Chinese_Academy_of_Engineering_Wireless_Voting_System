@@ -1,15 +1,11 @@
+import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.utils.GetMD5;
-import com.lixindi.gradproject.vo.VoteSetting;
-import com.lixindi.gradproject.vo.VotedNum;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.access.BootstrapException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.lixindi.gradproject.redis.VoteDao;
 
 /**
  * Created by lixindi on 2017/3/23.

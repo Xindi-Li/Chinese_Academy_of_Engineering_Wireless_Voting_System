@@ -1,6 +1,5 @@
 import com.lixindi.gradproject.dao.CandidateMapper;
 import com.lixindi.gradproject.dto.CandidateDaoRequest;
-import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.NomineeRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;

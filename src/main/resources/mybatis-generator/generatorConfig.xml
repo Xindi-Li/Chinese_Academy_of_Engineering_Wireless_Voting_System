@@ -5,7 +5,7 @@
 
 <generatorConfiguration>
     <!-- 根据本机环境进行修改 -->
-    <classPathEntry location="C:\Users\lixindi\.m2\repository\mysql\mysql-connector-java\5.1.6\mysql-connector-java-5.1.6.jar"/>
+    <classPathEntry location="C:\Users\Administrator\.m2\repository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>
     <context id="testTables" targetRuntime="MyBatis3" >
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -52,8 +52,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table tableName="admin"></table>
-        <table tableName="candidate"></table>
+        <table tableName="academician"/>
 
         <!-- 有些表的字段需要指定java类型
          <table schema="" tableName="">

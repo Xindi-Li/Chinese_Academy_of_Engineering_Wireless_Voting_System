@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lixindi.gradproject.dao.AcademicianMapper">
+    <resultMap id="BaseResultMap" type="com.lixindi.gradproject.vo.Academician">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="major" property="major" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="native_place" property="native_place" jdbcType="VARCHAR"/>
+        <result column="ethnicity" property="ethnicity" jdbcType="VARCHAR"/>
+        <result column="highest_education" property="highest_education" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, age, major, company, department, native_place, ethnicity, highest_education
+    </sql>
+
+    <insert id="insert">
+        insert into academician (name, age, major, company,
+        department, native_place, ethnicity, highest_education)
+        VALUE
+        <foreach collection="list" item="item" separator=",">
+            (#{item.name,jdbcType=VARCHAR}, #{item.age,jdbcType=INTEGER}, #{item.major,jdbcType=VARCHAR},
+            #{item.company,jdbcType=VARCHAR},#{item.department,jdbcType=VARCHAR}, #{item.native_place,jdbcType=VARCHAR},
+            #{item.ethnicity,jdbcType=VARCHAR},#{item.highest_education,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <select id="getAcademicians" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM academician
+        <where>
+            <if test="department != null and department != ''">
+                department = #{department}
+            </if>
+            <if test="name != null and name != ''">
+                AND `name` LIKE "%"#{name}"%"
+            </if>
+        </where>
+        <if test="offset != null and itemsPerPage != null">
+            limit #{offset},#{itemsPerPage}
+        </if>
+    </select>
+
+    <select id="getDepartment" resultType="java.lang.String">
+        SELECT DISTINCT department
+        from academician
+    </select>
+
+    <select id="getTotal" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM academician
+        <where>
+            <if test="department != null and department!= ''">
+                department = #{department}
+            </if>
+            <if test="name != null and name != ''">
+                AND `name` LIKE "%"#{name}"%"
+            </if>
+        </where>
+    </select>
+
+</mapper>

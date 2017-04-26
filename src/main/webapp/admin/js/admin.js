@@ -24,6 +24,9 @@ admin.config(function ($routeProvider) {
     }).when('/vote_setting', {
         templateUrl: 'vote-setting.html',
         controller: 'vote_setting'
+    }).when('/view_academician', {
+        templateUrl: 'view-academician.html',
+        controller: 'view_academician'
     });
 });
 

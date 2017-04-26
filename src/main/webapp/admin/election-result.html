@@ -1,4 +1,4 @@
-<div class="modal fade">
+<div class="modal fade" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,27 +10,33 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th>提名书号</th>
                         <th>姓名</th>
                         <th>年龄</th>
                         <th>学科专业</th>
                         <th>工作单位</th>
+                        <th>所在学部</th>
+                        <th>籍贯</th>
+                        <th>民族</th>
+                        <th>最高学历</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in result.voteResult.candidates" ng-class="{'success':item.is_advance}">
-                        <td class="col-md-2">{{item.candidate_num}}</td>
-                        <td class="col-md-1">{{item.name}}</td>
-                        <td class="col-md-1">{{item.age}}</td>
-                        <td class="col-md-3">{{item.major}}</td>
-                        <td class="col-md-3">{{item.company}}</td>
-                        <td class="col-md-1">{{item.score}}</td>
+                    <tr ng-repeat="item in academician">
+                        <td>{{item.name}}</td>
+                        <td>{{item.age}}</td>
+                        <td>{{item.major}}</td>
+                        <td>{{item.company}}</td>
+                        <td>{{item.department}}</td>
+                        <td>{{item.native_place}}</td>
+                        <td>{{item.ethnicity}}</td>
+                        <td>{{item.highest_education}}</td>
                     </tr>
                     </tbody>
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-lg" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary btn-lg" ng-click="dismissModal()" data-dismiss="modal">关闭
+                </button>
             </div>
         </div>
     </div>

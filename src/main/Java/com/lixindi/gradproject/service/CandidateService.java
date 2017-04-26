@@ -6,7 +6,6 @@ import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
 import com.lixindi.gradproject.vo.NomineeRequest;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.List;
 
