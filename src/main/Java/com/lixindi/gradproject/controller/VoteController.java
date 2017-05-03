@@ -92,7 +92,8 @@ public class VoteController {
         VoteResult voteResult = voteService.getVoteResult();
         if (voteResult == null) {
             voteService.delKeys();
-            return new AjaxResponse<>(Status.ERROR, null);
+            VoteResult result = new VoteResult();;
+            return new AjaxResponse<>(Status.ERROR, result);
         }
         List<CandidateInfo> candidates = voteResult.getCandidates();
         int advance_num = voteService.getVoteParam().getAdvance_num();
@@ -124,5 +125,29 @@ public class VoteController {
     @ResponseBody
     public AjaxResponse<List<CandidateInfo>> getNominees() {
         return new AjaxResponse<>(Status.OK, voteService.getNominees());
+    }
+
+    @RequestMapping(value = "/admin/r_roundtimes", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<RoundTimes> getRoundTimes() {
+        return new AjaxResponse<>(Status.OK, voteService.getRoundTimes());
+    }
+
+    @RequestMapping(value = "/admin/w_roundtimes", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void setRoundTimes(@RequestBody RoundTimes roundTimes) {
+        voteService.saveRoundTimes(roundTimes);
+    }
+
+    @RequestMapping(value = "/admin/w_voteResultList", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void saveVoteResultList(@RequestBody List<VoteResult> resultList) {
+        voteService.saveVoteResultList(resultList);
+    }
+
+    @RequestMapping(value = "/admin/r_voteResultList", method = RequestMethod.GET)
+    @ResponseBody
+    public AjaxResponse<List<VoteResult>> getVoteResultList() {
+        return new AjaxResponse<>(Status.OK, voteService.getVoteResultList());
     }
 }

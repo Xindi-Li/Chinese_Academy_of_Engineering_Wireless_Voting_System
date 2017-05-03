@@ -12,6 +12,8 @@ public interface VoteDao {
 
     void delKeys(List<String> keys);
 
+    void delAllKeys();
+
     boolean addIdToSet(int id);
 
     boolean isIdExists(int id);

@@ -1,5 +1,5 @@
 <h2 class="sub-header">投票设置</h2>
-<div class="row" id="vote">
+<div class="row" id="vote" ng-init="init()">
     <div class="col-md-4">
         <form ng-submit="begin_vote()">
             <div class="form-group">
@@ -10,23 +10,21 @@
                 <label>候选人名单：</label>
                 <label class="radio-inline">
                     <input type="radio" name="is_group" ng-model="is_group" ng-value="true"
-                           ng-change="get_conditions()" ng-disabled="elec_begin" required>分组
+                           ng-change="get_conditions()" ng-disabled="round>1 || times>1|| vote_begin" required>分组
                 </label>
                 <label class="radio-inline">
                     <input type="radio" name="is_group" ng-model="is_group" ng-value="false"
-                           ng-change="get_conditions()" ng-disabled="elec_begin" required>不分组
+                           ng-change="get_conditions()" ng-disabled="round>1 || times>1|| vote_begin" required>不分组
                 </label>
             </div>
 
             <div class="form-group">
                 <label>选举类型：</label>
                 <label class="radio-inline">
-                    <input type="radio" name="vote_type" ng-model="vote_type" value="正式" required
-                           ng-disabled="vote_begin">正式
+                    <input type="radio" name="vote_type" required ng-disabled="vote_begin">正式
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="vote_type" ng-model="vote_type" value="预选" required
-                           ng-disabled="vote_begin"> 预选
+                    <input type="radio" name="vote_type" required ng-disabled="vote_begin"> 预选
                 </label>
             </div>
 
@@ -73,15 +71,16 @@
             </button>
         </form>
         <div id="end">
-            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="round_end&&elec_begin">
+            <button class="btn btn-danger btn-lg" ng-click="end_election()" ng-if="!vote_begin&&round>1&&times==1">
                 结束选举
             </button>
             <button class="btn btn-warning btn-lg" ng-click="end_round()"
-                    ng-if="elec_begin && !vote_begin && !round_end">
+                    ng-if="!vote_begin && (times>1)">
                 结束本轮投票
             </button>
         </div>
     </div>
+
     <div class="col-md-3" ng-if="!elec_begin">
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="item in conditions">
@@ -101,14 +100,14 @@
     </div>
     <div class="col-md-2 pull-right">
         <div class="panel panel-primary">
-            <div class="panel-heading text-center">本轮投票结果</div>
+            <div class="panel-heading text-center">投票结果</div>
             <div class="panel-body">
-                <div class="text-center" ng-show="timesList.length==0">
+                <div class="text-center" ng-show="voteResultList.length==0">
                     暂无结果
                 </div>
                 <div class="list-group">
-                    <a class="list-group-item" ng-repeat="item in timesList" href="" ng-click="show_modal(item)">
-                        第{{item}}次投票结果
+                    <a class="list-group-item" ng-repeat="item in voteResultList" href="" ng-click="show_modal(item)">
+                        第{{item.round}}轮<span ng-if="item.times != null">第{{item.times}}次</span>结果
                     </a>
                 </div>
             </div>

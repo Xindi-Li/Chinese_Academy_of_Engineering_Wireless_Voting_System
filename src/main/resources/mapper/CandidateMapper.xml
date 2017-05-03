@@ -47,6 +47,7 @@
         SELECT * FROM candidate
         <where>
             department = #{department}
+            AND is_elected = FALSE
             <if test="groups != null">
                 AND `group` IN
                 <foreach collection="groups" item="item" open="(" close=")" separator=",">
@@ -123,6 +124,17 @@
             </if>
         </set>
         WHERE candidate_num = #{candidate_num}
+    </update>
+
+    <update id="markCandidate">
+        UPDATE candidate
+        <set>
+            is_elected = TRUE
+        </set>
+        where candidate_num IN
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
     </update>
 
     <delete id="deleteCandidate">

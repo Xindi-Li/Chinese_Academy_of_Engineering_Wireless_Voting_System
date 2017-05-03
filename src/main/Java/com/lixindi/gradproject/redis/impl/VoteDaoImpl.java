@@ -32,6 +32,11 @@ public class VoteDaoImpl implements VoteDao {
         redisTemplate.delete(keys);
     }
 
+    @Override
+    public void delAllKeys() {
+        redisTemplate.delete(redisTemplate.keys("*"));
+    }
+
     public boolean addIdToSet(int id) {
         SetOperations<String, Integer> setOperations = redisTemplate.opsForSet();
         return setOperations.add("ids", id);

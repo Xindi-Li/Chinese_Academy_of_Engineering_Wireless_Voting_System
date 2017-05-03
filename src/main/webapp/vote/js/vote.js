@@ -39,6 +39,9 @@ vote.controller('vote_ctrl', function ($scope, $http, $location) {
                                         $http.get('/vote/r_nominees')
                                             .success(function (response) {
                                                 $scope.candidates = response.data;
+                                                $scope.candidates.forEach(function (e) {
+                                                    e.score = null;
+                                                });
                                             })
                                     }
                                 });

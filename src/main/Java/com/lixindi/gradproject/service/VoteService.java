@@ -1,9 +1,6 @@
 package com.lixindi.gradproject.service;
 
-import com.lixindi.gradproject.vo.CandidateInfo;
-import com.lixindi.gradproject.vo.VoteResult;
-import com.lixindi.gradproject.vo.VoteSetting;
-import com.lixindi.gradproject.vo.VotedNum;
+import com.lixindi.gradproject.vo.*;
 
 import java.util.List;
 
@@ -11,21 +8,29 @@ import java.util.List;
  * Created by lixindi on 2017/3/27.
  */
 public interface VoteService {
-    void setVoteParam(VoteSetting voteSetting);
-
-    void setNominees(List<CandidateInfo> candidates);
-
-    void delKeys();
-
     List<CandidateInfo> getNominees();
 
     VoteSetting getVoteParam();
 
     VoteResult getVoteResult();
 
+    RoundTimes getRoundTimes();
+
+    VotedNum getVotedNum();
+
+    List<VoteResult> getVoteResultList();
+
     Boolean validateId(int id);
+
+    void setVoteParam(VoteSetting voteSetting);
+
+    void setNominees(List<CandidateInfo> candidates);
+
+    void delKeys();
 
     Boolean saveVoteResult(VoteResult voteResult);
 
-    VotedNum getVotedNum();
+    void saveRoundTimes(RoundTimes roundTimes);
+
+    void saveVoteResultList(List<VoteResult> resultList);
 }

@@ -6,6 +6,7 @@ import com.lixindi.gradproject.vo.CandidateInfo;
 import com.lixindi.gradproject.vo.CandidateRequest;
 import com.lixindi.gradproject.vo.GroupRequest;
 import com.lixindi.gradproject.vo.NomineeRequest;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -28,4 +29,8 @@ public interface CandidateService {
     Boolean updateCandidate(CandidateInfo candidateInfo);
 
     Boolean deleteCandidate(CandidateInfo candidateInfo);
+
+    void markCandidate(List<String> candidates);
+
+    void clearRedis();
 }

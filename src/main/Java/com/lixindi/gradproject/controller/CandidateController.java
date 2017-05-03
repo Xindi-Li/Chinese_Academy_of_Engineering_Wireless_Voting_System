@@ -86,7 +86,7 @@ public class CandidateController {
     @RequestMapping(value = "/admin/r_conditions", method = RequestMethod.GET)
     @ResponseBody
     public AjaxResponse<List<String>> getConditions() {
-        List<String> conditions = new ArrayList<String>();
+        List<String> conditions = new ArrayList<>();
         List<String> departments = candidateService.getDepartment();
         for (String department : departments) {
             List<String> groups = candidateService.getGroupByDepartment(department);
@@ -108,5 +108,13 @@ public class CandidateController {
         nomineeRequest.forEach(e -> candidates.addAll(candidateService.getNominee(e)));
         return new AjaxResponse<>(Status.OK, candidates);
     }
+
+    @RequestMapping(value = "/admin/mark_candidate", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void markCandidate(@RequestBody List<String> candidates) {
+        candidateService.markCandidate(candidates);
+        candidateService.clearRedis();
+    }
+
 
 }

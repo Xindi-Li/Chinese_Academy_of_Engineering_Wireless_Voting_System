@@ -5,6 +5,7 @@ import com.lixindi.gradproject.dao.CandidateMapper;
 import com.lixindi.gradproject.dto.CandidateDaoRequest;
 import com.lixindi.gradproject.dto.CandidateResponse;
 import com.lixindi.gradproject.dto.ServiceResponse;
+import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.service.CandidateService;
 import com.lixindi.gradproject.utils.Status;
 import com.lixindi.gradproject.vo.CandidateInfo;
@@ -25,6 +26,9 @@ import java.util.List;
 public class CandidateServiceImpl implements CandidateService {
     @Autowired
     private CandidateMapper candidateMapper;
+
+    @Autowired
+    private VoteDao voteDao;
 
     public ServiceResponse<Boolean> insertCandidate(List<CandidateInfo> candidateInfos) {
         try {
@@ -99,5 +103,15 @@ public class CandidateServiceImpl implements CandidateService {
     public Boolean deleteCandidate(CandidateInfo candidateInfo) {
         int lines = candidateMapper.deleteCandidate(candidateInfo);
         return lines > 0;
+    }
+
+    @Override
+    public void markCandidate(List<String> candidates) {
+        candidateMapper.markCandidate(candidates);
+    }
+
+    @Override
+    public void clearRedis() {
+        voteDao.delAllKeys();
     }
 }

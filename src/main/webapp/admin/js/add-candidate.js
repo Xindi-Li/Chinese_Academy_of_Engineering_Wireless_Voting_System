@@ -17,12 +17,12 @@ angular.module('admin').controller('add_candidate', function ($scope, $http) {
         $http.post('/admin/w_candidate', [$scope.candidate])
             .success(function (response) {
                 if (response.data) {
-                    alert("提交成功");
+                    alert("录入成功");
                     $scope.candidate = {};
                 } else if (response.status == 2) {
                     alert("提名书号重复，请重新填写");
                 } else {
-                    alert("提交失败");
+                    alert("录入失败");
                 }
             })
 

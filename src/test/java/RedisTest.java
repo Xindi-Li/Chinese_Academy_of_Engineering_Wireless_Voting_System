@@ -1,5 +1,6 @@
 import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.utils.GetMD5;
+import com.lixindi.gradproject.vo.RoundTimes;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,10 @@ public class RedisTest {
 
     @Test
     public void set() {
-        voteDao.setKeyValue("is_start",true);
+        RoundTimes roundTimes = voteDao.getValueByKey("roundtimes");
+        roundTimes.setRound(1);
+        roundTimes.setTimes(2);
+        voteDao.setKeyValue("roundtimes", roundTimes);
     }
 
     @Test
@@ -31,12 +35,12 @@ public class RedisTest {
     }
 
     @Test
-    public void delKey(){
-        redisTemplate.delete("机械与运载工程学部score");
+    public void delKey() {
+        redisTemplate.delete(redisTemplate.keys("*"));
     }
 
     @Test
-    public void getMD5(){
+    public void getMD5() {
         System.out.println(GetMD5.getMD5("123"));
     }
 

@@ -26,4 +26,6 @@ public interface CandidateMapper {
     int updateCandidate(CandidateInfo candidateInfo);
 
     int deleteCandidate(CandidateInfo candidateInfo);
+
+    int markCandidate(List<String> candidates);
 }

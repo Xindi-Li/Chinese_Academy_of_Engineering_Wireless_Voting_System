@@ -2,10 +2,7 @@ package com.lixindi.gradproject.service.impl;
 
 import com.lixindi.gradproject.redis.VoteDao;
 import com.lixindi.gradproject.service.VoteService;
-import com.lixindi.gradproject.vo.CandidateInfo;
-import com.lixindi.gradproject.vo.VoteResult;
-import com.lixindi.gradproject.vo.VoteSetting;
-import com.lixindi.gradproject.vo.VotedNum;
+import com.lixindi.gradproject.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,7 @@ public class VoteServiceImpl implements VoteService {
     }
 
     public void delKeys() {
-        List<String> keys = new ArrayList<String>();
+        List<String> keys = new ArrayList<>();
         keys.add("ids");
         keys.add("voteParam");
         keys.add("voteResult");
@@ -48,6 +45,11 @@ public class VoteServiceImpl implements VoteService {
         return voteDao.getValueByKey("voteResult");
     }
 
+
+    public RoundTimes getRoundTimes() {
+        return voteDao.getValueByKey("roundtimes");
+    }
+
     public Boolean validateId(int id) {
         return voteDao.isIdExists(id);
     }
@@ -55,21 +57,31 @@ public class VoteServiceImpl implements VoteService {
     public Boolean saveVoteResult(VoteResult voteResult) {
         if (getVoteParam() != null) {
             voteDao.addIdToSet(voteResult.getVoterID());
-            if (voteDao.getValueByKey("voteResult") != null) {
-                VoteResult lastResult = voteDao.getValueByKey("voteResult");
+            VoteResult lastResult = voteDao.getValueByKey("voteResult");
+            if (lastResult != null) {
                 for (int i = 0; i < voteResult.getCandidates().size(); i++) {
-                    int saved = lastResult.getCandidates().get(i).getScore();
-                    int toAdd = voteResult.getCandidates().get(i).getScore();
-                    lastResult.getCandidates().get(i).setScore(saved + toAdd);
+                    CandidateInfo last = lastResult.getCandidates().get(i);
+                    CandidateInfo current = voteResult.getCandidates().get(i);
+                    int saved = last.getScore();
+                    int toAdd = current.getScore();
+                    current.setScore(saved + toAdd);
                 }
-                voteDao.setKeyValue("voteResult", lastResult);
-            } else {
-                voteDao.setKeyValue("voteResult", voteResult);
             }
+            voteDao.setKeyValue("voteResult", voteResult);
             return true;
         } else {
             return false;
         }
+    }
+
+
+    public void saveRoundTimes(RoundTimes roundTimes) {
+        voteDao.setKeyValue("roundtimes", roundTimes);
+    }
+
+    @Override
+    public void saveVoteResultList(List<VoteResult> resultList) {
+        voteDao.setKeyValue("voteResultList", resultList);
     }
 
     public VotedNum getVotedNum() {
@@ -77,5 +89,10 @@ public class VoteServiceImpl implements VoteService {
         votedNum.setTotal(voteDao.getVoterNum());
         votedNum.setVoted(voteDao.getVotedNum());
         return votedNum;
+    }
+
+    @Override
+    public List<VoteResult> getVoteResultList() {
+        return voteDao.getValueByKey("voteResultList");
     }
 }

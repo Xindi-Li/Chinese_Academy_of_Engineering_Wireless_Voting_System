@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title text-center">
-                    第{{result.round}}轮第{{result.times}}次结果
+                    第{{result.round}}轮<span ng-if="result.times != null">第{{result.times}}次</span>结果
                 </h3>
             </div>
             <div class="modal-body">
-                <div ng-if="result.voteResult==null" class="text-center">本次投票无结果</div>
-                <div ng-if="result.voteResult!=null">
+                <div ng-if="result.candidates==null" class="text-center">本次投票无结果</div>
+                <div ng-if="result.candidates!=null">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
@@ -17,21 +17,24 @@
                             <th>年龄</th>
                             <th>学科专业</th>
                             <th>工作单位</th>
-                            <th>分数</th>
+                            <th>所在学部</th>
+                            <th ng-if="result.times != null">分数</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="item in result.voteResult.candidates" ng-class="{'success':item.is_advance}">
-                            <td class="col-md-2">{{item.candidate_num}}</td>
-                            <td class="col-md-1">{{item.name}}</td>
-                            <td class="col-md-1">{{item.age}}</td>
-                            <td class="col-md-3">{{item.major}}</td>
-                            <td class="col-md-3">{{item.company}}</td>
-                            <td class="col-md-1">{{item.score}}</td>
+                        <tr ng-repeat="item in result.candidates"
+                            ng-class="{'success':item.is_advance&&result.times != null}">
+                            <td>{{item.candidate_num}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.age}}</td>
+                            <td>{{item.major}}</td>
+                            <td>{{item.company}}</td>
+                            <td>{{item.department}}</td>
+                            <td ng-if="result.times != null">{{item.score}}</td>
                         </tr>
                         </tbody>
                     </table>
-                    <h4 class="text-center">本次选举分数线为：{{result.voteResult.advance_score}}</h4>
+                    <h4 class="text-center" ng-if="result.times != null">本次选举分数线为：{{result.advance_score}}</h4>
                 </div>
             </div>
             <div class="modal-footer">

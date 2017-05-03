@@ -12,8 +12,26 @@ import java.util.List;
 public class VoteResult implements Serializable {
     private static final long serialVersionUID = -2359442457509883970L;
     private Integer voterID;
+    private Integer round;
+    private Integer times;
     private Integer advance_score;
     private List<CandidateInfo> candidates;
+
+    public Integer getRound() {
+        return round;
+    }
+
+    public void setRound(Integer round) {
+        this.round = round;
+    }
+
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
 
     public Integer getVoterID() {
         return voterID;
