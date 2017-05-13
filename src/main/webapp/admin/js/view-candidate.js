@@ -2,9 +2,14 @@
  * Created by lixindi on 2017/3/10.
  */
 angular.module('admin')
-    .controller('view_candidate', function ($scope, $http, $location, paginationConf, candidateInfo) {
+    .controller('view_candidate', function ($scope, $http, $location, candidateInfo) {
 
-        $scope.paginationConf = paginationConf.paginationConf;
+        $scope.paginationConf = {
+            currentPage: 1,
+            pagesLength: 15,
+            itemsPerPage: 5,
+            perPageOptions: [5, 10, 15, 20]
+        };
 
         $scope.get_department = function () {
             $http.get('/admin/r_department')

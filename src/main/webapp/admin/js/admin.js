@@ -55,15 +55,6 @@ admin.controller('logout_ctrl', function ($scope, $http) {
     }
 });
 
-admin.constant('paginationConf', {
-    paginationConf: {
-        currentPage: 1,
-        pagesLength: 15,
-        itemsPerPage: 5,
-        perPageOptions: [5, 10, 15, 20]
-    }
-});
-
 admin.service('candidateInfo', function () {
     this.setValue = function (candidate) {
         this.name = candidate.name;

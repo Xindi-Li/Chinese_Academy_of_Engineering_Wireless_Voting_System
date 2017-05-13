@@ -34,7 +34,7 @@ angular.module('admin')
                         $scope.conditions = response.data;
                     })
             } else {
-                $http.get('/admin/r_department')
+                $http.get('/admin/r_department?mode=true')
                     .success(function (response) {
                         $scope.conditions = response.data;
                     })

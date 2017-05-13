@@ -15,13 +15,13 @@ public interface CandidateMapper {
 
     List<CandidateInfo> getNominee(NomineeRequest nomineeRequest);
 
-    List<String> getDepartment();
+    List<String> getDepartment(@Param("mode") Boolean mode);
 
     int getTotal(CandidateDaoRequest candidateDaoRequest);
 
     int updateGroup(@Param("name") String name, @Param("department") String department, @Param("group") String group);
 
-    List<String> getGroupByDepartment(@Param("department") String department);
+    List<String> getGroupByDepartment(@Param("department") String department, @Param("mode") Boolean mode);
 
     int updateCandidate(CandidateInfo candidateInfo);
 

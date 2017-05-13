@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +61,14 @@ public class CandidateController {
 
     @RequestMapping(value = "/admin/r_department", method = RequestMethod.GET)
     @ResponseBody
-    public AjaxResponse<List<String>> getDepartment() {
-        List<String> departments = candidateService.getDepartment();
+    public AjaxResponse<List<String>> getDepartment(HttpServletRequest request) {
+        String mode = request.getParameter("mode");
+        List<String> departments;
+        if (mode == null) {
+            departments = candidateService.getDepartment(false);
+        }else {
+            departments = candidateService.getDepartment(true);
+        }
         return new AjaxResponse<>(Status.OK, departments);
     }
 
@@ -79,7 +86,7 @@ public class CandidateController {
     @RequestMapping(value = "/admin/r_group", method = RequestMethod.POST)
     @ResponseBody
     public AjaxResponse<List<String>> getGroupByDepartment(@RequestBody GroupRequest groupRequest) {
-        List<String> groups = candidateService.getGroupByDepartment(groupRequest.getDepartment());
+        List<String> groups = candidateService.getGroupByDepartment(groupRequest.getDepartment(),false);
         return new AjaxResponse<>(Status.OK, groups);
     }
 
@@ -87,9 +94,9 @@ public class CandidateController {
     @ResponseBody
     public AjaxResponse<List<String>> getConditions() {
         List<String> conditions = new ArrayList<>();
-        List<String> departments = candidateService.getDepartment();
+        List<String> departments = candidateService.getDepartment(true);
         for (String department : departments) {
-            List<String> groups = candidateService.getGroupByDepartment(department);
+            List<String> groups = candidateService.getGroupByDepartment(department,true);
             if (groups == null) {
                 conditions.add(department + "学部");
             } else {

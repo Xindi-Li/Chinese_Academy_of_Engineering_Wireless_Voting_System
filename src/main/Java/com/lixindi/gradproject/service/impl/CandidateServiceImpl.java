@@ -66,8 +66,8 @@ public class CandidateServiceImpl implements CandidateService {
         return candidateMapper.getNominee(request);
     }
 
-    public List<String> getDepartment() {
-        return candidateMapper.getDepartment();
+    public List<String> getDepartment(Boolean mode) {
+        return candidateMapper.getDepartment(mode);
     }
 
     public Boolean groupCandidate(GroupRequest groupRequest) {
@@ -81,11 +81,11 @@ public class CandidateServiceImpl implements CandidateService {
         return lines > 0;
     }
 
-    public List<String> getGroupByDepartment(String department) {
+    public List<String> getGroupByDepartment(String department, Boolean mode) {
         if (Strings.isNullOrEmpty(department)) {
             return null;
         } else {
-            List<String> groups = candidateMapper.getGroupByDepartment(department);
+            List<String> groups = candidateMapper.getGroupByDepartment(department, mode);
             groups.remove(null);
             if (CollectionUtils.isEmpty(groups)) {
                 return null;

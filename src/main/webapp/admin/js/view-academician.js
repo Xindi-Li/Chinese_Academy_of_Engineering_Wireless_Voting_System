@@ -2,9 +2,14 @@
  * Created by JamesLee on 2017/4/24.
  */
 angular.module('admin')
-    .controller('view_academician', function ($scope, $http, paginationConf) {
+    .controller('view_academician', function ($scope, $http) {
 
-        $scope.paginationConf = paginationConf.paginationConf;
+        $scope.paginationConf = {
+            currentPage: 1,
+            pagesLength: 15,
+            itemsPerPage: 5,
+            perPageOptions: [5, 10, 15, 20]
+        };
 
         $scope.get_department = function () {
             $http.get('/admin/r_depart')

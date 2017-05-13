@@ -60,6 +60,9 @@
     <select id="getDepartment" resultType="java.lang.String">
         SELECT DISTINCT department
         from candidate
+        <if test="mode == true">
+            WHERE is_elected = FALSE
+        </if>
     </select>
 
     <select id="getTotal" resultType="java.lang.Integer">
@@ -82,6 +85,9 @@
         SELECT DISTINCT `group`
         from candidate
         WHERE department = #{department}
+        <if test="mode == true">
+            AND is_elected = FALSE
+        </if>
     </select>
 
     <update id="updateGroup">
@@ -111,13 +117,13 @@
                 company = #{company},
             </if>
             <if test="department != null and department != ''">
-                department = #{department}
+                department = #{department},
             </if>
             <if test="native_place != null and native_place != ''">
-                native_place = #{native_place}
+                native_place = #{native_place},
             </if>
             <if test="ethnicity != null and ethnicity != ''">
-                ethnicity = #{ethnicity}
+                ethnicity = #{ethnicity},
             </if>
             <if test="highest_education != null and highest_education != ''">
                 highest_education = #{highest_education}

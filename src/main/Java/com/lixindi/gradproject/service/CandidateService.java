@@ -20,11 +20,11 @@ public interface CandidateService {
 
     List<CandidateInfo> getNominee(NomineeRequest request);
 
-    List<String> getDepartment();
+    List<String> getDepartment(Boolean mode);
 
     Boolean groupCandidate(GroupRequest groupRequest);
 
-    List<String> getGroupByDepartment(String department);
+    List<String> getGroupByDepartment(String department, Boolean mode);
 
     Boolean updateCandidate(CandidateInfo candidateInfo);
 

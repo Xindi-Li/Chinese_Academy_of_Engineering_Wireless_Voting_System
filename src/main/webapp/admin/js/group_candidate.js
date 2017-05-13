@@ -2,15 +2,21 @@
  * Created by lixindi on 2017/3/13.
  */
 angular.module('admin')
-    .controller('group_candidate', function ($scope, $http, paginationConf, $route) {
+    .controller('group_candidate', function ($scope, $http, $route) {
         $scope.candidates = [];
-        $scope.paginationConf = paginationConf.paginationConf;
+        $scope.paginationConf = {
+            currentPage: 1,
+            pagesLength: 15,
+            itemsPerPage: 5,
+            perPageOptions: [5, 10, 15, 20]
+        };
 
         $scope.get_department = function () {
             $http.get('/admin/r_department')
                 .success(function (response) {
                     $scope.departmentList = response.data;
                     $scope.department = response.data[0];
+                    $scope.get_candidate();
                 })
         };
         $scope.get_candidate = function () {
@@ -40,7 +46,7 @@ angular.module('admin')
                 }
             }
         };
-        
+
 
         $scope.remove_candidate = function (candidate) {
             var index = $scope.candidates.indexOf(candidate);
