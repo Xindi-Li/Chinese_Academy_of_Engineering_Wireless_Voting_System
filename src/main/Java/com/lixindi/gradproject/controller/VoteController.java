@@ -92,15 +92,17 @@ public class VoteController {
         VoteResult voteResult = voteService.getVoteResult();
         if (voteResult == null) {
             voteService.delKeys();
-            VoteResult result = new VoteResult();;
+            VoteResult result = new VoteResult();
+            ;
             return new AjaxResponse<>(Status.ERROR, result);
         }
         List<CandidateInfo> candidates = voteResult.getCandidates();
         int advance_num = voteService.getVoteParam().getAdvance_num();
+        int candidate_num = candidates.size();
         voteService.delKeys();
         Collections.sort(candidates, (a, b) -> b.getScore() - a.getScore());
         ListIterator<CandidateInfo> listIterator = candidates.listIterator();
-        int score = candidates.get(advance_num - 1).getScore();
+        int score = advance_num > candidate_num ? candidates.get(candidate_num - 1).getScore() : candidates.get(advance_num - 1).getScore();
         while (listIterator.hasNext()) {
             CandidateInfo candidate = listIterator.next();
             if (candidate.getScore() >= score) {

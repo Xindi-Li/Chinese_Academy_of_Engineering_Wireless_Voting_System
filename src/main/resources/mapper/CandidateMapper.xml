@@ -55,6 +55,7 @@
                 </foreach>
             </if>
         </where>
+        ORDER BY candidate_num
     </select>
 
     <select id="getDepartment" resultType="java.lang.String">
