@@ -34,12 +34,12 @@ public class CandidateServiceImpl implements CandidateService {
         try {
             int lines = candidateMapper.insertCandidate(candidateInfos);
             if (lines > 0) {
-                return new ServiceResponse<Boolean>(Status.OK, true);
+                return new ServiceResponse<>(Status.OK, true);
             } else {
-                return new ServiceResponse<Boolean>(Status.ERROR, false);
+                return new ServiceResponse<>(Status.ERROR, false);
             }
         } catch (DuplicateKeyException exception) {
-            return new ServiceResponse<Boolean>(Status.DUPLICATE_KEY, false);
+            return new ServiceResponse<>(Status.DUPLICATE_KEY, false);
         }
     }
 
