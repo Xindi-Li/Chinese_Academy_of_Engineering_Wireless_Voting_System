@@ -22,13 +22,13 @@
                     <th rowspan="2">年龄</th>
                     <th rowspan="2">学科专业</th>
                     <th rowspan="2">工作单位</th>
-                    <th colspan="3" ng-if="voteData.ballot_type =='记分'">圈选栏</th>
+                    <th colspan="3" ng-if="voteData.ballot_type =='计分'">圈选栏</th>
                     <th colspan="2" ng-if="voteData.ballot_type =='表决'">圈选栏</th>
                 </tr>
                 <tr>
-                    <th ng-if="voteData.ballot_type =='记分'">A</th>
-                    <th ng-if="voteData.ballot_type =='记分'">B</th>
-                    <th ng-if="voteData.ballot_type =='记分'">C</th>
+                    <th ng-if="voteData.ballot_type =='计分'">A</th>
+                    <th ng-if="voteData.ballot_type =='计分'">B</th>
+                    <th ng-if="voteData.ballot_type =='计分'">C</th>
 
                     <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-ok"></i></th>
                     <th ng-if="voteData.ballot_type =='表决'"><i class="glyphicon glyphicon-remove"></i></th>
@@ -42,13 +42,13 @@
                     <td>{{item.major}}</td>
                     <td>{{item.company}}</td>
 
-                    <td ng-if="voteData.ballot_type =='记分'">
+                    <td ng-if="voteData.ballot_type =='计分'">
                         <input type="radio" name="{{item}}" ng-model="item.score" value="3" required>
                     </td>
-                    <td ng-if="voteData.ballot_type =='记分'">
+                    <td ng-if="voteData.ballot_type =='计分'">
                         <input type="radio" name="{{item}}" ng-model="item.score" value="2" required>
                     </td>
-                    <td ng-if="voteData.ballot_type =='记分'">
+                    <td ng-if="voteData.ballot_type =='计分'">
                         <input type="radio" name="{{item}}" ng-model="item.score" value="1" required>
                     </td>
 
