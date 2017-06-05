@@ -3,7 +3,7 @@
     <div class="col-md-10">
         <form class="form-inline" ng-init="get_department()">
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label class="searchbox" for="department">学部:</label>
                         <select id="department" class="form-control" ng-model="department"
@@ -12,7 +12,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="group">组:</label>
                         <select id="group" class="form-control" ng-model="group"
@@ -21,13 +21,14 @@
                     </div>
                 </div>
 
-                <div class="col-xs-3">
+                <div class="col-md-3">
                     <div class="form-group">
                         <label class="searchbox" for="name">姓名:</label>
-                        <input class="form-control" type="text" ng-model="name" id="name" placeholder="姓名">
+                        <input class="form-control" type="text" ng-model="name" id="name" placeholder="姓名"
+                               style="width:120px;">
                     </div>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-md-1">
                     <button type="submit" class="btn btn-primary" ng-click="get_candidate()">查询</button>
                 </div>
             </div>
